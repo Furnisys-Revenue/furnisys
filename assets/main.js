@@ -1,5 +1,12 @@
 // Furnisys site: mobile menu, contact form, footer year.
 (function () {
+  var h = document.querySelector('.site-header');
+  function sc() { if (h) h.classList.toggle('scrolled', scrollY > 8); }
+  addEventListener('scroll', sc, { passive: true }); sc();
+  document.querySelectorAll('.photo img').forEach(function (im) {
+    function miss() { im.parentNode.classList.add('missing'); }
+    if (im.complete && im.naturalWidth === 0) miss(); else im.addEventListener('error', miss);
+  });
   var t = document.querySelector('.nav-toggle'), n = document.getElementById('site-nav');
   if (t && n) t.addEventListener('click', function () {
     var open = n.classList.toggle('open'); t.setAttribute('aria-expanded', open ? 'true' : 'false');

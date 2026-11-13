@@ -3,27 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Contact | Furnisys</title>
+<title>Request a consult | Furnisys</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Send an enquiry to Furnisys. enquiry@furnisys.co, +91 70457 63012, Navi Mumbai.">
-<meta property="og:title" content="Contact | Furnisys">
+<meta property="og:title" content="Request a consult | Furnisys">
 <meta property="og:description" content="Send an enquiry to Furnisys. enquiry@furnisys.co, +91 70457 63012, Navi Mumbai.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://furnisys.vercel.app/assets/logo.png">
 <link rel="canonical" href="https://www.furnisys.co.in/contact">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:wght@400;500;600;700;800&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="preload" href="assets/fonts/merriweather-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/roboto-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/styles.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Furnisys", "alternateName": "Furnisys \u2013 Furniture Systems", "slogan": "Functional Furniture Systems", "url": "https://www.furnisys.co.in", "email": "enquiry@furnisys.co", "telephone": "+91 70457 63012", "parentOrganization": {"@type": "Organization", "name": "Fabtech India"}, "address": {"@type": "PostalAddress", "streetAddress": "EL-21, TTC Industrial Area, MIDC, Mahape", "addressLocality": "Navi Mumbai", "addressRegion": "Maharashtra", "postalCode": "400710", "addressCountry": "IN"}, "sameAs": ["https://www.linkedin.com/company/furnisys/"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Furnisys", "alternateName": "Furnisys \u2013 Furniture Systems", "slogan": "Functional Furniture Systems", "url": "https://www.furnisys.co.in", "logo": "https://furnisys.vercel.app/assets/logo.png", "email": "enquiry@furnisys.co", "telephone": "+91 70457 63012", "parentOrganization": {"@type": "Organization", "name": "Fabtech India"}, "address": {"@type": "PostalAddress", "streetAddress": "EL-21, TTC Industrial Area, MIDC, Mahape", "addressLocality": "Navi Mumbai", "addressRegion": "Maharashtra", "postalCode": "400710", "addressCountry": "IN"}, "sameAs": ["https://www.linkedin.com/company/furnisys/", "https://furnisys.co.in/"]}</script>
 </head>
 <body>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Furnisys home">
-      <img class="brand-logo" src="assets/logo.png" alt="Furnisys – Functional Furniture Systems" width="741" height="170">
-    </a>
+    <a class="brand" href="index.html" aria-label="Furnisys home"><img class="brand-logo" src="assets/logo.png" alt="Furnisys – Functional Furniture Systems" width="741" height="170"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="nav" id="site-nav" aria-label="Main">
 <a href="index.html">Home</a>
@@ -31,7 +29,7 @@
 <a href="industries.html">Industries</a>
 <a href="case-studies.html">Case studies</a>
 <a href="how-we-work.html">How we work</a>
-<a class="btn" href="contact.html">Enquire</a>
+<a class="btn" href="contact.html">Request a consult</a>
     </nav>
   </div>
 </header>
@@ -39,10 +37,10 @@
 
 <section class="page-head"><div class="wrap">
   <span class="crumbs"><a href="index.html">Home</a> / Contact</span>
-  <h1>Send an enquiry</h1>
+  <h1>Request a consult</h1>
   <p class="lede">Tell us about the space and the work done in it. Drawings, photos or a rough count of stations all help us suggest a configuration.</p>
 </div></section>
-<section class="band" style="padding-top:3rem"><div class="wrap split">
+<section class="band band-grey" style="padding-top:3rem"><div class="wrap contact-grid">
   <form class="form" id="enquiry-form" novalidate>
     <div class="row">
       <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
@@ -68,10 +66,12 @@
     </div>
   </form>
   <dl class="contact-list">
-    <div><dt>Email</dt><dd>enquiry@furnisys.co</dd></div>
-    <div><dt>Phone</dt><dd>+91 70457 63012</dd></div>
-    <div><dt>Office and manufacturing facility</dt><dd>Fabtech India, EL-21, TTC Industrial Area, MIDC, Mahape, Navi Mumbai, Maharashtra 400710</dd></div>
-    <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/company/furnisys/" rel="noopener">linkedin.com/company/furnisys</a></dd></div>
+    <div class="contact-card"><dt>Request a consult</dt><dd>enquiry@furnisys.co</dd></div>
+    <div class="contact-card"><dt>Phone</dt><dd>+91 70457 63012</dd></div>
+    <div class="contact-card"><dt>Channel partners</dt><dd>bd@furnisys.co</dd></div>
+    <div class="contact-card"><dt>General</dt><dd>info@furnisys.co</dd></div>
+    <div class="contact-card"><dt>Careers</dt><dd>hr@furnisys.co</dd></div>
+    <div class="contact-card"><dt>Office and manufacturing facility</dt><dd>Fabtech India, EL-21, TTC Industrial Area, MIDC, Mahape, Navi Mumbai, Maharashtra 400710</dd></div>
   </dl>
 </div></section>
 
@@ -79,14 +79,16 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot-grid">
-      <div>
+      <div style="display:grid;gap:1rem;align-content:start">
         <a class="brand" href="index.html"><img class="brand-logo brand-logo-foot" src="assets/logo.png" alt="Furnisys – Functional Furniture Systems" width="741" height="170" loading="lazy"></a>
-        <p style="margin-top:1rem">A brand of Fabtech India. Modular, configurable furniture systems for industrial, technical and institutional workspaces.</p>
+        <p>A brand of Fabtech India. Modular, configurable furniture systems for industrial, technical and institutional workspaces, made in Navi Mumbai.</p>
       </div>
       <div><h3>Programs</h3><ul>
         <li><a href="programs.html#lista">LISTA</a></li>
+        <li><a href="programs.html#products">Workbenches &amp; workstations</a></li>
+        <li><a href="programs.html#storage">Cabinets &amp; storage</a></li>
         <li><a href="programs.html#wall-control">Wall Control</a></li>
-        <li><a href="programs.html#lockers">Lockers Manufacturing</a></li></ul></div>
+        <li><a href="programs.html#lockers">Lockers</a></li></ul></div>
       <div><h3>Company</h3><ul>
         <li><a href="industries.html">Industries</a></li>
         <li><a href="case-studies.html">Case studies</a></li>
@@ -94,13 +96,13 @@
         <li><a href="how-we-work.html#partners">Channel partners</a></li>
         <li><a href="contact.html">Contact</a></li></ul></div>
       <div><h3>Contact</h3><ul>
-        <li>enquiry@furnisys.co</li><li>+91 70457 63012</li>
+        <li>Enquiries: enquiry@furnisys.co</li><li>Channel partners: bd@furnisys.co</li><li>+91 70457 63012</li>
         <li>EL-21, TTC Industrial Area, MIDC, Mahape, Navi Mumbai 400710</li>
         <li><a href="https://www.linkedin.com/company/furnisys/" rel="noopener">LinkedIn</a></li></ul></div>
     </div>
     <div class="foot-base">
       <span>© <span data-year>2026</span> Furnisys, a brand of Fabtech India. All rights reserved.</span>
-      <span><a href="terms.html">Terms &amp; conditions</a></span>
+      <span><a href="https://furnisys.co.in/terms-and-conditions/" rel="noopener">Terms &amp; conditions</a> · <a href="https://furnisys.co.in/privacy-policy/" rel="noopener">Privacy policy</a></span>
     </div>
   </div>
 </footer>
