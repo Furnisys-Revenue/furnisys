@@ -34,6 +34,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--white);border-bottom:1px solid var(--grey3)}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:72px}
 .brand{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.brand-logo{display:block;height:52px;width:auto}
+.brand-logo-foot{height:58px}
+@media (max-width:480px){.site-header .brand-logo{height:42px}}
 .brand-mark{font-family:var(--f-sub);font-weight:800;font-size:1.5rem;letter-spacing:.14em;color:var(--blue)}
 .brand-mark span{color:var(--red)}
 .brand-tag{font-family:var(--f-sub);font-size:.7rem;letter-spacing:.06em;color:var(--grey1);margin-top:.3rem}
