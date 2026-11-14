@@ -34,16 +34,39 @@
       all.forEach(function (d) { d.open = anyClosed; }); b.textContent = anyClosed ? 'Collapse all sections' : 'Expand all sections';
     });
   });
-  var tabs = document.querySelectorAll('.tab');
-  function selectTab(t) {
-    tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1;
-      var p = document.getElementById(x.getAttribute('aria-controls')); if (p) p.hidden = !on; });
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { selectTab(t); });
-    t.addEventListener('keydown', function (e) {
-      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
-      var n = tabs[(i + d + tabs.length) % tabs.length]; selectTab(n); n.focus();
+  document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+    var tabs = list.querySelectorAll('[role="tab"]');
+    function selectTab(t) {
+      tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on ? 'true' : 'false'); x.tabIndex = on ? 0 : -1;
+        var p = document.getElementById(x.getAttribute('aria-controls')); if (p) p.hidden = !on; });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { selectTab(t); });
+      t.addEventListener('keydown', function (e) {
+        var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0; if (!d) return;
+        e.preventDefault(); var n = tabs[(i + d + tabs.length) % tabs.length]; selectTab(n); n.focus();
+      });
+    });
+  });
+  var qq = new URLSearchParams(location.search);
+  document.querySelectorAll('form.qform').forEach(function (fm) {
+    var note = fm.querySelector('.form-note'), res = fm.querySelector('.form-result'), pre = res.querySelector('pre');
+    if (qq.get('product') && fm.message) fm.message.value = 'Interested in: ' + qq.get('product') + '\n';
+    if (qq.get('type') === 'partner' && fm.ptype) fm.ptype.value = 'Channel partnership';
+    fm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var bad = Array.prototype.filter.call(fm.querySelectorAll('[required]'), function (el) { return !el.value.trim(); });
+      if (bad.length || !/^\S+@\S+\.\S+$/.test(fm.email.value)) {
+        note.textContent = 'Fill in all fields, including a valid work email, then submit again.'; note.hidden = false; (bad[0] || fm.email).focus(); return;
+      }
+      note.hidden = true;
+      var L = function (el) { var lab = fm.querySelector('label[for="' + el.id + '"]'); return (lab ? lab.textContent : el.name) + ': ' + el.value; };
+      var body = Array.prototype.map.call(fm.querySelectorAll('input,select'), L).join('\n') + '\n\nProject brief:\n' + fm.message.value;
+      pre.textContent = body; res.hidden = false;
+      location.href = 'mailto:enquiry@furnisys.co?subject=' + encodeURIComponent('Project brief - ' + fm.company.value + ' (' + fm.size.value + ')') + '&body=' + encodeURIComponent(body);
+    });
+    res.querySelector('.copy-btn').addEventListener('click', function () {
+      var b = this; if (navigator.clipboard) navigator.clipboard.writeText(pre.textContent).then(function () { b.textContent = 'Copied'; });
     });
   });
   var f = document.getElementById('enquiry-form'); if (!f) return;
