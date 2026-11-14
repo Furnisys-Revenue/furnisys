@@ -113,18 +113,183 @@
       "permanent": true
     },
     {
-      "source": "/chemically-resistant-workbenches-chemical-resistant-worktops",
-      "destination": "/blogs",
+      "source": "/Base-Series",
+      "destination": "/base-series-industrial-workbench",
       "permanent": true
     },
     {
-      "source": "/transforming-rd-labs-in-the-oil-gas-industry-with-modular-workstations",
-      "destination": "/blogs",
+      "source": "/Workbench-for-Material-Testing",
+      "destination": "/workbench-for-material-testing-mumbai-india",
       "permanent": true
     },
     {
-      "source": "/premier-india-agencies-case-study-by-furnisys",
-      "destination": "/case-studies",
+      "source": "/esd-workstations-safeguarding-sensitive-electronics",
+      "destination": "/esd-workbench-esd-workstations-esd-worktable",
+      "permanent": true
+    },
+    {
+      "source": "/flexi-workstation",
+      "destination": "/flexi-modular-workstation-system",
+      "permanent": true
+    },
+    {
+      "source": "/kritsnam-case-study-by-furnisys",
+      "destination": "/esd-proof-electronic-workbench-by-furnisys",
+      "permanent": true
+    },
+    {
+      "source": "/liebherr-case-study-by-furnisys",
+      "destination": "/tool-storage-solutions-mobile-cabinet",
+      "permanent": true
+    },
+    {
+      "source": "/optimizing-auto-service-centers",
+      "destination": "/auto-service-centers-workbench-service-workstation",
+      "permanent": true
+    },
+    {
+      "source": "/optimizing-packaging-workbenches",
+      "destination": "/packaging-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/pro-series",
+      "destination": "/pro-series-heavy-duty-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/scitec-series",
+      "destination": "/scitec-series-technical-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/specialty-solutions",
+      "destination": "/Specialized-storage-solutions",
+      "permanent": true
+    },
+    {
+      "source": "/specialty-workbenches",
+      "destination": "/specialized-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/the-concept-of-modularity",
+      "destination": "/modularity-in-industrial-furniture",
+      "permanent": true
+    },
+    {
+      "source": "/workbench-for-fabrication-area",
+      "destination": "/workbench-for-fabrication-area-mumbai-india",
+      "permanent": true
+    },
+    {
+      "source": "/zero-carbon-tech-24-case-study-by-furnisys",
+      "destination": "/railway-infrastructure-service-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/products",
+      "destination": "/all-products",
+      "permanent": true
+    },
+    {
+      "source": "/workstations-workbenches",
+      "destination": "/view-all-workstations-and-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/storage-system",
+      "destination": "/view-all-storage-systems",
+      "permanent": true
+    },
+    {
+      "source": "/industrial-storage-cabinet-system",
+      "destination": "/view-all-storage-systems",
+      "permanent": true
+    },
+    {
+      "source": "/link-systems",
+      "destination": "/link-systems-combinations",
+      "permanent": true
+    },
+    {
+      "source": "/sink-cabinet",
+      "destination": "/sink-cabinets",
+      "permanent": true
+    },
+    {
+      "source": "/link-workstand",
+      "destination": "/Stands-Trolleys",
+      "permanent": true
+    },
+    {
+      "source": "/link-trolleys",
+      "destination": "/Stands-Trolleys",
+      "permanent": true
+    },
+    {
+      "source": "/packing-bench",
+      "destination": "/link-packing-accessories",
+      "permanent": true
+    },
+    {
+      "source": "/flexi-flow-rack",
+      "destination": "/link-flow-racks",
+      "permanent": true
+    },
+    {
+      "source": "/universal-cart",
+      "destination": "/flexi-modular-workstation-system",
+      "permanent": true
+    },
+    {
+      "source": "/product-catalog",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
+      "source": "/work-with-partner",
+      "destination": "/partners",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-solutions",
+      "destination": "/manufacturing",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-industrial-workstation-solutions",
+      "destination": "/manufacturing",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-industrial-workstation-and-storage-solutions",
+      "destination": "/manufacturing",
+      "permanent": true
+    },
+    {
+      "source": "/labs",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/warehouses",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/storage-system-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/workbenches-workstations-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/issue-counter-photos",
+      "destination": "/gallery",
       "permanent": true
     },
     {
