@@ -1,16 +1,104 @@
 # Furnisys
 
-> Furnisys (Furniture Systems) is a brand of Fabtech India, Navi Mumbai. Tagline: Functional Furniture Systems. It designs, manufactures and installs modular, configurable furniture systems for industrial, technical and institutional workspaces, from a 22,000 sq. ft. manufacturing facility.
+> Furnisys (Furniture Systems) is the industrial furniture brand of Fabtech India, based in Navi Mumbai, India. Tagline: "Functional Furniture Systems". Furnisys designs, manufactures and installs modular, configurable workspace systems (industrial workbenches, ESD workstations, modular workstations, storage cabinets, pegboards and steel lockers) for manufacturing plants, laboratories, automotive service centres, aerospace, healthcare, jewellery manufacturing and education. Every setup is built from standard modules so it can be expanded or reconfigured.
 
-Contact: enquiry@furnisys.co (consults) | bd@furnisys.co (channel partners) | info@furnisys.co | +91 70457 63012 | Fabtech India, EL-21, TTC Industrial Area, MIDC, Mahape, Navi Mumbai, Maharashtra 400710
+Key facts:
+- Manufacturer: Fabtech India, EL-21, TTC Industrial Area, MIDC, Mahape, Navi Mumbai, Maharashtra 400710, India
+- Manufacturing facility: 22,000 sq. ft. in Navi Mumbai
+- Programs: Work & Storage System; Pegboards; Lockers System
+- Services: application consultancy, 2D/3D space planning, manufacturing, installation, after-sales service
+- Contact: enquiry@furnisys.co (projects), bd@furnisys.co (channel partners), +91 70457 63012, Mon–Sat 10:00–19:00 IST
+- Website: https://www.furnisys.co.in
 
-## Programs
-- [Work & Storage System](https://www.furnisys.co.in/programs#work-storage): workbenches (Base, Ansys, Pro, Scitec), Flexi system, Link system (Uprighter, Workstand, Trolley, Flow Racks, Packaging System), ESD workstations, base, mobile and sink cabinets.
-- [Pegboards](https://www.furnisys.co.in/programs#pegboards): metal pegboard panels and accessories for wall-mounted tool and storage organisation.
-- [Lockers](https://www.furnisys.co.in/programs#lockers): steel lockers in Knock Down and All Welded series, 1 to 9 tiers.
+## Solutions by industry and application
+- [Manufacturing Workspace Solutions](https://www.furnisys.co.in/manufacturing): Assembly, rework, inspection, R&D, kitting and maintenance spaces configured as one modular system.
+- [Aerospace Workspace Solutions](https://www.furnisys.co.in/aerospace-workspace-solutions): Aerospace facilities operate across highly specialised environments. Furnisys approaches each space as a functional system, combining workstations, storage
+- [Automotive Workspace Solutions](https://www.furnisys.co.in/automotive-workspace-solutions): Automotive service centers operate across a wide range of specialised bays — from fast-turnaround express lanes to heavy mechanical overhaul zones. Furnisy
+- [Healthcare Workspace Solutions](https://www.furnisys.co.in/healthcare-workspace-solutions): Healthcare facilities operate across highly specialised support and ancillary spaces. Furnisys approaches each space as a functional system, combining work
+- [Gems and Jewellery](https://www.furnisys.co.in/gems-jewellery-workspace-solutions): Gems and jewellery manufacturing facilities bring together fine craftsmanship and industrial process control within the same footprint. Furnisys approaches
+- [Education](https://www.furnisys.co.in/education): Whether it’s a university campus, vocational institute, STEM lab, or technical training center, Furnisys delivers modular workspace and storage solutions d
+- [Electronic Assembly Storage Solutions](https://www.furnisys.co.in/electronic-assembly-storage-solutions): In high-performance manufacturing environments, precision, safety, and efficiency are non-negotiable. Whether you're operating an assembly line, a fabricat
+- [Machining and Fabrication Storage Solutions](https://www.furnisys.co.in/machining-and-fabrication-storage-solutions): Furnisys provides durable industrial furniture designed for the demanding environment of machining and fabrication. Our heavy-duty workbenches are ideal fo
+- [Maintenance and Repair Storage Solutions](https://www.furnisys.co.in/maintenance-and-repair-storage-solutions): In the maintenance and repair industry, efficiency and organization are critical to minimizing downtime and maximizing productivity. Furnisys offers a comp
+- [Medical Manufacturing Storage Solutions](https://www.furnisys.co.in/medical-manufacturing-storage-solutions): When precision, cleanliness, and efficiency are vital, Furnisys provides the storage and workstation solutions your medical manufacturing environment deman
 
-## Pages
-- [Industries](https://www.furnisys.co.in/industries): Manufacturing, Aerospace & Aviation, Automotive & Auto Services, Oil & Gas, Power Generation, Agriculture & Outdoor, Construction, Jobsite Solutions, Metalworking, Museums, Libraries & Archives, Tool Crib & Point of Use, Government, Military & Law Enforcement, Education & Training, Healthcare, Gems & Jewellery.
-- [Case studies](https://www.furnisys.co.in/case-studies)
-- [How we work](https://www.furnisys.co.in/how-we-work): consultancy (product configuration), 2D/3D space planning, manufacturing, installation, after-sales service; channel partner program.
-- [Contact](https://www.furnisys.co.in/contact)
+## Products
+- [Base Series Industrial Workbench](https://www.furnisys.co.in/base-series-industrial-workbench): All purpose workbench series designed to functionally serve your basic workspace needs.
+- [Scitec Series Technical Workbenches](https://www.furnisys.co.in/scitec-series-technical-workbenches): An adaptable workbench series designed for diverse technical environment.
+- [Pro Series Heavy Duty Workbench](https://www.furnisys.co.in/pro-series-heavy-duty-workbench): An industrial grade workbench series designed to withstand rough work environments.
+- [Flexi Modular Workstation System](https://www.furnisys.co.in/flexi-modular-workstation-system): Our most flexible workstation — designed to adapt, expand, and reconfigure effortlessly as your workspace needs evolve.
+- [ESD Workstations](https://www.furnisys.co.in/esd-workstations): Comprehensive ESD-safe solutions designed to protect sensitive components and ensure a static-controlled environment.
+- [Link Flow Racks](https://www.furnisys.co.in/link-flow-racks): Experience efficient material handling with LINK Flow Racks—designed to streamline picking, sorting, and assembly processes.
+- [Link Packing Accessories](https://www.furnisys.co.in/link-packing-accessories): "Designed to support efficient packing and shipping operations" — can be integrated with Furnisys work systems to streamline workflow, improve accessibilit
+- [Stands & Trolleys](https://www.furnisys.co.in/Stands-Trolleys): Configure stands and trolleys to securely hold or transport parts, tools, and test equipment—ideal for use across production, assembly, repair, and mainten
+- [Overhead Cabinets Shelves and Mounting Components](https://www.furnisys.co.in/overhead-cabinets-shelves-and-mounting-components): Keep essential items within reach and your worktop organized with overhead storage solutions. Cabinets can be wall-mounted or fixed onto riser shelves, whi
+- [Specialty Workbench](https://www.furnisys.co.in/specialized-workbenches): Enhance efficiency with configurable workbenches designed to support specific tasks.
+- [Flexi Workstations](https://www.furnisys.co.in/flexi-workstations): Flexi Workstations offer ultimate adaptability for both current and future needs. Maximize productivity per square foot with their flexibility. These indus
+- [Flexi Modular Single-Sided Starter Unit](https://www.furnisys.co.in/flexi-modular-single-sided-starter-unit): A foundational unit for single-user setups, this starter configuration can function independently or be extended using compatible adders and corners for a
+- [Double-Sided Modular Workstation Starter Unit](https://www.furnisys.co.in/flexi-double-sided-modular-workstation-starter-unit): Create efficient multi-user workstations with this double-sided starter module. Ideal for collaborative environments and space optimization, it can be used
+- [Flexi Single-Sided Adder Unit](https://www.furnisys.co.in/flexi-single-sided-adder-unit): "Designed to connect with any single-sided Flexi starter or corner unit" to extend worksurface length and accessory support.
+- [Flexi Double-Sided Adder Unit](https://www.furnisys.co.in/flexi-double-sided-adder-unit): "Designed to join with double-sided starter or corner units," adds capacity without increasing footprint width.
+- [Flexi Single-Sided Corner Unit](https://www.furnisys.co.in/Flexi-Single-Sided-Corner-Unit): A smart way to navigate turns in your layout—perfect for L-shaped or U-shaped workstations in assembly or light manufacturing setups. Utilize corners effi
+- [Flexi Double-Sided Corner Unit](https://www.furnisys.co.in/Flexi-Double-Sided-Corner-Unit): Connects with other double-sided units to create productive back-to-back corner workspaces, offering fluid workflow transitions and maximum utilization of
+- [Storage Cabinets](https://www.furnisys.co.in/storage-cabinets): Furnisys storage cabinet range is designed to achieve complete organization of parts , tools and equipment. Our extensive range of cabinet footprints & dra
+- [Base Storage Cabinet](https://www.furnisys.co.in/base-storage-cabinet): "Modular, high-capacity storage built to handle heavy loads" adapts to changing workspaces and demanding storage needs.
+- [Mobile Cabinets](https://www.furnisys.co.in/mobile-cabinet): Designed for workflows that require tools and parts on the move, Furnisys mobile cabinets combine storage and mobility in one solution
+- [Deep Depth Mobile Cabinets](https://www.furnisys.co.in/Deep-Depth-Mobile-Cabinets): Heavy-Duty Mobility with Reliable StorageBuilt for high-capacity storage and smooth mobility, Furnisys deep depth mobile cabinets are designed to support h
+- [Shallow Depth Mobile Cabinets](https://www.furnisys.co.in/Shallow-Depth-Mobile-Cabinets): Compact Design. Maximum Efficiency.Ideal for space-conscious areas, Furnisys shallow depth mobile cabinets offer generous storage without taking up too muc
+- [Shelf Storage Cabinets](https://www.furnisys.co.in/shelf-cabinets): An efficient solution to store, organize, and access bulky equipment or irregularly shaped items that aren’t ideal for drawer storage.
+- [Tall Cabinet](https://www.furnisys.co.in/tall-cabinet): Incorporate tall cabinets to bring added height, strength, and organized efficiency to your workspace.
+- [Issue Counters](https://www.furnisys.co.in/issue-counters): Furnisys issue counter cabinets offer organized, accessible storage for fast-moving items of various sizes—designed to keep your workspace efficient, clean
+- [Sink Cabinets](https://www.furnisys.co.in/sink-cabinets): "Get the functionality of a sink with a clean, cohesive look." Designed to match Furnisys cabinets and workstations in R&D labs, pharmaceutical units, repa
+- [Link systems combinations](https://www.furnisys.co.in/link-systems-combinations): Increase the efficiency of your workspace by incorporating the Link Uprighter with any of our workbenches. The Link Uprighter can also be mounted directly
+- [Specialty Solutions](https://www.furnisys.co.in/Specialized-storage-solutions): Furnisys delivers purpose-built functional systems to solve your most specialised storage needs.
+
+## Case studies
+- [Jewellery Manufacturing Case Study](https://www.furnisys.co.in/case-study-jewellery): Pro and Scitec workstations, base and mobile cabinets for a new jewellery manufacturing facility.
+- [Medical Device Testing Lab Case Study](https://www.furnisys.co.in/case-study-medical-devices): ESD-safe Scitec workstations and workbenches for a medical equipment testing lab.
+- [Bearing Packaging Case Study](https://www.furnisys.co.in/case-study-automotive): Eight Scitec packaging workstations with Link Uprighters for an automotive bearing manufacturer.
+- [Packaging Workstation for Tool & Die Manufacturer](https://www.furnisys.co.in/packaging-workstation-for-tool-and-die-manufacturing-a-furnisys-case-study): A manufacturer of tungsten carbide and steel dies used in metal forming approached Furnisys with a specific requirement: a dedicated workstation for packag
+- [Workstation Systems for an Aerospace Manufacturer](https://www.furnisys.co.in/aerospace-rd-workstation-systems): Industry: Aerospace & Defense, Product & Parts Manufacturing Function: Research & Development Furnisys Program: Workstation Systems, Link Uprighter System,
+- [Kritsnam Case Study](https://www.furnisys.co.in/esd-proof-electronic-workbench-by-furnisys): Founded in 2015 in Kanpur, Kritsnam Technologies makes Artificial intelligence-backed solutions to manage water resources sustainably. With their product D
+- [Liebherr Case Study](https://www.furnisys.co.in/tool-storage-solutions-mobile-cabinet): Liebherr Appliances India Private Limited is a heavy equipment manufacturer, a wholly owned subsidiary of Liebherr-Hausgeräte GmbH in Ochsenhausen (Germany
+- [Zero Carbon Tech 24 Case Study (Industrial & Railway Infrastructure Services)](https://www.furnisys.co.in/railway-infrastructure-service-workbenches): They provide Carbon Capture, Utilization, and Storage (CCUS) Solutions
+- [Weatherford Case Study](https://www.furnisys.co.in/weatherford-case-study): In the oil industry, particularly in oil equipment and services, research and development (R&D) play a critical role in ensuring that products and processe
+- [A Training Workstation Configured for Flame Arrester & Breather Valve Assembly](https://www.furnisys.co.in/training-workstation-flame-arrester-breather-valve-case-study): The client manufactures flame arresters, valves, and tank equipment, including equipment for cryogenic storage tanks, hydrogen applications, and lightning
+- [Premier India Agencies Case Study](https://www.furnisys.co.in/premier-india-agencies-case-study-by-furnisys): Product & Services- They are manufacturer & supplier of industrial and railway-related products.
+
+## Use cases
+- [Chemical Resistant Workbenches](https://www.furnisys.co.in/chemical-resistant-workbenches): In Oil & Gas R&D, it is essential to study material behavior at both molecular and thermal levels to ensure the long-term reliability of components working
+- [Workbench for Material Testing](https://www.furnisys.co.in/workbench-for-material-testing-mumbai-india): In Oil & Gas R&D labs, material testing is not just another routine procedure, it is a vital step that decides whether components can survive extreme condi
+- [Workbench requirement for fabrication area](https://www.furnisys.co.in/workbench-for-fabrication-area-mumbai-india): In the Oil & Gas industry, material reliability is non-negotiable. Every component used in drilling, exploration, and production tools must withstand harsh
+- [Training Center Furniture for Oil & Gas Industry](https://www.furnisys.co.in/training-center-furniture-for-oil-gas-industry): In the oil and gas industry, training is not just theoretical, it demands practical, hands-on exposure. From hydraulic valves to pneumatic actuators, techn
+- [ESD-Safe Workstation](https://www.furnisys.co.in/esd-safe-workstation): In the Oil & Gas industry, reliability in embedded electronics, from downhole sensors to surface control systems, is non-negotiable. At the core of these e
+- [Lathe Machining Zone](https://www.furnisys.co.in/lathe-machining-zone-mumbai-india): In every Lathe Machining Zone, efficiency depends not only on the machines but also on the support systems around them. Operators working on valves and pre
+- [Packaging Area for Fasteners](https://www.furnisys.co.in/packaging-area-for-fasteners): When it comes to fastener manufacturing, efficiency in the Packaging Area for Fasteners is just as important as precision in production. Nuts, bolts, and s
+- [Pump Assembly Area](https://www.furnisys.co.in/pump-assembly-area): A well-structured Pump Assembly Area is essential for precision, safety, and speed. In pneumatic equipment manufacturing, every step of the assembly proces
+- [Valve Assembly Line](https://www.furnisys.co.in/valve-assembly-line): Setting up a Valve Assembly Line requires more than just a flat surface and a few tools. Precision assembly tasks like aligning gaskets, torqueing bolts, c
+
+## Guides and articles
+- [Optimizing Packaging Workbenches (White Paper)](https://www.furnisys.co.in/packaging-workbenches): In modern industrial operations, packaging is more than just a functional necessity it is a strategic process that impacts efficiency, product safety, and
+- [Mahindra Enters Aircraft Manufacturing with Novavayu Aerospace](https://www.furnisys.co.in/mahindra-novavayu-aerospace-india-aircraft-manufacturing): Mahindra Group has taken its most significant step yet into aerospace manufacturing. On July 29, 2026, the conglomerate incorporated Novavayu Aerospace Lim
+- [Assembly Workbench](https://www.furnisys.co.in/assembly-workbench-assembly-workstation-india): The assembly workbench is a pivotal fixture in manufacturing environments, serving as the vital workspace where various components are combined to create f
+- [ESD Workbench: Safeguarding Sensitive Electronics](https://www.furnisys.co.in/esd-workbench-esd-workstations-esd-worktable): In today’s technology-driven world, protecting sensitive electronic components during assembly, testing, and repair is critical. One of the biggest threats
+- [Facing a Lack of Bandwidth to Configure Workbenches?](https://www.furnisys.co.in/configure-workbenches-custom-workstations): Have you ever struggled with the thought - “I don’t have the time or the bandwidth to configure a perfect workstation”?
+- [Reduce Functional Risk to Prevent Product Failure](https://www.furnisys.co.in/prevent-product-failure): Product failure can happen despite robust designs and quality materials. Often, the root cause lies in overlooked functional risks - issues that emerge whe
+- [Ergonomic Workbench](https://www.furnisys.co.in/ergonomic-workbench-ergonomic-workstation-in-mumbai): You’ve invested in quality equipment, streamlined your workflows, and hired skilled technicians. But something’s still off, productivity dips, workers comp
+- [Optimize Space in Your Manufacturing Facility](https://www.furnisys.co.in/optimize-space-in-the-manufacturing-facility): If you're running a manufacturing facility and feel like you're running out of space, you're not alone.
+- [Space Optimization in Manufacturing (Workstation Edition)](https://www.furnisys.co.in/space-optimization-in-manufacturing-workstation-edition): Every second counts in the fast-paced world of manufacturing. Inefficiencies due to cluttered workspaces translate to lost time, decreased productivity, an
+- [A Guide to Planning for Manufacturing Site Expansion](https://www.furnisys.co.in/a-guide-to-planning-for-manufacturing-site-expansion): The manufacturing landscape is dynamic. As your business flourishes and product demand surges, the inevitable question arises: is it time to expand your ma
+- [10 Mistakes Customers Make While Buying Industrial Furniture](https://www.furnisys.co.in/10-mistakes-customers-make-while-buying-industrial-furniture): Equipping a manufacturing space is no small feat. You're not just decorating; you're laying the foundation for efficient workflows, employee well-being, an
+- [Tackling High Labor Costs In Manufacturing Industry](https://www.furnisys.co.in/tackling-high-labor-costs): The manufacturing industry thrives on innovation and efficiency. But in today's dynamic landscape, manufacturers face a double challenge: rising labour cos
+- [Reasons For Low Employee Productivity In Manufacturing Industry](https://www.furnisys.co.in/reasons-for-low-employee-productivity-in-manufacturing-industry): In the fast-paced world of manufacturing, even minor dips in employee productivity can significantly impact your bottom line. Meeting deadlines, ensuring q
+- [Optimizing Auto Service Centers with Efficient Storage, Workstations & Trolleys](https://www.furnisys.co.in/auto-service-centers-workbench-service-workstation): "Optimizing Auto Centers" (label) Modular, configurable workstations and storage systems by Furnisys, Navi Mumbai.
+- [Worktops for the Manufacturing Industry](https://www.furnisys.co.in/worktops-for-every-industry): Selecting the right worktop for manufacturing industry environments is not just a design choice, it’s a decision that directly influences productivity, saf
+- [The Concept of Modularity](https://www.furnisys.co.in/modularity-in-industrial-furniture): Modularity is a concept that has revolutionized many industries, from technology to architecture, and industrial furniture is no exception. But what exactl
+- [Need Chemically Resistant Workbenches? Here's How We Equip Labs for Thermal & Chemical Testing](https://www.furnisys.co.in/chemically-resistant-workbenches-chemical-resistant-worktops): In Oil & Gas R&D, understanding material behavior at a molecular and thermal level is crucial to ensuring long-term reliability of components exposed to ex
+- [Transforming R&D Labs in the Oil & Gas Industry with Modular Workstations](https://www.furnisys.co.in/transforming-rd-labs-in-the-oil-gas-industry-with-modular-workstations): Did you know? How a Newly Built Lab Setup Was Streamlined with Configurable Workbenches Across Testing Zones
+
+## Company
+- [Our story](https://www.furnisys.co.in/our-story)
+- [How we work](https://www.furnisys.co.in/how-we-work)
+- [Clientele](https://www.furnisys.co.in/clientele)
+- [Product literature](https://www.furnisys.co.in/downloads)
+- [Contact / discuss a project](https://www.furnisys.co.in/contact)
