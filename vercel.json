@@ -303,6 +303,11 @@
       "permanent": true
     },
     {
+      "source": "/about-us",
+      "destination": "/our-story",
+      "permanent": true
+    },
+    {
       "source": "/category/:path*",
       "destination": "/blogs",
       "permanent": true
