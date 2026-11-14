@@ -48,6 +48,16 @@
       });
     });
   });
+  document.querySelectorAll('.fchips').forEach(function (g) {
+    var grid = g.nextElementSibling;
+    g.querySelectorAll('.fchip').forEach(function (b) {
+      b.addEventListener('click', function () {
+        g.querySelectorAll('.fchip').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        var f = b.getAttribute('data-f');
+        Array.prototype.forEach.call(grid.children, function (c) { c.hidden = f !== 'all' && (' ' + (c.getAttribute('data-cat') || '') + ' ').indexOf(' ' + f + ' ') < 0; });
+      });
+    });
+  });
   var qq = new URLSearchParams(location.search);
   document.querySelectorAll('form.qform').forEach(function (fm) {
     var note = fm.querySelector('.form-note'), res = fm.querySelector('.form-result'), pre = res.querySelector('pre');
