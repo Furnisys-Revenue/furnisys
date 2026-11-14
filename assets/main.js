@@ -63,12 +63,22 @@
   var lb = document.getElementById('lightbox');
   if (lb) {
     var items = Array.prototype.slice.call(document.querySelectorAll('.g-item')), cur = 0, lbImg = lb.querySelector('img'), cap = lb.querySelector('figcaption'), last;
-    items.forEach(function (b) { var im = b.querySelector('img'); im.addEventListener('error', function () { var fb = im.getAttribute('data-fallback'); if (fb && im.src !== fb) { im.src = fb; b.setAttribute('data-full', fb); } else b.classList.add('missing'); }); });
+    function recount() {
+      document.querySelectorAll('.g-sub').forEach(function (sub) { var n = sub.querySelectorAll('.g-item').length; var c = sub.querySelector('h3 .cnt'); if (c) c.textContent = n; if (!n) sub.remove(); });
+      document.querySelectorAll('.g-sec').forEach(function (sec) { var n = sec.querySelectorAll('.g-item').length; var a = document.querySelector('.g-nav a[href="#' + sec.id + '"] .cnt'); if (a) a.textContent = n; if (!n) { sec.remove(); var l = document.querySelector('.g-nav a[href="#' + sec.id + '"]'); if (l) l.remove(); } });
+    }
+    function drop(b) { var li = b.parentNode; items.splice(items.indexOf(b), 1); li.remove(); recount(); }
+    items.slice().forEach(function (b) { var im = b.querySelector('img');
+      function bad() { var fb = im.getAttribute('data-fallback'); if (fb && im.src !== fb) { im.src = fb; b.setAttribute('data-full', fb); im.removeAttribute('data-fallback'); } else drop(b); }
+      im.addEventListener('error', bad);
+      im.addEventListener('load', function () { if (im.naturalWidth < 60) drop(b); });
+      if (im.complete && im.naturalWidth === 0 && im.src) bad();
+    });
     function show(i) { cur = (i + items.length) % items.length; var b = items[cur]; lbImg.src = b.getAttribute('data-full'); lbImg.alt = b.getAttribute('data-cap'); cap.textContent = b.getAttribute('data-cap'); }
     lbImg.addEventListener('error', function () { var fb = items[cur].getAttribute('data-fallback'); if (fb && lbImg.src !== fb) lbImg.src = fb; });
     function open(i) { last = document.activeElement; show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; lb.querySelector('.lb-close').focus(); }
     function close() { lb.hidden = true; document.body.style.overflow = ''; if (last) last.focus(); }
-    items.forEach(function (b, i) { b.addEventListener('click', function () { open(i); }); });
+    items.forEach(function (b) { b.addEventListener('click', function () { open(items.indexOf(b)); }); });
     lb.querySelector('.lb-close').addEventListener('click', close);
     lb.querySelector('.lb-prev').addEventListener('click', function () { show(cur - 1); });
     lb.querySelector('.lb-next').addEventListener('click', function () { show(cur + 1); });
