@@ -361,3 +361,18 @@ details p{margin-top:.7rem;max-width:68ch}
 .rich blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:4px solid var(--red);background:var(--grey4);border-radius:0 10px 10px 0}
 .rich .inline-img{margin:1.6rem 0}
 .rich .inline-img img{border-radius:var(--r);width:100%;height:auto;background:var(--tint)}
+/* long-page sections */
+.toc{display:grid;gap:.8rem;padding:1.2rem 1.4rem;border-radius:var(--r);background:var(--tint);margin-bottom:2rem}
+.toc-title{font-family:var(--f-sub);font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.toc-links{display:flex;flex-wrap:wrap;gap:.5rem}
+.toc-links a{font-family:var(--f-sub);font-weight:500;font-size:.86rem;text-decoration:none;color:var(--ink);background:var(--white);border:1px solid var(--grey3);border-radius:999px;padding:.35rem .8rem;line-height:1.3}
+.toc-links a:hover{border-color:var(--blue);color:var(--blue)}
+.toc-all{justify-self:start;background:none;border:0;padding:0;font:600 .88rem var(--f-sub);color:var(--red);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.rich details.sec{border:1px solid var(--grey3);border-radius:var(--r);padding:0;margin-top:1rem;background:var(--white);scroll-margin-top:100px}
+.rich details.sec:first-of-type{border-top:1px solid var(--grey3)}
+.rich details.sec > summary{padding:1.1rem 1.4rem;align-items:center}
+.rich details.sec > summary h2{margin:0;font-size:clamp(1.15rem,2vw,1.4rem)}
+.rich details.sec[open] > summary{border-bottom:1px solid var(--grey3)}
+.rich .sec-body{padding:1.2rem 1.4rem 1.6rem}
+.rich .sec-body > * + *{margin-top:1rem}
+.rich .sec-body > h3:first-child{margin-top:0}

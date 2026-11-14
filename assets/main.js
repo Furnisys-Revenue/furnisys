@@ -25,6 +25,15 @@
   });
   var y = document.querySelector('[data-year]'); if (y) y.textContent = new Date().getFullYear();
 
+  function openHash(h) { var el = h && document.getElementById(h.slice(1)); if (el && el.tagName === 'DETAILS') el.open = true; }
+  openHash(location.hash);
+  document.querySelectorAll('.toc-links a').forEach(function (a) { a.addEventListener('click', function () { openHash(a.getAttribute('href')); }); });
+  document.querySelectorAll('.toc-all').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var all = document.querySelectorAll('details.sec'), anyClosed = Array.prototype.some.call(all, function (d) { return !d.open; });
+      all.forEach(function (d) { d.open = anyClosed; }); b.textContent = anyClosed ? 'Collapse all sections' : 'Expand all sections';
+    });
+  });
   var f = document.getElementById('enquiry-form'); if (!f) return;
   var q = new URLSearchParams(location.search);
   if (q.get('program')) f.program.value = q.get('program');
