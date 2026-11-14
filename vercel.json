@@ -293,6 +293,11 @@
       "permanent": true
     },
     {
+      "source": "/assembly-instructions",
+      "destination": "/downloads",
+      "permanent": true
+    },
+    {
       "source": "/category/:path*",
       "destination": "/blogs",
       "permanent": true

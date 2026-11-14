@@ -595,3 +595,51 @@ h1,h2{color:var(--blue)}
 .fchip[aria-pressed="true"]{background:var(--blue);color:var(--white)}
 .filterable > [hidden]{display:none!important}
 .contact-grid .steps{grid-template-columns:1fr 1fr}@media (max-width:520px){.contact-grid .steps{grid-template-columns:1fr}}
+
+/* ================= v8: gallery + lightbox, FAQ ================= */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.g-nav{margin-top:.6rem;margin-bottom:0}
+.g-nav .fchip{text-decoration:none}
+.cnt{font-size:.75rem;opacity:.7;margin-left:.2rem}
+.g-sec{padding-block:1.5rem 2.5rem;scroll-margin-top:100px}
+.g-head{display:grid;gap:.3rem;margin-bottom:1.2rem}
+.g-head h2{font-size:clamp(1.4rem,2.4vw,1.9rem)}
+.g-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.9rem}
+.g-item{position:relative;display:block;width:100%;aspect-ratio:1/1;padding:0;border:1px solid var(--grey3);border-radius:12px;overflow:hidden;background:var(--white);cursor:zoom-in}
+.g-item img{width:100%;height:100%;object-fit:contain;padding:6%;transition:transform .3s}
+.g-item:hover img{transform:scale(1.05)}
+.g-item.missing img{visibility:hidden}
+.wm{position:absolute;inset:0;background:url(watermark.png) center/200px repeat;pointer-events:none}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(5,14,30,.92);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lightbox[hidden]{display:none}
+.lb-fig{margin:0;display:grid;gap:.8rem;justify-items:center;min-width:0}
+.lb-img{position:relative;background:var(--white);border-radius:12px;overflow:hidden;max-width:min(1000px,100%)}
+.lb-img img{display:block;max-height:78vh;max-width:100%;width:auto;object-fit:contain}
+.lb-img .wm{background-size:260px}
+.lb-fig figcaption{color:#e5e5e5;font-family:var(--f-sub);font-size:.95rem;text-align:center}
+.lb-close,.lb-prev,.lb-next{background:rgba(255,255,255,.12);border:0;color:#fff;width:48px;height:48px;border-radius:50%;font-size:2rem;line-height:1;cursor:pointer}
+.lb-close{position:absolute;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+.lb-close:hover,.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
+@media (max-width:600px){.lightbox{grid-template-columns:1fr}.lb-prev,.lb-next{position:absolute;bottom:max(16px,env(safe-area-inset-bottom,0px))}.lb-prev{left:30%}.lb-next{right:30%}}
+/* FAQ */
+.faq-search{display:flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--grey2);border-radius:999px;padding:.4rem .5rem .4rem 1.1rem;max-width:560px;box-shadow:var(--shadow)}
+.faq-search .ic-sm{color:var(--red);flex:none}
+.faq-search input{flex:1;border:0;outline:0;font:inherit;font-size:1rem;padding:.6rem 0;background:transparent;min-width:0}
+.faq-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(2rem,4vw,3.5rem);align-items:start}
+@media (max-width:960px){.faq-layout{grid-template-columns:1fr}}
+.faq-group{display:grid;gap:.6rem;margin-bottom:2.2rem}
+.faq-gh{display:flex;align-items:center;gap:.9rem;margin-bottom:.4rem}
+.faq-gh .ic-ring{width:44px;height:44px}
+.faq-gh h2{font-size:1.4rem}
+.faq-item{border:1px solid var(--grey3)!important;border-radius:14px;padding:0!important;background:var(--white);transition:box-shadow .2s}
+.faq-item[open]{box-shadow:var(--shadow);border-color:transparent!important}
+.faq-item summary{padding:1.1rem 1.3rem;font-size:1rem}
+.faq-a{padding:0 1.3rem 1.2rem;display:grid;gap:.8rem}
+.faq-a p{margin:0;max-width:66ch}
+.swatches{display:flex;flex-wrap:wrap;gap:.8rem}
+.sw{display:grid;justify-items:center;gap:.3rem;font:600 .8rem var(--f-sub);color:var(--ink);text-align:center}
+.sw i{width:52px;height:52px;border-radius:12px;border:1px solid var(--grey3);display:block}
+.sw small{font-weight:500;color:var(--grey1)}
+.faq-side{display:grid;gap:1rem;position:sticky;top:100px}
+.faq-side .pill{font-size:.95rem;padding:.8rem 1rem}
+@media (max-width:960px){.faq-side{position:static}}
