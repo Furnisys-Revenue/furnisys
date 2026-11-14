@@ -1,4 +1,136 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/contact-us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/request-a-consult",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-sales-representative",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/partners-form",
+      "destination": "/contact?type=partner",
+      "permanent": true
+    },
+    {
+      "source": "/career-form",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/base-series-industrial-workbenches",
+      "destination": "/base-series-industrial-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/base-series-workbenches",
+      "destination": "/base-series-industrial-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/scitec-series-workbenches",
+      "destination": "/scitec-series-technical-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/flexi-workstations1",
+      "destination": "/flexi-workstations",
+      "permanent": true
+    },
+    {
+      "source": "/flexi-double-sided-starter-unit",
+      "destination": "/flexi-double-sided-modular-workstation-starter-unit",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-workstations-solutions",
+      "destination": "/manufacturing",
+      "permanent": true
+    },
+    {
+      "source": "/industrial-storage-cabinet-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/flexi-system-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/pro-series-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/link-series-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/scitec-series-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/esd-workstations-esd-table-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/education-and-training-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/industrial-workstations-and-workbenches-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/industry-solutions-for-workbenches-workstations-and-cabinets",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/base-series-photos",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/chemically-resistant-workbenches-chemical-resistant-worktops",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/transforming-rd-labs-in-the-oil-gas-industry-with-modular-workstations",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/premier-india-agencies-case-study-by-furnisys",
+      "destination": "/case-studies",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/blogs",
+      "permanent": true
+    }
+  ]
 }
