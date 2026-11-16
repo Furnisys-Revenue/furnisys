@@ -770,3 +770,14 @@ h1,h2{color:var(--blue)}
 .brp-out li .ic-sm{flex:none;color:var(--red);margin-top:.1rem}
 @media (max-width:1100px){.brp-top{grid-template-columns:1fr}.brp-img{aspect-ratio:4/3}.brp-out ul{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.brp-cols{grid-template-columns:1fr}.brp-out ul{grid-template-columns:1fr}}
+
+/* ===== v13: LinkedIn showcase links ===== */
+.li-band{padding-block:2.4rem}
+.li-row{display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;padding:1.4rem 1.6rem;border-radius:18px;background:var(--grey4);border:1px solid var(--grey3)}
+.li-badge{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;background:#0a66c2;color:#fff}
+.li-badge .ic{width:26px;height:26px}
+.li-row h3{font-size:1.1rem}.li-row p{font-size:.93rem}
+.li-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;font:600 .85rem var(--f-sub);color:#0a66c2;text-decoration:none}
+.li-link .ic{width:16px;height:16px}
+.li-link:hover{text-decoration:underline}
+@media (max-width:700px){.li-row{grid-template-columns:1fr;justify-items:start}}
