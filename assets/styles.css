@@ -781,3 +781,13 @@ h1,h2{color:var(--blue)}
 .li-link .ic{width:16px;height:16px}
 .li-link:hover{text-decoration:underline}
 @media (max-width:700px){.li-row{grid-template-columns:1fr;justify-items:start}}
+
+/* ===== v15: photos in use ===== */
+.ph-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.ph-grid.one{grid-template-columns:minmax(0,820px);justify-content:center}
+.ph-fig{margin:0;display:grid;gap:.6rem}
+.ph-fig .photo{aspect-ratio:16/9;border-radius:16px}
+.ph-fig figcaption{font-size:.9rem;color:var(--grey1)}
+@media (max-width:760px){.ph-grid{grid-template-columns:1fr}}
+.ind.has-img{padding-top:0;overflow:hidden}
+.ind-img{aspect-ratio:16/9;margin:0 -1.4rem .6rem;border-radius:0}
