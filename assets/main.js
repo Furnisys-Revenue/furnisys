@@ -3,10 +3,19 @@
   var h = document.querySelector('.site-header');
   function sc() { if (h) h.classList.toggle('scrolled', scrollY > 8); }
   addEventListener('scroll', sc, { passive: true }); sc();
+  // relevant real photo for any frame whose image fails to load
+  var PH = [[/esd|pcb|electron/i, 'ph-pcb-testing-line'], [/scitec|test|instrument|lab/i, 'ph-electronics-test-bench'], [/metrolog|inspect|calibrat|gauge/i, 'ph-metrology-bench'],
+    [/pro series|heavy|fabricat|weld|machin|metal/i, 'ph-metalworking-benches'], [/mobile|trolley|cart/i, 'ph-mobile-site-workshop'], [/flow rack|kitting|\bbins?\b/i, 'ph-kitting-flow-racks'],
+    [/issue|counter|spare|parts/i, 'ph-parts-issue-counter'], [/drawer|cabinet|storage/i, 'ph-spare-parts-cabinets'], [/peg|wall|tool board|uprighter|overhead/i, 'ph-point-of-use-tools'],
+    [/locker/i, 'cat-lockers-system'], [/flexi|assembly|workstation/i, 'ph-assembly-line'], [/aero|aircraft|aviation/i, 'ph-aerospace-rd'], [/auto|car|vehicle|service/i, 'ph-auto-service-bay'],
+    [/tractor|agri|farm/i, 'ph-tractor-service'], [/oil|gas|valve|pump/i, 'ph-oilgas-maintenance'], [/power|plant|maint/i, 'ph-power-maintenance'], [/container|site/i, 'ph-container-workshop']];
+  var POOL = ['ph-assembly-line', 'ph-metalworking-benches', 'ph-gauge-test-bench', 'ph-spare-parts-cabinets', 'ph-kitting-flow-racks', 'ph-point-of-use-tools'], pi = 0;
+  function pickPhoto(alt) { for (var i = 0; i < PH.length; i++) if (PH[i][0].test(alt)) return PH[i][1]; return POOL[(pi++) % POOL.length]; }
   document.querySelectorAll('.photo img').forEach(function (im) {
     function miss() {
       var fb = im.getAttribute('data-fallback');
       if (fb) { im.removeAttribute('data-fallback'); im.src = fb; return; }
+      if (!im.dataset.filled) { im.dataset.filled = '1'; im.src = 'assets/img/' + pickPhoto(im.alt || '') + '.jpg'; return; }
       im.parentNode.classList.add('missing');
     }
     if (im.complete && im.naturalWidth === 0) miss(); else im.addEventListener('error', miss);
