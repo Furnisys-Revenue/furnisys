@@ -727,3 +727,22 @@ h1,h2{color:var(--blue)}
 .cross{color:var(--red);font-weight:700}
 .unk{color:var(--grey1);font-style:italic}
 .cmp-note{margin-top:1rem;font-size:.85rem;color:var(--grey1);text-align:center}
+
+/* ===== v11: Lockers System page ===== */
+.lk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.lk-series{position:relative;display:grid;gap:1.2rem;align-content:start;padding:1.8rem 1.6rem;border-radius:20px;border:1px solid var(--grey3);background:var(--white)}
+.lk-series h3{font-size:1.4rem;color:var(--blue)}
+.lk-head,.lk-body{display:grid;gap:.7rem;min-width:0}
+.lk-label{font:700 .8rem var(--f-sub);letter-spacing:.04em;color:var(--red);margin-top:.4rem}
+.lk-series .checks{gap:.55rem}
+.lk-series .checks li{grid-template-columns:1.4rem 1fr;gap:.6rem;font-size:.93rem}
+.lk-series .checks li::before{width:1.4rem;height:1.4rem;background-size:14px}
+.lk-gauge{min-width:520px;font-size:.88rem}
+.lk-gauge th,.lk-gauge td{text-align:center;padding:.6rem .5rem}
+.lk-note{font-size:.88rem;color:var(--grey1)}
+.lk-sub{margin:2.2rem 0 1rem;font-size:1.15rem}
+.lk-colours{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+.lk-colours li{display:grid;justify-items:center;gap:.3rem;width:120px;text-align:center;font-size:.85rem}
+.lk-colours .sw{width:64px;height:64px;border-radius:14px;border:1px solid var(--grey3)}
+.lk-colours b{font:600 .9rem var(--f-sub);color:var(--ink)}
+@media (max-width:900px){.lk-grid{grid-template-columns:1fr}}
