@@ -893,3 +893,5 @@ h1,h2{color:var(--blue)}
 .wa-btn span{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);white-space:nowrap;padding:.4rem .75rem;border-radius:8px;background:var(--ink);color:#fff;font-size:.82rem;opacity:0;pointer-events:none;transition:opacity .2s}
 .wa-btn:hover span,.wa-btn:focus-visible span{opacity:1}
 @media (max-width:640px){.wa-btn{bottom:calc(86px + env(safe-area-inset-bottom,0px))}}
+.hero-rot .hero-h1 .tt-b.rot-words{display:inline-grid;cursor:default}
+.rot-w{transition-duration:.35s}
