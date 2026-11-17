@@ -928,3 +928,20 @@ h1,h2{color:var(--blue)}
 .man .cmp-wrap{overflow-x:visible}
 .man .spec-t{min-width:0;width:100%;table-layout:fixed}
 .man .spec-t th,.man .spec-t td{white-space:normal!important;overflow:visible;text-overflow:clip;word-break:normal}
+/* v22 case studies: at-a-glance strip, section labels, render figures, FAQ */
+.rich .cs-glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:0;margin:1.4rem 0 .4rem;border:1px solid var(--grey3);border-radius:var(--r);background:var(--tint);overflow:hidden}
+.rich .cs-glance>div{padding:.85rem 1.1rem;border-right:1px solid var(--grey3);border-bottom:1px solid var(--grey3);min-width:0}
+.rich .cs-glance dt{font-family:var(--f-sub);font-weight:600;font-size:.78rem;color:var(--grey1);margin:0 0 .2rem}
+.rich .cs-glance dd{margin:0;color:var(--blue);font-weight:500;font-size:.95rem;line-height:1.4}
+.rich .cs-label{font-family:var(--f-sub);font-weight:700;font-size:.8rem;color:var(--red);margin:0 0 .4rem;letter-spacing:.02em}
+.rich .cs-fig{background:var(--white);border:1px solid var(--grey3);border-radius:var(--r);padding:.6rem}
+.rich .cs-fig img{max-height:460px;object-fit:contain;background:var(--white)}
+.rich .cs-fig figcaption{font-size:.85rem;color:var(--grey1);margin-top:.4rem;text-align:center}
+.rich details.faq-q{border-top:1px solid var(--grey3);padding:.2rem 0}
+.rich details.faq-q:first-child{border-top:0}
+.rich details.faq-q>summary{cursor:pointer;font-family:var(--f-sub);font-weight:600;color:var(--blue);padding:.75rem 0;list-style:none}
+.rich details.faq-q>summary::-webkit-details-marker{display:none}
+.rich details.faq-q>summary::before{content:"+";display:inline-block;width:1.2em;color:var(--red);font-weight:700}
+.rich details.faq-q[open]>summary::before{content:"–"}
+.rich details.faq-q>p{margin:0 0 .9rem 1.2em}
+.fchips{flex-wrap:wrap}
