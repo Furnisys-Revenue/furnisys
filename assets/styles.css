@@ -956,3 +956,11 @@ h1,h2{color:var(--blue)}
 @media (max-width:1000px){.eb-grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:760px){.eb-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:420px){.eb-grid{grid-template-columns:1fr}}
+/* v25 brochure band on solution pages */
+.brochure-band .bro-row{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:clamp(1.4rem,4vw,3rem);align-items:center;max-width:920px}
+.brochure-band .bro-cover{display:block;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--grey3);transition:transform .2s}
+.brochure-band .bro-cover:hover{transform:translateY(-3px)}
+.brochure-band .bro-cover img{display:block;width:100%;aspect-ratio:1054/1492;object-fit:cover}
+.brochure-band .bro-copy h2{margin:.4rem 0 .6rem}
+.brochure-band .bro-copy p{max-width:52ch}
+@media (max-width:640px){.brochure-band .bro-row{grid-template-columns:1fr}.brochure-band .bro-cover{max-width:220px}}
