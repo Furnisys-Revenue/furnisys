@@ -1111,3 +1111,22 @@ h1,h2{color:var(--blue)}
 .pf .pt-grid.pz-grid-cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
 .pz-head{flex-wrap:wrap}
 .pz-foot{flex-wrap:wrap}
+/* v33 partner programs page */
+.pg-stats{list-style:none;margin:1.6rem 0 0;padding:0;display:flex;gap:clamp(1.2rem,4vw,2.6rem);flex-wrap:wrap}
+.pg-stats b{display:block;font:700 1.8rem var(--f-head,inherit);color:var(--red);line-height:1}
+.pg-stats span{font-size:.85rem;color:var(--grey1)}
+.pg-bens{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.pg-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1rem}
+.pg-card{background:#fff;border:1px solid var(--grey3);border-radius:var(--r);padding:1.4rem;display:grid;gap:.6rem;align-content:start}
+.pg-card h3{margin:.3rem 0 0;font-size:1.1rem}
+.pg-who{margin:0;font-size:.9rem;color:var(--grey1)}
+.pg-list{list-style:none;margin:.3rem 0 0;padding:.8rem 0 0;border-top:1px solid var(--grey3);display:grid;gap:.5rem}
+.pg-list li{position:relative;padding-left:1.4rem;font-size:.9rem}
+.pg-list li::before{content:"";position:absolute;left:.1rem;top:.45em;width:.6rem;height:.32rem;border-left:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg)}
+.pg-logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem;max-width:1000px;margin-inline:auto}
+.pg-logo{height:84px;background:#fff;border:1px solid var(--grey3);border-radius:10px;display:grid;place-items:center;padding:.6rem;transition:border-color .2s}
+.pg-logo:hover{border-color:var(--blue)}
+.pg-logo img{max-width:100%;max-height:60px;width:auto;height:auto;object-fit:contain}
+.pg-ress{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.8rem;max-width:1000px;margin-inline:auto}
+.pg-res{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border:1px solid var(--grey3);border-radius:var(--r);font:600 .95rem var(--f-sub);color:var(--blue);text-decoration:none}
+.pg-res:hover{border-color:var(--blue);background:var(--tint)}
