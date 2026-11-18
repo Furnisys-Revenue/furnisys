@@ -1130,3 +1130,14 @@ h1,h2{color:var(--blue)}
 .pg-ress{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.8rem;max-width:1000px;margin-inline:auto}
 .pg-res{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border:1px solid var(--grey3);border-radius:var(--r);font:600 .95rem var(--f-sub);color:var(--blue);text-decoration:none}
 .pg-res:hover{border-color:var(--blue);background:var(--tint)}
+/* v34 user manual */
+.um ol,.um ul{padding-left:1.3rem}
+.um li{margin:.3rem 0}
+.um .um-fig{margin:1.4rem 0;padding:.8rem;border:1px solid var(--grey3);border-radius:var(--r);background:#fff}
+.um .um-fig img{width:100%;height:auto;display:block}
+.um .um-fig figcaption{font-size:.85rem;color:var(--grey1);text-align:center;margin-top:.5rem}
+.um .tbl{overflow-x:auto;margin:1rem 0}
+.um .um-tbl{width:100%;table-layout:auto}
+.um .um-tbl td,.um .um-tbl th{white-space:normal;vertical-align:top;font-size:.92rem}
+.um h3{margin-top:1.6rem}
+.um .um-tbl td{font-weight:400;color:var(--ink,#333)}.um .um-tbl tr:first-child td,.um .um-tbl th{font-weight:600;color:var(--blue)}
