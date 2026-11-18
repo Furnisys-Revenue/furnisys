@@ -945,3 +945,7 @@ h1,h2{color:var(--blue)}
 .rich details.faq-q[open]>summary::before{content:"–"}
 .rich details.faq-q>p{margin:0 0 .9rem 1.2em}
 .fchips{flex-wrap:wrap}
+/* v23 Zoho form embed */
+.zf-wrap{padding:0;overflow:hidden}
+.zf-wrap .qhead{padding:1.4rem 1.4rem 0}
+.zf-wrap iframe{display:block;width:100%;height:900px;border:0;background:transparent}
