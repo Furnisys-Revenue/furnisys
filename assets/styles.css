@@ -1193,3 +1193,13 @@ h1,h2{color:var(--blue)}
 .umx-support ul>li{padding:1rem;border:1px solid var(--grey3);border-radius:var(--r);background:#fff}
 .umx-support ul>li::before{display:none}
 @media (max-width:900px){.umx-grid{grid-template-columns:1fr}.umx-side{display:none}.umx-tbl td:last-child{white-space:normal}}
+/* v36 manual help */
+.umx-help{margin-left:1rem;padding:1rem;border-radius:var(--r);background:var(--blue);color:#fff;display:grid;gap:.35rem}
+.umx-help b{font:700 .95rem var(--f-sub)}.umx-help p{margin:0;font-size:.85rem;color:rgba(255,255,255,.85);line-height:1.45}
+.umx-help a{color:#fff;font:600 .85rem var(--f-sub);display:inline-flex;gap:.35rem;align-items:center;text-decoration:none;margin-top:.2rem}
+.umx-hcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1rem;max-width:1080px;margin-inline:auto}
+.umx-hc{display:grid;gap:.3rem;justify-items:start;padding:1.3rem;background:#fff;border:1px solid var(--grey3);border-radius:var(--r);text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+.umx-hc:hover{border-color:var(--blue);transform:translateY(-2px)}
+.umx-hc b{font:700 1rem var(--f-sub);color:var(--blue);margin-top:.4rem}
+.umx-hc span:not(.ic-ring){font-weight:600;color:var(--ink,#222)}
+.umx-hc em{font-style:normal;font-size:.85rem;color:var(--grey1)}
