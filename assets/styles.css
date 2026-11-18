@@ -1054,3 +1054,60 @@ h1,h2{color:var(--blue)}
 .pt-logo{height:84px;margin:-.2rem -.3rem .2rem;padding:.6rem;display:grid;place-items:center;border-bottom:1px solid var(--grey3)}
 .pt-logo img{max-width:100%;max-height:68px;width:auto;height:auto;object-fit:contain}
 .pt-logo-none .pt-mono{width:60px;height:60px;font-size:1.1rem}
+/* v32 Zoho-style partner cards and profile pages */
+.pz-grid-cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))}
+.pz-card{position:relative;padding:1.2rem;gap:.6rem;transition:border-color .2s,box-shadow .2s}
+.pz-card:hover{border-color:var(--blue);box-shadow:var(--shadow)}
+.pz-hit{position:absolute;inset:0;z-index:0}
+.pz-card a:not(.pz-hit){position:relative;z-index:1}
+.pz-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem}
+.pz-logo{width:132px;height:72px;border:1px solid var(--grey3);border-radius:10px;background:#fff;display:grid;place-items:center;padding:.45rem;flex:none}
+.pz-logo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.pz-logo.pz-none span{font:700 1.3rem var(--f-sub);color:var(--blue);letter-spacing:.04em}
+.pz-logo.lg{width:200px;height:110px;padding:.8rem}
+.pz-logo.sm{width:88px;height:50px;padding:.3rem}
+.pz-logo.sm.pz-none span{font-size:.9rem}
+.pz-card h3{font-size:1.08rem;margin:.2rem 0 0}
+.pz-card h3 a{color:var(--blue)}
+.pz-intro{margin:0;font-size:.9rem;color:var(--grey1);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pz-foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:auto;padding-top:.7rem;border-top:1px solid var(--grey3)}
+.pz-more{font:600 .85rem var(--f-sub);color:var(--red);white-space:nowrap}
+.pz-hero-row{display:flex;align-items:center;gap:clamp(1rem,3vw,2rem);margin-top:1.2rem;flex-wrap:wrap}
+.pz-hero-copy{display:grid;gap:.5rem;min-width:0}
+.pz-hero-copy .pt-type{justify-self:start}
+.pz-h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:0}
+.pz-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.pz-main h2{margin-top:0}
+.pz-sub{margin:2rem 0 .8rem;font-size:1.1rem}
+.pz-syss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:.8rem}
+.pz-sys{display:grid;gap:.3rem;padding:1rem;border:1px solid var(--grey3);border-radius:var(--r);background:var(--tint);color:inherit}
+.pz-sys b{color:var(--blue);font-family:var(--f-sub)}
+.pz-sys span{font-size:.85rem;color:var(--grey1)}
+.pz-sys:hover{border-color:var(--blue)}
+.pt-tags.lg li{font-size:.85rem;padding:.3rem .8rem}
+.pz-side{position:sticky;top:96px}
+.pz-box{border:1px solid var(--grey3);border-radius:var(--r);padding:1.3rem;display:grid;gap:1rem;background:#fff}
+.pz-box h3{margin:0;font-size:1.05rem}
+.pz-dl{margin:0;display:grid;gap:.6rem}
+.pz-dl dt{font:600 .75rem var(--f-sub);color:var(--grey1)}
+.pz-dl dd{margin:0;color:var(--blue);font-weight:500}
+.pz-contact{list-style:none;margin:0;padding:.9rem 0 0;border-top:1px solid var(--grey3);display:grid;gap:.55rem}
+.pz-contact li{display:grid;gap:.1rem;min-width:0}
+.pz-contact span{font:600 .75rem var(--f-sub);color:var(--grey1)}
+.pz-contact a{color:var(--blue);overflow-wrap:anywhere}
+.pz-minis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1rem}
+.pz-mini{display:flex;align-items:center;gap:.9rem;padding:.8rem;border:1px solid var(--grey3);border-radius:var(--r);color:inherit}
+.pz-mini:hover{border-color:var(--blue)}
+.pz-mini b{display:block;color:var(--blue);font-family:var(--f-sub);font-size:.95rem}
+.pz-mini em{font-style:normal;font-size:.8rem;color:var(--grey1)}
+@media (max-width:860px){.pz-grid{grid-template-columns:1fr}.pz-side{position:static}}
+.pz-card h3 a,.pz-more,.pz-sys,.pz-mini,.pz-sys span,.pz-sys b{text-decoration:none}
+.pz-card h3 a:hover,.pz-more:hover{text-decoration:underline}
+.pz-logo{overflow:hidden}
+.pz-logo img{max-height:56px}
+.pz-logo.lg img{max-height:90px}
+.pz-logo.sm img{max-height:40px}
+.pz-head .pt-type{white-space:nowrap;font-size:.7rem}
+.pf .pt-grid.pz-grid-cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.pz-head{flex-wrap:wrap}
+.pz-foot{flex-wrap:wrap}
