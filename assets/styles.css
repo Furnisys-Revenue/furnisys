@@ -964,3 +964,13 @@ h1,h2{color:var(--blue)}
 .brochure-band .bro-copy h2{margin:.4rem 0 .6rem}
 .brochure-band .bro-copy p{max-width:52ch}
 @media (max-width:640px){.brochure-band .bro-row{grid-template-columns:1fr}.brochure-band .bro-cover{max-width:220px}}
+/* v27 partner directory */
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem;margin-top:1.4rem}
+.pt-card{background:var(--white);border:1px solid var(--grey3);border-radius:var(--r);padding:1.2rem 1.3rem;display:grid;gap:.55rem;align-content:start;min-width:0}
+.pt-card h3{font-size:1.05rem;line-height:1.35;margin:0;color:var(--blue)}
+.pt-type{justify-self:start;font-family:var(--f-sub);font-weight:600;font-size:.75rem;padding:.2rem .6rem;border-radius:99px}
+.pt-aggregator{background:var(--tint);color:var(--blue)}
+.pt-expert{background:#fdeceb;color:var(--red)}
+.pt-loc{display:flex;align-items:center;gap:.35rem;margin:0;color:var(--grey1);font-size:.92rem}
+.pt-loc svg{width:16px;height:16px;flex:none;color:var(--red)}
+.pt-types{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
