@@ -1211,3 +1211,22 @@ h1,h2{color:var(--blue)}
 .faq-ex b{font:700 .75rem var(--f-sub);color:var(--blue);letter-spacing:.03em}
 .faq-ex p{margin:.15rem 0 0;font-size:.93rem}
 .faq-chips{flex-wrap:wrap}
+/* v38 request-a-catalogue popup */
+.rc-modal{position:fixed;inset:0;z-index:1000;background:rgba(10,25,55,.55);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) 16px}
+.rc-modal[hidden]{display:none}
+.rc-box{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;border-radius:16px;padding:clamp(1.4rem,4vw,2.2rem);box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.rc-x{position:absolute;top:.6rem;right:.8rem;border:0;background:none;font-size:1.8rem;line-height:1;color:var(--grey1);cursor:pointer}
+.rc-box h2{margin:.3rem 0 .4rem;font-size:1.5rem}
+.rc-sub{margin:0 0 1.2rem;color:var(--grey1)}
+.rc-form{display:grid;gap:.9rem}
+.rc-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.rc-form label{display:grid;gap:.35rem;font:600 .85rem var(--f-sub);color:var(--blue)}
+.rc-form label em{color:var(--red);font-style:normal}
+.rc-form input{font:400 1rem var(--f-body,inherit);padding:.7rem .85rem;border:1px solid var(--grey3);border-radius:10px;color:var(--ink,#222);background:#fff}
+.rc-form input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.rc-err{margin:0;color:var(--red);font-size:.88rem}
+.rc-go{justify-self:start}
+.rc-note{margin:0;font-size:.78rem;color:var(--grey1)}
+.rc-done{display:grid;gap:.6rem;justify-items:start;padding:1rem 0}
+.rc-done[hidden],.rc-form-wrap[hidden]{display:none}
+@media (max-width:520px){.rc-row{grid-template-columns:1fr}}
