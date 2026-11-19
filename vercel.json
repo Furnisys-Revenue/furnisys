@@ -3,15 +3,26 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/:path+",
-      "has": [
+      "source": "/configurator",
+      "missing": [
         {
           "type": "host",
           "value": "configurator.furnisys.co.in"
         }
       ],
-      "destination": "https://www.furnisys.co.in/:path+",
-      "permanent": false
+      "destination": "https://configurator.furnisys.co.in/",
+      "permanent": true
+    },
+    {
+      "source": "/_configurator/:path*",
+      "missing": [
+        {
+          "type": "host",
+          "value": "configurator.furnisys.co.in"
+        }
+      ],
+      "destination": "https://configurator.furnisys.co.in/",
+      "permanent": true
     },
     {
       "source": "/contact-us",
@@ -322,18 +333,6 @@
       "source": "/category/:path*",
       "destination": "/blogs",
       "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "configurator.furnisys.co.in"
-        }
-      ],
-      "destination": "/configurator"
     }
   ]
 }
