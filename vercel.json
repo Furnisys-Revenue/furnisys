@@ -3,6 +3,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "configurator.furnisys.co.in"
+        }
+      ],
+      "destination": "https://www.furnisys.co.in/:path+",
+      "permanent": false
+    },
+    {
       "source": "/contact-us",
       "destination": "/contact",
       "permanent": true
@@ -311,6 +322,18 @@
       "source": "/category/:path*",
       "destination": "/blogs",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "configurator.furnisys.co.in"
+        }
+      ],
+      "destination": "/configurator"
     }
   ]
 }
