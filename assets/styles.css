@@ -1232,3 +1232,8 @@ h1,h2{color:var(--blue)}
 .rc-done{display:grid;gap:.6rem;justify-items:start;padding:1rem 0}
 .rc-done[hidden],.rc-form-wrap[hidden]{display:none}
 @media (max-width:520px){.rc-row{grid-template-columns:1fr}}
+/* Enquiry form gets the full width so the Zoho form has room for two columns; side cards move below */
+.contact-grid:has(.zf-split){grid-template-columns:1fr}
+.contact-grid:has(.zf-split) .zf-split{width:100%;max-width:1080px}
+.contact-grid:has(.zf-split) .contact-list{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));max-width:1080px;width:100%;margin-inline:auto}
+.contact-grid:has(.zf-split) .contact-card{align-content:start}
