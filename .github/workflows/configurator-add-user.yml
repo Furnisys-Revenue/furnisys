@@ -1,0 +1,64 @@
+name: Configurator – add user and email login
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Full name
+        required: true
+      email:
+        description: Email address (login is sent here)
+        required: true
+      company:
+        description: Company
+        required: false
+      user_id:
+        description: User ID (optional – defaults to the part of the email before @)
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: configurator-users
+  cancel-in-progress: false
+
+jobs:
+  add-user:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Create login
+        id: add
+        env:
+          IN_NAME: ${{ inputs.name }}
+          IN_EMAIL: ${{ inputs.email }}
+          IN_COMPANY: ${{ inputs.company }}
+          IN_USER_ID: ${{ inputs.user_id }}
+        run: node scripts/add-configurator-user.mjs
+      - name: Save user list (Vercel redeploys automatically)
+        run: |
+          git config user.name "Furnisys Configurator Bot"
+          git config user.email "actions@github.com"
+          git add data/configurator-users.json
+          git commit -m "Configurator: ${{ steps.add.outputs.action }} user ${{ steps.add.outputs.user_id }}"
+          git push
+      - name: Wait for the website to update
+        run: sleep 90
+      - name: Email the login
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_HOST || 'smtp.zoho.in' }}
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          from: Furnisys <${{ secrets.SMTP_USERNAME }}>
+          reply_to: enquiry@furnisys.co
+          to: ${{ inputs.email }}
+          bcc: ${{ secrets.SMTP_USERNAME }}
+          subject: Your Furnisys 3D Configurator login
+          html_body: file://${{ runner.temp }}/welcome.html
