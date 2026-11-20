@@ -1420,3 +1420,26 @@ h1,h2{color:var(--blue)}
 @media (max-width:1000px){.sp-chs{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:900px){.sp-grid{grid-template-columns:1fr}}
 @media (max-width:900px){.sp-flow{grid-template-columns:repeat(2,1fr)}}
+
+/* v44 Getting started + quick fixes */
+.gs-ready{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.gs-group{background:#fff;border:1px solid var(--grey3);border-radius:14px;padding:1.25rem 1.4rem}
+.gs-group h3{font:700 1.05rem var(--f-sub);color:var(--blue);margin:0 0 .7rem}
+.gs-check{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.gs-check li{display:grid;grid-template-columns:1.2rem 1fr;gap:.65rem;font-size:.95rem}
+.gs-check li::before{content:"";width:1.05rem;height:1.05rem;border:2px solid var(--blue);border-radius:4px;margin-top:.15rem}
+.gs-fams{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.gs-fam{background:#fff;border-radius:14px;border:1px solid var(--grey3);padding:1.4rem;display:grid;gap:.9rem;align-content:start;scroll-margin-top:100px}
+.gs-fam h3{font-family:var(--f-head);color:var(--blue);margin:0;font-size:1.2rem}
+.gs-two{display:grid;grid-template-columns:1.3fr 1fr;gap:2.5rem;align-items:start}
+.gs-docs{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.gs-doc{border-left:3px solid var(--red);background:var(--grey4);border-radius:8px;padding:.8rem 1rem;display:grid;gap:.2rem}
+.gs-doc b{font-family:var(--f-sub);color:var(--ink)}.gs-doc span{font-size:.9rem;color:var(--grey1)}
+.qf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.qf-card{background:#fff;border:1px solid var(--grey3);border-radius:14px;padding:1.4rem;display:grid;gap:.9rem;align-content:start;scroll-margin-top:100px}
+.qf-card h2{font-family:var(--f-head);color:var(--blue);font-size:1.25rem;margin:0}
+.qf-cause{margin:0;font-size:.95rem;color:var(--grey1)}
+.qf-foot{display:flex;flex-wrap:wrap;gap:1rem;font:600 .9rem var(--f-sub);border-top:1px solid var(--grey3);padding-top:.8rem}
+.qf-foot a{color:var(--blue)}.qf-foot a:last-child{color:var(--red)}
+.gs-weekly{columns:2;max-width:900px}
+@media (max-width:900px){.gs-ready,.gs-fams,.gs-two,.qf-grid,.gs-docs{grid-template-columns:1fr}.gs-weekly{columns:1}}
