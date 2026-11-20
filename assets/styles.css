@@ -1453,3 +1453,4 @@ h1,h2{color:var(--blue)}
 .cb-minis{display:flex;flex-wrap:wrap;gap:1rem}
 .cb-mini{display:grid;gap:.15rem;min-width:220px;padding:1.1rem 1.3rem;border:1px solid var(--grey3);border-radius:14px;text-decoration:none;background:#fff}
 .cb-mini:hover{border-color:var(--blue)}.cb-mini span{font-size:.85rem;color:var(--grey1)}.cb-mini b{font-family:var(--f-head);color:var(--blue);font-size:1.25rem}.cb-mini small{color:var(--red);font-weight:600}
+.dd-res.cols-3{grid-template-columns:repeat(3,minmax(190px,1fr));width:min(780px,92vw)}
