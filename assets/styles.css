@@ -1443,3 +1443,13 @@ h1,h2{color:var(--blue)}
 .qf-foot a{color:var(--blue)}.qf-foot a:last-child{color:var(--red)}
 .gs-weekly{columns:2;max-width:900px}
 @media (max-width:900px){.gs-ready,.gs-fams,.gs-two,.qf-grid,.gs-docs{grid-template-columns:1fr}.gs-weekly{columns:1}}
+
+/* v45 named comparisons */
+.cb-route{display:block;font:500 .74rem var(--f-sub);color:var(--grey1);margin-top:.15rem}
+.cmp th.us .cb-route{color:var(--blue)}
+.cb-pair{min-width:520px}
+.cb-usbox{border:2px solid var(--blue)}
+.cb-h{font:700 1.1rem var(--f-sub);color:var(--blue);margin:0 0 .7rem}
+.cb-minis{display:flex;flex-wrap:wrap;gap:1rem}
+.cb-mini{display:grid;gap:.15rem;min-width:220px;padding:1.1rem 1.3rem;border:1px solid var(--grey3);border-radius:14px;text-decoration:none;background:#fff}
+.cb-mini:hover{border-color:var(--blue)}.cb-mini span{font-size:.85rem;color:var(--grey1)}.cb-mini b{font-family:var(--f-head);color:var(--blue);font-size:1.25rem}.cb-mini small{color:var(--red);font-weight:600}
