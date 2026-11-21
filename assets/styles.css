@@ -1511,3 +1511,7 @@ p{font-family:Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:400}
 .rn-type{font:700 .72rem var(--f-sub);padding:.2rem .6rem;border-radius:20px;color:#fff;background:var(--blue)}.rn-type.rn-improved{background:#0a7a34}
 .rn-area{font:600 .72rem var(--f-sub);padding:.2rem .6rem;border-radius:20px;background:#eef0f2;color:var(--ink)}
 @media (max-width:600px){.rn-item{grid-template-columns:1fr;gap:.3rem}}
+
+/* v52 */
+img{height:auto}
+.tag{color:#b31212}
