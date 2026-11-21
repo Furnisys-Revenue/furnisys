@@ -3,7 +3,7 @@
 // Any other mandatory field that appears later is filled with a safe default so CRM never rejects the record.
 const { zoho, leadFields } = require('../lib/zoho');
 
-const FORM_LABEL = { enquiry: 'Website enquiry', partner: 'Partner application', match: 'Partner match request', support: 'Support request' };
+const FORM_LABEL = { enquiry: 'Website enquiry', partner: 'Partner application', match: 'Partner match request', support: 'Support request', catalogue: 'Catalogue request', brochure: 'Brochure request' };
 const norm = s => String(s || '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
 
 function options(f) { return (f.pick_list_values || []).map(o => o.display_value || o.actual_value).filter(v => v && v !== '-None-'); }
@@ -29,6 +29,7 @@ const key = s => (norm(s).split(' ')[0] || '');
 function workspace(ind) { const k = key(ind); return k === 'education' ? 'Education' : k === 'healthcare' ? 'Lab' : ['oil', 'power', 'construction', 'metalworking'].includes(k) ? 'Workshop' : 'Manufacturing'; }
 function firstNum(s) { const m = String(s || '').match(/\d+/); return m ? parseInt(m[0], 10) : null; }
 const isProject = a => /complete line|lab or workshop/i.test(a.need || '') || (firstNum(a.qty) || 0) >= 26;
+const subCat = a => /configurable/i.test(a.item || '') && !/pre-?configured/i.test(a.item || '') ? 'Configurable' : /pre-?configured/i.test(a.item || '') ? 'Preconfigured' : null;
 function orgSize(a) { const n = firstNum(a.qty); return n == null ? 'Medium' : n >= 50 ? 'Large' : n >= 11 ? 'Medium' : 'Small'; }
 function matrix(a) { const n = firstNum(a.qty) || 0; return isProject(a) || n >= 26 ? 'High Value' : n >= 5 ? 'Primary' : 'Easy to buy'; }
 const PRODUCTS = { 'workbenches': 'Workbench/Workstation', 'storage': 'Base Cabinet', 'trolleys': 'Tool Trolley' };
@@ -44,7 +45,8 @@ module.exports = async (req, res) => {
   const type = FORM_LABEL[b.type] ? b.type : 'enquiry';
 
   if (b.hp || (b.elapsed && b.elapsed < 2500)) { res.status(200).json({ ok: true }); return; } // bots
-  const miss = ['first', 'last', 'email', 'phone', 'company'].filter(k => !a[k]);
+  const need = ['catalogue', 'brochure'].includes(type) ? ['first', 'last', 'email'] : ['first', 'last', 'email', 'phone', 'company'];
+  const miss = need.filter(k => !a[k]);
   if (miss.length || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(a.email)) { res.status(400).json({ ok: false, error: 'Missing or invalid fields', miss }); return; }
 
   try {
@@ -55,7 +57,7 @@ module.exports = async (req, res) => {
     const setPick = (api, wanted, fallback) => { const f = F[api]; if (f) set(api, pick(f, wanted, fallback)); };
 
     // contact
-    set('First_Name', a.first); set('Last_Name', a.last); set('Email', a.email); set('Mobile', a.phone); set('Company', a.company);
+    set('First_Name', a.first); if (!a.company) a.company = 'Not provided'; set('Last_Name', a.last); set('Email', a.email); set('Mobile', a.phone); set('Company', a.company || 'Not provided');
     set('City', a.city); set('State', a.state);
     if (a.web) set('Website', /^https?:/i.test(a.web) ? a.web : 'https://' + a.web);
     // source and stage
@@ -72,7 +74,7 @@ module.exports = async (req, res) => {
     setPick('Workspace_Type_New', workspace(ind), 'Manufacturing');
     setPick('Department_Function', type === 'support' ? 'Maintenance' : 'Other', 'Other');
     setPick('Enquiry_Category', isProject(a) ? 'Project' : 'Product');
-    setPick('Enqiry_Sub_Category', isProject(a) ? 'Configurable' : 'Preconfigured');
+    setPick('Enqiry_Sub_Category', subCat(a) || (isProject(a) ? 'Configurable' : 'Preconfigured'));
     setPick('Enquiry_Type', 'Standard');
     setPick('Organization_Size', orgSize(a), 'Medium');
     setPick('Product_Matrix', matrix(a), 'Primary');
