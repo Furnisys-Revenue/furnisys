@@ -1520,3 +1520,5 @@ img{height:auto}
 .nav-search{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;color:var(--blue);margin-right:.25rem}
 .nav-search:hover,.nav-search:focus-visible{background:var(--tint)}
 #search{--pagefind-ui-primary:#003377;--pagefind-ui-text:#1d2433;--pagefind-ui-border:#d5dae2;--pagefind-ui-border-radius:10px;--pagefind-ui-font:inherit;--pagefind-ui-scale:.95}
+.canon-note{background:var(--tint);font-size:.92rem;padding:.6rem 0;color:var(--ink)}.canon-note a{color:var(--blue);font-weight:600}
+.hub-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}.hub-card{text-decoration:none;color:var(--ink);display:grid;gap:.4rem;align-content:start}.hub-card:hover{border-color:var(--blue)}
