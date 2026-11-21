@@ -1515,3 +1515,8 @@ p{font-family:Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:400}
 /* v52 */
 img{height:auto}
 .tag{color:#b31212}
+
+/* v53 search */
+.nav-search{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;color:var(--blue);margin-right:.25rem}
+.nav-search:hover,.nav-search:focus-visible{background:var(--tint)}
+#search{--pagefind-ui-primary:#003377;--pagefind-ui-text:#1d2433;--pagefind-ui-border:#d5dae2;--pagefind-ui-border-radius:10px;--pagefind-ui-font:inherit;--pagefind-ui-scale:.95}
