@@ -1470,3 +1470,10 @@ h1,h2{color:var(--blue)}
 .fe-inds .sl-tag{font-size:1rem;padding:.55rem 1rem;background:#fff}
 @media (max-width:1000px){.fe-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:700px){.fe-grid,.fe-ben{grid-template-columns:1fr}.sc-mod{grid-template-columns:1fr;gap:.8rem}.sc-num{justify-self:start}}
+
+/* v48 audit fixes */
+.hero-h1 .hero-h1-text{display:inline;font:inherit;color:inherit;margin:0;letter-spacing:inherit;line-height:inherit}
+.cv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.7rem;margin-top:1rem}
+.cv-state{background:#fff;border:1px solid var(--grey3);border-radius:10px;padding:.7rem .9rem;display:grid;gap:.1rem}
+.cv-state b{font-family:var(--f-sub);color:var(--blue)}.cv-state span{font-size:.85rem;color:var(--grey1)}
+div.hero-h1{font-family:var(--f-head);font-weight:700;color:var(--blue);line-height:1.12;letter-spacing:-.015em;text-wrap:balance;margin:0}
