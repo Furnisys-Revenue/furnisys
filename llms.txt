@@ -108,6 +108,7 @@ Key facts:
 - [Valve Assembly Line](https://www.furnisys.co.in/valve-assembly-line): Setting up a Valve Assembly Line requires more than just a flat surface and a few tools. Precision assembly tasks like aligning gaskets, torqueing bolts, c
 
 ## Guides and articles
+- [Workspace Basics: one-minute concept videos](https://www.furnisys.co.in/concept-videos): 37 one-minute videos on UDL load ratings, ESD protection, Link and Flexi systems, bench accessories, storage, ergonomics and layout planning.
 - [Optimizing Packaging Workbenches (White Paper)](https://www.furnisys.co.in/packaging-workbenches): In modern industrial operations, packaging is more than just a functional necessity it is a strategic process that impacts efficiency, product safety, and
 - [Mahindra Enters Aircraft Manufacturing with Novavayu Aerospace](https://www.furnisys.co.in/mahindra-novavayu-aerospace-india-aircraft-manufacturing): Mahindra Group has taken its most significant step yet into aerospace manufacturing. On July 29, 2026, the conglomerate incorporated Novavayu Aerospace Lim
 - [Assembly Workbench](https://www.furnisys.co.in/assembly-workbench-assembly-workstation-india): The assembly workbench is a pivotal fixture in manufacturing environments, serving as the vital workspace where various components are combined to create f
