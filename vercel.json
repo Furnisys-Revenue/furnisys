@@ -519,6 +519,10 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in; style-src 'self' 'unsafe-inline' https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.com; img-src 'self' data: blob: https:; font-src 'self' data: https://*.zohostatic.com https://*.zohocdn.com; connect-src 'self' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com wss://*.zohopublic.com wss://*.zoho.com; frame-src 'self' https://*.zohopublic.com https://*.zoho.com https://www.youtube.com https://www.youtube-nocookie.com https://*.aflip.in; media-src 'self' https:; form-action 'self' https://forms.zohopublic.com; frame-ancestors 'self'; base-uri 'self'"
         }
       ]
     }

@@ -65,7 +65,7 @@ var q=new URLSearchParams(location.search),utm=['utm_source','utm_medium','utm_c
 var R=F.querySelector('[name=zf_referrer_name]');if(utm)R.value+='&'+utm;
 function done(){F.reset();B.disabled=false;F.hidden=true;D.hidden=false;D.scrollIntoView({block:'nearest'});}
 function fallback(){var pk=F.getAttribute('data-pack');if(pk){var tgt=F.querySelector('[name='+pk+']'),parts=[tgt.value.trim()];F.querySelectorAll('[data-k]:not([name])').forEach(function(c){if(String(c.value||'').trim())parts.push(c.getAttribute('data-l')+': '+c.value.trim());});
-parts.push('Form: '+F.getAttribute('data-type'));tgt.value=parts.join(' | ').slice(0,255);}sent=true;HTMLFormElement.prototype.submit.call(F);}
+parts.push('Form: '+F.getAttribute('data-type'));var R2=F.querySelector('[name=zf_referrer_name]');R2.value=(R2.value+' || '+parts.slice(1).join(' | ')).slice(0,1000);}sent=true;HTMLFormElement.prototype.submit.call(F);}
 F.addEventListener('submit',function(e){e.preventDefault();var miss=[];F.querySelectorAll('[required]').forEach(function(c){if(!String(c.value||'').trim())miss.push(c.getAttribute('data-l').toLowerCase());});
 var em=F.querySelector('[data-k=email]');if(em&&em.value&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim()))miss.push('a valid email');
 var ph=F.querySelector('[data-k=phone]');if(ph&&ph.value){var d=ph.value.replace(/[^0-9+]/g,'');if(d.replace(/\D/g,'').length<8)miss.push('a valid mobile number');else ph.value=d;}
