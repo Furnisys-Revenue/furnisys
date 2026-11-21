@@ -87,6 +87,15 @@ module.exports = async (req, res) => {
       else if (/expert/i.test(a.ptype)) setPick('Channel_Partners_Type', 'Expert Partner');
       const ot = ORGTYPE[key(a.biz)]; if (ot) setPick('Industry_Type', ot, 'Other');
     }
+    // optional custom fields, filled automatically once they exist in Leads (matched by label)
+    const byLabel = l => fields.find(f => norm(f.field_label) === norm(l));
+    const pagePath = String(b.page || '').replace(/^https?:\/\//, '').replace(/^[^/]*/, '').replace(/\.html$/, '') || '/';
+    for (const [labels, val] of [[['Website Page', 'Source Page', 'Lead Page', 'Landing Page'], pagePath],
+                                 [['Form Type', 'Website Form'], FORM_LABEL[type]],
+                                 [['Campaign', 'UTM Campaign', 'Website Campaign'], b.utm || '']]) {
+      if (!val) continue;
+      for (const l of labels) { const f = byLabel(l); if (f && rec[f.api_name] === undefined) { if (f.data_type === 'picklist' || f.data_type === 'multiselectpicklist') setPick(f.api_name, val); else set(f.api_name, String(val).slice(0, f.length || 255)); break; } }
+    }
     // everything the visitor said, readable, in Description
     const L = b.labels || {};
     const lines = [`${FORM_LABEL[type]} from the website`].concat(suspect ? ['[Check: possible spam - hidden field filled or form sent very fast]'] : []).concat(['']).concat(Object.entries(a).filter(([, v]) => v).map(([k, v]) => `${L[k] || k}: ${v}`));
