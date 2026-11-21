@@ -17,6 +17,12 @@ module.exports = async (req, res) => {
   const missing = ['ZOHO_CLIENT_ID', 'ZOHO_CLIENT_SECRET'].filter(k => !process.env[k]);
   if (missing.length) { res.status(200).send(page(`<h1>Almost there</h1><p class="bad">Add these in Vercel first: ${missing.join(', ')}. Then redeploy.</p>`)); return; }
 
+  if (url.searchParams.get('ids')) {
+    const id = (process.env.ZOHO_CLIENT_ID || '').trim(), sec = (process.env.ZOHO_CLIENT_SECRET || '').trim();
+    res.status(200).send(page(`<h1>Keys Vercel is using</h1><p>Client ID: <code>${id.slice(0, 9)}…${id.slice(-4)}</code> (${id.length} characters)</p><p>Client Secret: <code>${sec.slice(0, 3)}…${sec.slice(-3)}</code> (${sec.length} characters)</p>`));
+    return;
+  }
+
   if (url.searchParams.get('check')) {
     try {
       const f = await leadFields();
