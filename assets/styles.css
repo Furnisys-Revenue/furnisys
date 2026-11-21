@@ -1525,7 +1525,7 @@ img{height:auto}
 
 /* v55 nx */
 .nx-band{border-top:1px solid var(--grey3)}
-.nx-grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));margin-top:1.25rem}
+.nx-grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));margin-top:1.25rem}
 .nx-lane h3{font-family:var(--f-sub);font-size:1.05rem;color:var(--blue);margin:0 0 .25rem}
 .nx-sub{margin:0 0 .9rem;color:var(--grey1);font-size:.95rem}
 .nx-cards{display:grid;gap:.75rem}
@@ -1536,3 +1536,5 @@ img{height:auto}
 .nx-kind{justify-self:start;font-family:var(--f-sub);font-size:.72rem;font-weight:600;letter-spacing:.03em;padding:.15rem .5rem;border-radius:99px;background:var(--tint);color:var(--blue)}
 .nx-case{background:#fdeaea;color:#b31212}
 .nx-product{background:var(--grey4);color:var(--ink)}
+.nx-use{background:#e6f4ec;color:#1d6b3e}
+.nx-blog,.nx-article,.nx-white{background:#fff4e0;color:#8a5200}
