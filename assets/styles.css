@@ -1539,6 +1539,9 @@ img{height:auto}
 .nx-use{background:#e6f4ec;color:#1d6b3e}
 .nx-blog,.nx-article,.nx-white{background:#fff4e0;color:#8a5200}
 
+
+
+
 /* v57 rs */
 .rs-head .lede{max-width:56ch}
 .rs-search{display:flex;gap:.5rem;max-width:620px;margin-top:1.25rem}
@@ -1570,6 +1573,25 @@ img{height:auto}
 .rs-portal>div{flex:1;min-width:220px}
 .rs-portal h2{font-family:var(--f-sub);font-size:1.2rem;color:var(--blue);margin:0 0 .25rem}
 .rs-portal p{margin:0;color:var(--grey1)}
+.rs-hgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:2.5rem;align-items:center}
+.rs-hart svg{width:100%;height:auto;display:block}
+.rs-pop{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:.9rem 0 0;font-size:.9rem;color:var(--grey1)}
+.rs-pop a{color:var(--blue);font-weight:500}
+.rs-tile{padding:0;overflow:hidden;gap:0;transition:box-shadow .15s,border-color .15s}
+.rs-tile:hover{border-color:var(--grey2);box-shadow:0 6px 22px rgba(0,51,119,.08)}
+.rs-tb{display:flex;flex-direction:column;gap:.5rem;padding:1.2rem 1.4rem 1.4rem;flex:1}
+.rs-art{background:var(--tint);display:grid;place-items:center;padding:.9rem 1rem;height:150px}
+.rs-art svg{height:100%;width:auto;max-width:100%;display:block}
+.rs-media .rs-img{margin:0;border-radius:0;aspect-ratio:auto;height:150px;order:0}
+.rs-dark .rs-art{background:rgba(255,255,255,.08)}
+.rs-side{flex-direction:row;align-items:stretch}
+.rs-side .rs-art{width:46%;height:auto;flex:none;padding:1.2rem}.rs-side .rs-art svg{width:100%;height:auto}
+.rs-videos .rs-tb{padding:1.4rem}
+.rs-vhead{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem}
+.rs-vhead h2{margin:0 0 .25rem}
+.rs-portal>.rs-part{width:150px;flex:none;min-width:0}.rs-part svg{width:100%;height:auto;display:block}
+@media (max-width:860px){.rs-hgrid{grid-template-columns:1fr}.rs-hart{max-width:460px}}
+@media (max-width:620px){.rs-side{flex-direction:column}.rs-side .rs-art{width:auto;height:150px}.rs-portal>.rs-part{width:110px}}
 @media (max-width:1000px){.rs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.rs-grid{grid-template-columns:1fr}.rs-w2{grid-column:auto}.rs-vgrid{grid-template-columns:1fr}.rs-search{flex-direction:column}}
 /* /v57 */
