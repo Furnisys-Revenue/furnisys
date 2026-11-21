@@ -113,5 +113,11 @@ if(Object.keys(hit).length){a.last=hit;a.last_landing=location.pathname;if(!a.fi
 if(ext&&!a.first_referrer)a.first_referrer=ext;localStorage.setItem(K,JSON.stringify(a));
 document.querySelectorAll('input[name=zc_gad]').forEach(function(i){var g=(a.last&&a.last.gclid)||(a.first&&a.first.gclid);if(g)i.value=g;});}catch(e){}})();</script><script>(function(){document.addEventListener('submit',function(e){var F=e.target;if(!F.classList||!F.classList.contains('nf-form'))return;
 setTimeout(function(){F.querySelectorAll('[required]').forEach(function(c){var bad=!String(c.value||'').trim();c.setAttribute('aria-invalid',bad?'true':'false');});
-var er=F.querySelector('.rc-err');if(er){er.id=er.id||('err-'+Math.random().toString(36).slice(2,7));F.querySelectorAll('[aria-invalid=true]').forEach(function(c){c.setAttribute('aria-describedby',er.id);});}},0);},true);})();</script></body>
+var er=F.querySelector('.rc-err');if(er){er.id=er.id||('err-'+Math.random().toString(36).slice(2,7));F.querySelectorAll('[aria-invalid=true]').forEach(function(c){c.setAttribute('aria-describedby',er.id);});}},0);},true);})();</script><script>(function(){if(window.fsTrack)return;window.dataLayer=window.dataLayer||[];window.pagesense=window.pagesense||[];
+window.fsTrack=function(n,p){try{window.dataLayer.push(Object.assign({event:n},p||{}));window.pagesense.push(['trackEvent',n]);}catch(e){}};
+var F=window.fetch;if(F)window.fetch=function(u,o){var r=F.apply(this,arguments);try{if(String(u).indexOf('/api/lead')>-1&&o&&o.body){var t=(JSON.parse(o.body).type||'enquiry');r.then(function(x){if(x.ok)fsTrack('generate_lead',{form_type:t});fsTrack&&x.ok&&fsTrack('lead_'+t);});}}catch(e){}return r;};
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'';
+if(h.indexOf('tel:')===0)fsTrack('click_to_call');else if(h.indexOf('wa.me')>-1||h.indexOf('whatsapp')>-1)fsTrack('whatsapp_click');else if(h.indexOf('mailto:')===0)fsTrack('email_click');
+else if(a.hasAttribute('data-catalogue'))fsTrack('catalogue_request_open');else if(h.indexOf('aflip.in')>-1)fsTrack('brochure_open');else if(/\.pdf($|\?)/i.test(h))fsTrack('file_download',{file:h});});
+document.addEventListener('focusin',function(e){var f=e.target.closest&&e.target.closest('form.nf-form');if(f&&!f.__st){f.__st=1;fsTrack('form_start',{form_type:f.getAttribute('data-type')});}});})();</script></body>
 </html>
