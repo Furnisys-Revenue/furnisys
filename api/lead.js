@@ -44,7 +44,8 @@ module.exports = async (req, res) => {
   const a = Object.fromEntries(Object.entries(b.answers || {}).map(([k, v]) => [k, String(v || '').trim()]));
   const type = FORM_LABEL[b.type] ? b.type : 'enquiry';
 
-  if (b.hp || (b.elapsed && b.elapsed < 2500)) { res.status(200).json({ ok: true }); return; } // bots
+  // never drop silently: browsers can autofill hidden fields, so suspected bots are kept but flagged
+  const suspect = !!b.hp || (b.elapsed && b.elapsed < 1500);
   const need = ['catalogue', 'brochure'].includes(type) ? ['first', 'last', 'email'] : ['first', 'last', 'email', 'phone', 'company'];
   const miss = need.filter(k => !a[k]);
   if (miss.length || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(a.email)) { res.status(400).json({ ok: false, error: 'Missing or invalid fields', miss }); return; }
@@ -88,7 +89,7 @@ module.exports = async (req, res) => {
     }
     // everything the visitor said, readable, in Description
     const L = b.labels || {};
-    const lines = [`${FORM_LABEL[type]} from the website`, ''].concat(Object.entries(a).filter(([, v]) => v).map(([k, v]) => `${L[k] || k}: ${v}`));
+    const lines = [`${FORM_LABEL[type]} from the website`].concat(suspect ? ['[Check: possible spam - hidden field filled or form sent very fast]'] : []).concat(['']).concat(Object.entries(a).filter(([, v]) => v).map(([k, v]) => `${L[k] || k}: ${v}`));
     lines.push('', `Page: ${b.page || ''}`); if (b.utm) lines.push(`Campaign: ${b.utm}`);
     set('Description', lines.join('\n'));
 
