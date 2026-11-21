@@ -1497,3 +1497,17 @@ p{font-family:Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:400}
 .ind-go{display:inline-block;margin-top:.6rem;font:600 .92rem var(--f-sub);color:var(--blue)}
 .rot-dot{width:24px;height:24px;padding:7px;background-clip:content-box;box-sizing:border-box}.rot-dot.on{width:42px}
 @media (max-width:640px){.zsiq_cnt,.zsiq-newtheme .zsiq_cnt,#zsiq_agtpic+div{display:none!important}}
+
+/* v51 release notes */
+.rn-sortl{display:grid;gap:.3rem;font:600 .85rem var(--f-sub);color:var(--blue)}
+.rn-sortl select{padding:.55rem .7rem;border:1px solid var(--grey2);border-radius:10px;font:inherit;color:var(--ink);background:#fff}
+.rn-list{display:grid;gap:2rem}
+.rn-month h2{font-family:var(--f-head);color:var(--blue);font-size:1.35rem;margin:0 0 .8rem;padding-bottom:.4rem;border-bottom:2px solid var(--grey3)}
+.rn-month[hidden],.rn-item[hidden]{display:none}
+.rn-item{display:grid;grid-template-columns:70px 1fr;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--grey3)}
+.rn-item time{font:700 .95rem var(--f-sub);color:var(--grey1);padding-top:.2rem}
+.rn-body{display:grid;gap:.45rem;min-width:0}.rn-body h3{font-family:var(--f-head);color:var(--blue);margin:0;font-size:1.15rem}.rn-body p{margin:0;max-width:68ch}
+.rn-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.rn-type{font:700 .72rem var(--f-sub);padding:.2rem .6rem;border-radius:20px;color:#fff;background:var(--blue)}.rn-type.rn-improved{background:#0a7a34}
+.rn-area{font:600 .72rem var(--f-sub);padding:.2rem .6rem;border-radius:20px;background:#eef0f2;color:var(--ink)}
+@media (max-width:600px){.rn-item{grid-template-columns:1fr;gap:.3rem}}
