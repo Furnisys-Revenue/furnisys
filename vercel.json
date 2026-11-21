@@ -3,6 +3,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "furnisys.co.in"
+        }
+      ],
+      "destination": "https://www.furnisys.co.in/:path*",
+      "permanent": true
+    },
+    {
       "source": "/configurator",
       "missing": [
         {
@@ -333,6 +344,183 @@
       "source": "/category/:path*",
       "destination": "/blogs",
       "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug*",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/our-story",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "/our-story",
+      "permanent": true
+    },
+    {
+      "source": "/shop",
+      "destination": "/all-products",
+      "permanent": true
+    },
+    {
+      "source": "/shop/:slug*",
+      "destination": "/all-products",
+      "permanent": true
+    },
+    {
+      "source": "/feed",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/feed/:slug*",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/product/base-series",
+      "destination": "/base-series-industrial-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/product/pro-series",
+      "destination": "/pro-series-heavy-duty-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/product/scitec-series",
+      "destination": "/scitec-series-technical-workbenches",
+      "permanent": true
+    },
+    {
+      "source": "/product/:slug*",
+      "destination": "/all-products",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/:slug*",
+      "destination": "/all-products",
+      "permanent": true
+    },
+    {
+      "source": "/category/:slug*",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:slug*",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/author/:slug*",
+      "destination": "/our-story",
+      "permanent": true
+    },
+    {
+      "source": "/catalogues",
+      "destination": "/downloads#catalogues",
+      "permanent": true
+    },
+    {
+      "source": "/catalogues.html",
+      "destination": "/downloads#catalogues",
+      "permanent": true
+    },
+    {
+      "source": "/Flexi-Single-Sided-Corner-Unit",
+      "destination": "/flexi-single-sided-corner-unit",
+      "permanent": true
+    },
+    {
+      "source": "/Flexi-Single-Sided-Corner-Unit.html",
+      "destination": "/flexi-single-sided-corner-unit",
+      "permanent": true
+    },
+    {
+      "source": "/Flexi-Double-Sided-Corner-Unit",
+      "destination": "/flexi-double-sided-corner-unit",
+      "permanent": true
+    },
+    {
+      "source": "/Flexi-Double-Sided-Corner-Unit.html",
+      "destination": "/flexi-double-sided-corner-unit",
+      "permanent": true
+    },
+    {
+      "source": "/Stands-Trolleys",
+      "destination": "/stands-trolleys",
+      "permanent": true
+    },
+    {
+      "source": "/Stands-Trolleys.html",
+      "destination": "/stands-trolleys",
+      "permanent": true
+    },
+    {
+      "source": "/Specialized-storage-solutions",
+      "destination": "/specialized-storage-solutions",
+      "permanent": true
+    },
+    {
+      "source": "/Specialized-storage-solutions.html",
+      "destination": "/specialized-storage-solutions",
+      "permanent": true
+    },
+    {
+      "source": "/Shallow-Depth-Mobile-Cabinets",
+      "destination": "/shallow-depth-mobile-cabinets",
+      "permanent": true
+    },
+    {
+      "source": "/Shallow-Depth-Mobile-Cabinets.html",
+      "destination": "/shallow-depth-mobile-cabinets",
+      "permanent": true
+    },
+    {
+      "source": "/Deep-Depth-Mobile-Cabinets",
+      "destination": "/deep-depth-mobile-cabinets",
+      "permanent": true
+    },
+    {
+      "source": "/Deep-Depth-Mobile-Cabinets.html",
+      "destination": "/deep-depth-mobile-cabinets",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        }
+      ]
     }
   ]
 }

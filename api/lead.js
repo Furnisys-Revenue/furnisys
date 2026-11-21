@@ -96,10 +96,21 @@ module.exports = async (req, res) => {
       if (!val) continue;
       for (const l of labels) { const f = byLabel(l); if (f && rec[f.api_name] === undefined) { if (f.data_type === 'picklist' || f.data_type === 'multiselectpicklist') setPick(f.api_name, val); else set(f.api_name, String(val).slice(0, f.length || 255)); break; } }
     }
+    // attribution captured on arrival (first touch / last touch), FUR-011
+    const at = (b.attr && typeof b.attr === 'object') ? b.attr : {};
+    const tq = t => t ? Object.entries(t).map(([k, v]) => `${k}=${v}`).join('&') : '';
+    if (at.landing) set('First_Visited_URL', 'https://www.furnisys.co.in' + String(at.landing).slice(0, 200));
+    const campaign = tq(at.last || at.first) || b.utm || '';
+    if (campaign) { const f = byLabel('Campaign') || byLabel('UTM Campaign'); if (f && rec[f.api_name] === undefined) set(f.api_name, campaign.slice(0, f.length || 255)); }
+    const attrLines = [];
+    if (at.landing) attrLines.push(`First page visited: ${at.landing}`);
+    if (at.first_referrer) attrLines.push(`Came from: ${at.first_referrer}`);
+    if (at.first) attrLines.push(`First campaign: ${tq(at.first)}`);
+    if (at.last && tq(at.last) !== tq(at.first)) attrLines.push(`Latest campaign: ${tq(at.last)}`);
     // everything the visitor said, readable, in Description
     const L = b.labels || {};
     const lines = [`${FORM_LABEL[type]} from the website`].concat(suspect ? ['[Check: possible spam - hidden field filled or form sent very fast]'] : []).concat(['']).concat(Object.entries(a).filter(([, v]) => v).map(([k, v]) => `${L[k] || k}: ${v}`));
-    lines.push('', `Page: ${b.page || ''}`); if (b.utm) lines.push(`Campaign: ${b.utm}`);
+    lines.push('', `Page: ${b.page || ''}`); if (attrLines.length) lines.push(...attrLines); if (b.utm) lines.push(`Campaign: ${b.utm}`);
     set('Description', lines.join('\n'));
 
     // safety net: fill any other mandatory field added to the layout later

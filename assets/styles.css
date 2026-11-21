@@ -1489,3 +1489,11 @@ div.hero-h1{font-family:var(--f-head);font-weight:700;color:var(--blue);line-hei
 .nf-form[hidden]{display:none}
 @media (max-width:640px){.nf-form .rc-row.nf-row2{grid-template-columns:1fr}}
 .nf-form .rc-row.nf-row1{grid-template-columns:1fr}
+
+/* v50 audit register fixes */
+p{font-family:Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:400}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:2000;background:var(--blue);color:#fff;padding:.6rem 1rem;border-radius:8px;font-weight:600}
+.skip-link:focus{left:12px}
+.ind-go{display:inline-block;margin-top:.6rem;font:600 .92rem var(--f-sub);color:var(--blue)}
+.rot-dot{width:24px;height:24px;padding:7px;background-clip:content-box;box-sizing:border-box}.rot-dot.on{width:42px}
+@media (max-width:640px){.zsiq_cnt,.zsiq-newtheme .zsiq_cnt,#zsiq_agtpic+div{display:none!important}}
