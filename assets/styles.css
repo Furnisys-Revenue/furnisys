@@ -1477,3 +1477,15 @@ h1,h2{color:var(--blue)}
 .cv-state{background:#fff;border:1px solid var(--grey3);border-radius:10px;padding:.7rem .9rem;display:grid;gap:.1rem}
 .cv-state b{font-family:var(--f-sub);color:var(--blue)}.cv-state span{font-size:.85rem;color:var(--grey1)}
 div.hero-h1{font-family:var(--f-head);font-weight:700;color:var(--blue);line-height:1.12;letter-spacing:-.015em;text-wrap:balance;margin:0}
+
+/* v49 native lead forms */
+.nf-frame{background:#fff;border-radius:16px;padding:clamp(1.1rem,3vw,1.75rem);border:1px solid var(--grey3)}
+.nf-form .rc-row.nf-row2{grid-template-columns:1fr 1fr}
+.nf-form select,.nf-form textarea{font:400 1rem var(--f-body,inherit);padding:.7rem .85rem;border:1px solid var(--grey3);border-radius:10px;color:var(--ink,#222);background:#fff;width:100%}
+.nf-form select:focus,.nf-form textarea:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.nf-form input{width:100%}
+.nf-form label{min-width:0}
+.nf-done h3{font-family:var(--f-head);color:var(--blue);margin:0}
+.nf-form[hidden]{display:none}
+@media (max-width:640px){.nf-form .rc-row.nf-row2{grid-template-columns:1fr}}
+.nf-form .rc-row.nf-row1{grid-template-columns:1fr}
