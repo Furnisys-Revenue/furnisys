@@ -277,7 +277,7 @@
     },
     {
       "source": "/product-catalog",
-      "destination": "/downloads",
+      "destination": "/ebooks",
       "permanent": true
     },
     {
@@ -327,7 +327,7 @@
     },
     {
       "source": "/assembly-instructions",
-      "destination": "/downloads",
+      "destination": "/ebooks",
       "permanent": true
     },
     {
@@ -427,12 +427,12 @@
     },
     {
       "source": "/catalogues",
-      "destination": "/downloads#catalogues",
+      "destination": "/ebooks#catalogues",
       "permanent": true
     },
     {
       "source": "/catalogues.html",
-      "destination": "/downloads#catalogues",
+      "destination": "/ebooks#catalogues",
       "permanent": true
     },
     {
@@ -494,6 +494,96 @@
       "source": "/Deep-Depth-Mobile-Cabinets.html",
       "destination": "/deep-depth-mobile-cabinets",
       "permanent": true
+    },
+    {
+      "source": "/furnisys-faq",
+      "destination": "/faqs",
+      "permanent": true
+    },
+    {
+      "source": "/furnisys-faq.html",
+      "destination": "/faqs",
+      "permanent": true
+    },
+    {
+      "source": "/downloads",
+      "destination": "/ebooks",
+      "permanent": true
+    },
+    {
+      "source": "/downloads.html",
+      "destination": "/ebooks",
+      "permanent": true
+    },
+    {
+      "source": "/getting-started",
+      "destination": "/tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/getting-started.html",
+      "destination": "/tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-workstation-solutions-usecases",
+      "destination": "/use-cases",
+      "permanent": true
+    },
+    {
+      "source": "/manufacturing-workstation-solutions-usecases.html",
+      "destination": "/use-cases",
+      "permanent": true
+    },
+    {
+      "source": "/concept-videos",
+      "destination": "/one-minute-videos",
+      "permanent": true
+    },
+    {
+      "source": "/concept-videos.html",
+      "destination": "/one-minute-videos",
+      "permanent": true
+    },
+    {
+      "source": "/workspace-glossary",
+      "destination": "/furnisys-glossary",
+      "permanent": true
+    },
+    {
+      "source": "/workspace-glossary.html",
+      "destination": "/furnisys-glossary",
+      "permanent": true
+    },
+    {
+      "source": "/solutions-library",
+      "destination": "/solutions",
+      "permanent": true
+    },
+    {
+      "source": "/solutions-library.html",
+      "destination": "/solutions",
+      "permanent": true
+    },
+    {
+      "source": "/support",
+      "destination": "/support-plans",
+      "permanent": true
+    },
+    {
+      "source": "/support.html",
+      "destination": "/support-plans",
+      "permanent": true
+    },
+    {
+      "source": "/newsletters",
+      "destination": "/newsletter-archives",
+      "permanent": true
+    },
+    {
+      "source": "/newsletters.html",
+      "destination": "/newsletter-archives",
+      "permanent": true
     }
   ],
   "headers": [
@@ -525,6 +615,44 @@
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in; style-src 'self' 'unsafe-inline' https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.com; img-src 'self' data: blob: https:; font-src 'self' data: https://*.zohostatic.com https://*.zohocdn.com; connect-src 'self' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com wss://*.zohopublic.com wss://*.zoho.com; frame-src 'self' https://*.zohopublic.com https://*.zoho.com https://www.youtube.com https://www.youtube-nocookie.com https://*.aflip.in; media-src 'self' https:; form-action 'self' https://forms.zohopublic.com; frame-ancestors 'self'; base-uri 'self'"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/faqs",
+      "destination": "/furnisys-faq"
+    },
+    {
+      "source": "/ebooks",
+      "destination": "/downloads"
+    },
+    {
+      "source": "/tutorials",
+      "destination": "/getting-started"
+    },
+    {
+      "source": "/use-cases",
+      "destination": "/manufacturing-workstation-solutions-usecases"
+    },
+    {
+      "source": "/one-minute-videos",
+      "destination": "/concept-videos"
+    },
+    {
+      "source": "/furnisys-glossary",
+      "destination": "/workspace-glossary"
+    },
+    {
+      "source": "/solutions",
+      "destination": "/solutions-library"
+    },
+    {
+      "source": "/support-plans",
+      "destination": "/support"
+    },
+    {
+      "source": "/newsletter-archives",
+      "destination": "/newsletters"
     }
   ]
 }
