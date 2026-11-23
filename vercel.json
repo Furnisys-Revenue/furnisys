@@ -3,6 +3,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "furnisys.co.in"
+        }
+      ],
+      "destination": "https://www.furnisys.co.in/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -612,7 +623,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in https://cdn.pagesense.io https://*.pagesense.io https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net https://*.googleadservices.com https://connect.facebook.net https://snap.licdn.com; style-src 'self' 'unsafe-inline' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in; img-src 'self' data: blob: https:; font-src 'self' data: https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in; connect-src 'self' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in wss://*.zohopublic.com wss://*.zoho.com wss://*.zoho.in https://*.pagesense.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://www.google.com https://www.facebook.com https://px.ads.linkedin.com; frame-src 'self' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in https://www.youtube.com https://www.youtube-nocookie.com https://*.aflip.in https://td.doubleclick.net https://www.googletagmanager.com; worker-src 'self' blob:; media-src 'self' blob: https:; form-action 'self' https://forms.zohopublic.com https://forms.zohopublic.in; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' https://www.furnisys.co.in https://furnisys.co.in 'unsafe-inline' 'wasm-unsafe-eval' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in https://cdn.pagesense.io https://*.pagesense.io https://www.googletagmanager.com https://*.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net https://*.googleadservices.com https://connect.facebook.net https://snap.licdn.com; style-src 'self' https://www.furnisys.co.in https://furnisys.co.in 'unsafe-inline' https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in; img-src 'self' https://www.furnisys.co.in https://furnisys.co.in data: blob: https:; font-src 'self' https://www.furnisys.co.in https://furnisys.co.in data: https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in; connect-src 'self' https://www.furnisys.co.in https://furnisys.co.in https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in wss://*.zohopublic.com wss://*.zoho.com wss://*.zoho.in https://*.pagesense.io https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.doubleclick.net https://www.google.com https://www.facebook.com https://px.ads.linkedin.com; frame-src 'self' https://www.furnisys.co.in https://furnisys.co.in https://*.zohopublic.com https://*.zoho.com https://*.zohostatic.com https://*.zohocdn.com https://*.zohopublic.in https://*.zoho.in https://www.youtube.com https://www.youtube-nocookie.com https://*.aflip.in https://td.doubleclick.net https://www.googletagmanager.com; worker-src 'self' blob:; media-src 'self' https://www.furnisys.co.in https://furnisys.co.in blob: https:; form-action 'self' https://forms.zohopublic.com https://forms.zohopublic.in; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests"
         }
       ]
     }
