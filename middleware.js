@@ -11,6 +11,7 @@ export default function middleware(request) {
       });
     }
     if (url.pathname.startsWith('/_configurator/')) return;
+    if (url.pathname.startsWith('/api/')) return;
     return Response.redirect('https://www.furnisys.co.in' + url.pathname + url.search, 307);
   } catch (e) {
     return;

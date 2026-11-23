@@ -34,6 +34,8 @@ button,select,input{font:inherit;color:inherit}
 .app{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;padding-block:12px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top-quote{padding:7px 14px;font-size:15px;white-space:nowrap}
+@media (max-width:520px){.top-quote{padding:6px 10px;font-size:14px}}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .logo-chip{background:#ffffff;border-radius:6px;padding:4px 8px;display:flex;flex:none}
 .logo-chip img{height:30px;width:auto;display:block}
@@ -230,7 +232,8 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
     </div>
     <div class="top-right">
       <div class="ref"><span class="ref-label" id="refLabel">Part no.</span><code id="ref">—</code></div>
-      <button type="button" class="tour-btn" id="tourBtn" title="How to use the configurator" aria-label="Show the guided tour">?</button>
+      <button type="button" class="btn top-quote" id="quoteBtnTop">Get a quote</button>
+       <button type="button" class="tour-btn" id="tourBtn" title="How to use the configurator" aria-label="Show the guided tour">?</button>
     </div>
   </header>
 
@@ -442,7 +445,8 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
         <label class="qty" for="dwgTitle">Project / customer <input type="text" id="dwgTitle" placeholder="e.g. ENT LAB" maxlength="60"></label>
         <label class="qty" for="dwgBy">Prepared by <input type="text" id="dwgBy" placeholder="Name" maxlength="40"></label>
         <label class="qty" for="qty">Quantity on drawing <input type="number" id="qty" min="1" max="999" value="1" inputmode="numeric"></label>
-        <button type="button" class="btn" id="pdfBtn" disabled>Preparing downloads…</button>
+        <button type="button" class="btn" id="quoteBtn">Get a quote for this design</button>
+         <button type="button" class="btn ghost" id="pdfBtn" disabled>Preparing downloads…</button>
         <div class="btnrow">
           <button type="button" class="btn ghost" id="sheetBtn" disabled>Drawing (.png)</button>
           <button type="button" class="btn ghost" id="exportBtn" disabled>SketchUp (.zip)</button>
@@ -3219,6 +3223,7 @@ document.getElementById('copyBtn').addEventListener('click', () => {
   catch(e){ fallback(); }
 });
 
+window.__fsDesign = () => ({ spec: specText(), qty: qty(), title: productTitle(), code: refText(), storage: isCabinet() });
 /* ---------- Start ---------- */
 applyTheme();
 loadPreset(0);
@@ -3227,6 +3232,91 @@ Object.assign(S, {series:'scitec', above:'riser', rType:'inst', rH:24, rD:12, rP
 normalise('product'); syncUI(); rebuild(); fit('iso'); markPreset(-1);
 resize();
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(() => rebuild());
+})();
+</script>
+
+<div class="qm" id="quoteModal" hidden role="dialog" aria-modal="true" aria-labelledby="qmTitle">
+  <form class="qm-card" id="quoteForm" novalidate>
+    <button type="button" class="qm-x" id="qmClose" aria-label="Close">×</button>
+    <h2 id="qmTitle">Get a quote for this design</h2>
+    <p class="qm-sub" id="qmDesign"></p>
+    <div class="qm-grid">
+      <label>First name *<input data-k="first" data-l="First name" autocomplete="given-name" maxlength="100" required></label>
+      <label>Last name *<input data-k="last" data-l="Last name" autocomplete="family-name" maxlength="100" required></label>
+      <label>Work email *<input type="email" data-k="email" data-l="Work email" autocomplete="email" maxlength="200" required></label>
+      <label>Mobile *<input type="tel" data-k="phone" data-l="Mobile" autocomplete="tel" inputmode="tel" maxlength="20" required></label>
+      <label>Company *<input data-k="company" data-l="Company" autocomplete="organization" maxlength="200" required></label>
+      <label>City *<input data-k="city" data-l="City" autocomplete="address-level2" maxlength="100" required></label>
+    </div>
+    <label class="qm-full">Anything else we should know?<textarea data-k="msg" data-l="Message" rows="2" maxlength="1000"></textarea></label>
+    <input type="text" name="qm_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <p class="qm-err" id="qmErr" hidden></p>
+    <button type="submit" class="btn" id="qmSend">Send my design for a quote</button>
+    <p class="qm-note">Your design specification is attached automatically. Our team replies within one working day.</p>
+  </form>
+  <div class="qm-card qm-done" id="qmDone" hidden>
+    <h2>Thank you, we've received your design</h2>
+    <p>A Furnisys engineer will contact you within one working day with a price and lead time.</p>
+    <button type="button" class="btn" id="qmOk">Back to the configurator</button>
+  </div>
+</div>
+<style>
+.qm{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:16px;background:rgba(10,14,20,.55)}
+.qm-card{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--panel);color:var(--ink);border-radius:12px;padding:22px 22px 18px;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:var(--f-body)}
+.qm-card h2{margin:0 28px 4px 0;font:700 1.6rem/1.15 var(--f-display);letter-spacing:.01em}
+.qm-sub{margin:0 0 14px;color:var(--muted);font-size:.9rem}
+.qm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.qm-card label{display:grid;gap:4px;font-size:.85rem;font-weight:600;color:var(--ink)}
+.qm-full{margin-top:10px}
+.qm-card input,.qm-card textarea{width:100%;box-sizing:border-box;font:inherit;font-weight:400;font-size:.95rem;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink)}
+.qm-card .btn{width:100%;margin-top:14px}
+.qm-x{position:absolute;top:10px;right:12px;border:0;background:none;font-size:1.6rem;line-height:1;cursor:pointer;color:var(--muted)}
+.qm-err{color:var(--accent);font-size:.88rem;margin:10px 0 0}
+.qm-note{color:var(--muted);font-size:.8rem;margin:10px 0 0}
+@media (max-width:520px){.qm-grid{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  var T0 = Date.now(), M = document.getElementById('quoteModal'), F = document.getElementById('quoteForm'), D = document.getElementById('qmDone'),
+      E = document.getElementById('qmErr'), B = document.getElementById('qmSend'), last = null;
+  function design(){ try{ return window.__fsDesign ? window.__fsDesign() : null; }catch(e){ return null; } }
+  function open(){ last = document.activeElement; var d = design();
+    document.getElementById('qmDesign').textContent = d ? d.title + ' · ' + d.code + ' · Qty ' + d.qty : '';
+    F.hidden = false; D.hidden = true; E.hidden = true; M.hidden = false; var f = F.querySelector('input'); if(f) f.focus(); }
+  function close(){ M.hidden = true; if(last && last.focus) last.focus(); }
+  document.getElementById('quoteBtn').addEventListener('click', open);
+  document.getElementById('quoteBtnTop').addEventListener('click', open);
+  document.getElementById('qmClose').addEventListener('click', close);
+  document.getElementById('qmOk').addEventListener('click', close);
+  M.addEventListener('click', function(e){ if(e.target === M) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !M.hidden) close(); });
+  F.addEventListener('submit', function(e){
+    e.preventDefault();
+    var miss = [];
+    F.querySelectorAll('[required]').forEach(function(c){ if(!c.value.trim()) miss.push(c.getAttribute('data-l').toLowerCase()); });
+    var em = F.querySelector('[data-k=email]'); if(em.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())) miss.push('a valid email');
+    var ph = F.querySelector('[data-k=phone]'); if(ph.value && ph.value.replace(/\D/g,'').length < 8) miss.push('a valid mobile number');
+    if(miss.length){ E.textContent = 'Please fill in: ' + miss.join(', ') + '.'; E.hidden = false; return; }
+    E.hidden = true; B.disabled = true; B.textContent = 'Sending…';
+    var a = {}, l = {}, d = design() || {};
+    F.querySelectorAll('[data-k]').forEach(function(c){ a[c.getAttribute('data-k')] = c.value.trim(); l[c.getAttribute('data-k')] = c.getAttribute('data-l'); });
+    a.need = d.storage ? 'Storage cabinets' : 'Workbenches / workstations'; l.need = 'What do you need?';
+    a.item = 'Configurable'; l.item = 'Product type';
+    a.qty = String(d.qty || 1); l.qty = 'Quantity';
+    a.source = '3D configurator'; l.source = 'Came through';
+    a.design = d.spec || ''; l.design = 'Design from the configurator';
+    var q = new URLSearchParams(location.search), utm = ['utm_source','utm_medium','utm_campaign'].map(function(k){ return q.get(k) ? k + '=' + q.get(k) : ''; }).filter(Boolean).join('&');
+    var payload = { type: 'enquiry', answers: a, labels: l, page: location.host + '/configurator', utm: utm,
+      attr: { landing: location.host + '/configurator', first_referrer: document.referrer || '' },
+      hp: F.querySelector('[name=qm_hp]').value, elapsed: Date.now() - T0 };
+    function fail(){ B.disabled = false; B.textContent = 'Send my design for a quote';
+      E.innerHTML = 'Sorry, that didn\'t go through. Please try again, or WhatsApp us on <a href="https://wa.me/917045763012" target="_blank" rel="noopener">+91 70457 63012</a>.'; E.hidden = false; }
+    fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){
+        if(r.ok && j.ok){ F.reset(); B.disabled = false; B.textContent = 'Send my design for a quote'; F.hidden = true; D.hidden = false; document.getElementById('qmOk').focus(); }
+        else fail(); }); })
+      .catch(fail);
+  });
 })();
 </script>
 

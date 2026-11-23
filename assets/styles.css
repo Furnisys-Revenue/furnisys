@@ -1546,3 +1546,16 @@ img{height:auto}
 .lb-img{max-width:min(1600px,100%);background:transparent}
 .lb-img img{max-height:86vh;max-width:min(1600px,94vw);width:auto;height:auto;object-fit:contain}
 /* /v66 */
+/* Quick-contact bar (phones only) */
+.qc-bar{display:none}
+@media (max-width:720px){
+  .qc-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:1fr 1fr 1.3fr;background:#fff;border-top:1px solid var(--grey3);box-shadow:0 -4px 16px rgba(0,35,80,.08);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .qc-bar a{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:56px;color:var(--blue);text-decoration:none;font:600 .92rem/1 var(--f-sub)}
+  .qc-bar a+a{border-left:1px solid var(--grey3)}
+  .qc-bar .qc-bar-wa{color:#128c4a}
+  .qc-bar .qc-bar-quote{background:var(--red);color:#fff;border-left:0}
+  body.has-qc{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}
+  body.has-qc .wa-btn{display:none!important}
+  body.has-qc .zsiq_floatmain,body.has-qc #zsiq_float{bottom:calc(68px + env(safe-area-inset-bottom,0px))!important}
+}
+@media print{.qc-bar{display:none!important}}

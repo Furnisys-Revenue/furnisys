@@ -161,3 +161,21 @@
     if (navigator.clipboard) navigator.clipboard.writeText(txt.textContent).then(function () { b.textContent = 'Copied'; }, sel); else sel();
   });
 })();
+
+// Quick-contact bar on phones: Call / WhatsApp / Get a quote, on every page (desktop keeps the existing floating WhatsApp button).
+(function () {
+  if (document.querySelector('.qc-bar') || /^configurator\./.test(location.host)) return;
+  var PHONE = '917045763012', TEL = '+917045763012';
+  var h1 = document.querySelector('h1'), topic = h1 ? h1.textContent.replace(/\s+/g, ' ').trim().slice(0, 90) : '';
+  var msg = 'Hello Furnisys, I\'d like to know more' + (topic && location.pathname !== '/' ? ' about ' + topic : '') + '. (Page: ' + location.host + location.pathname + ')';
+  var wa = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
+  var ql = document.querySelector('a[href^="/contact?product="]'), quote = ql ? ql.getAttribute('href') : '/contact';
+  var icoWA = '<svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>';
+  var icoTel = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>';
+  var bar = document.createElement('nav');
+  bar.className = 'qc-bar'; bar.setAttribute('aria-label', 'Quick contact');
+  bar.innerHTML = '<a href="tel:' + TEL + '">' + icoTel + '<span>Call</span></a>' +
+    '<a href="' + wa + '" target="_blank" rel="noopener" class="qc-bar-wa">' + icoWA.replace(/26/g, '20') + '<span>WhatsApp</span></a>' +
+    '<a href="' + quote + '" class="qc-bar-quote"><span>Get a quote</span></a>';
+  document.body.appendChild(bar); document.body.classList.add('has-qc');
+})();
