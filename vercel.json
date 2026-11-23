@@ -595,6 +595,21 @@
       "source": "/newsletters.html",
       "destination": "/newsletter-archives",
       "permanent": true
+    },
+    {
+      "source": "/partner-mabec",
+      "destination": "/find-a-partner",
+      "permanent": true
+    },
+    {
+      "source": "/partner-technoventor-innovations",
+      "destination": "/find-a-partner",
+      "permanent": true
+    },
+    {
+      "source": "/partner-parivartan4excellence",
+      "destination": "/find-a-partner",
+      "permanent": true
     }
   ],
   "headers": [
