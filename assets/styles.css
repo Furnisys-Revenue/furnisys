@@ -1559,3 +1559,15 @@ img{height:auto}
   body.has-qc .zsiq_floatmain,body.has-qc #zsiq_float{bottom:calc(68px + env(safe-area-inset-bottom,0px))!important}
 }
 @media print{.qc-bar{display:none!important}}
+
+
+/* v68 */
+.bro-pdf{margin-left:.25rem}
+.rc-done .btn-ghost{margin-left:.4rem}
+.kit-grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));margin-top:1.25rem}
+.kit-card{display:grid;gap:.25rem;padding:1rem 1.1rem;border:1px solid var(--grey3);border-left:4px solid var(--red);border-radius:12px;background:#fff;color:var(--ink);text-decoration:none}
+.kit-card b{font-family:var(--f-sub);font-size:1rem}
+.kit-card span{font-size:.88rem;color:var(--grey1)}
+.kit-card em{font-style:normal;font-weight:600;color:var(--blue);font-size:.9rem;margin-top:.2rem}
+.kit-card:hover{border-color:var(--blue)}
+/* /v68 */
