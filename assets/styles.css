@@ -725,6 +725,7 @@ h1,h2{color:var(--blue)}
 .rating{color:#d99a00;letter-spacing:.08em;white-space:nowrap}
 .cost{color:#1f8a4c;font-weight:700;letter-spacing:.08em;white-space:nowrap}
 .r-off{color:var(--grey3)}
+.r-off::after{content:attr(data-s)}
 .ticks{color:#1f8a4c;font-weight:700;letter-spacing:.1em}
 .cross{color:var(--red);font-weight:700}
 .unk{color:var(--grey1);font-style:italic}
@@ -1546,3 +1547,5 @@ img{height:auto}
 .lb-img{max-width:min(1600px,100%);background:transparent}
 .lb-img img{max-height:86vh;max-width:min(1600px,94vw);width:auto;height:auto;object-fit:contain}
 /* /v66 */
+.cmp-criteria{margin-top:.6rem}.cmp-criteria summary{cursor:pointer;font-weight:600}.cmp-criteria ul{margin:.5rem 0 0 1.1rem;padding:0}.cmp-criteria li{margin:.2rem 0}
+@media (min-width:1001px){.journey.j5{grid-template-columns:repeat(5,1fr)}}

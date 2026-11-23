@@ -79,7 +79,8 @@ module.exports = async (req, res) => {
     setPick('Enquiry_Type', 'Standard');
     setPick('Organization_Size', orgSize(a), 'Medium');
     setPick('Product_Matrix', matrix(a), 'Primary');
-    if (firstNum(a.qty) != null) set('Workbench_Qty', firstNum(a.qty));
+    // Workbench_Qty only when the count is of workstations (forms relabel the count for lockers, wall, storage and trolleys)
+    if (firstNum(a.qty) != null && !/locker|wall|pegboard|cabinet|storage|trolley|flow rack/i.test(a.need || '')) set('Workbench_Qty', firstNum(a.qty));
     const prod = PRODUCTS[key(a.need)]; if (prod && F.Products1) { const v = pick(F.Products1, prod); if (norm(v) === norm(prod)) set('Products1', v); }
     // partner applications
     if (type === 'partner') {

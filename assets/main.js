@@ -161,3 +161,35 @@
     if (navigator.clipboard) navigator.clipboard.writeText(txt.textContent).then(function () { b.textContent = 'Copied'; }, sel); else sel();
   });
 })();
+
+/* Enquiry forms: quantity question follows the product chosen (lockers, wall, storage), and ?program= / ?product= preselects it */
+(function () {
+  var Q = {
+    lockers: { l: 'Number of lockers', o: ['Up to 25', '26–50', '51–100', '101–250', 'More than 250'] },
+    wall: { l: 'Number of walls or tool areas', o: ['1', '2–5', '6–10', '11–25', 'More than 25'] },
+    storage: { l: 'Number of cabinets', o: ['1–4', '5–10', '11–25', '26–50', 'More than 50'] },
+    trolleys: { l: 'Number of trolleys or racks', o: ['1–4', '5–10', '11–25', '26–50', 'More than 50'] },
+    def: { l: 'Number of workstations', o: ['1–4', '5–10', '11–25', '26–50', 'More than 50'] }
+  };
+  function kind(v) { v = String(v || '').toLowerCase(); return /locker/.test(v) ? 'lockers' : /wall|pegboard/.test(v) ? 'wall' : /cabinet|storage/.test(v) ? 'storage' : /trolley|flow rack/.test(v) ? 'trolleys' : 'def'; }
+  var qs = new URLSearchParams(location.search), want = qs.get('program') || qs.get('product') || '';
+  document.querySelectorAll('form.nf-form').forEach(function (F) {
+    var need = F.querySelector('select[data-k=need]'), qty = F.querySelector('select[data-k=qty]');
+    if (!need) return;
+    if (want && !need.value) {
+      var k = kind(want), pick = Array.prototype.find.call(need.options, function (o) { return o.value && (k !== 'def' ? kind(o.text) === k : /workbench/i.test(o.text) && /workbench|workstation|series|flexi|esd/i.test(want)); });
+      if (pick) need.value = pick.value || pick.text;
+    }
+    if (!qty) return;
+    var lab = qty.closest('label'), span = lab && lab.querySelector('span');
+    function apply() {
+      var q = Q[kind(need.value)], cur = qty.value;
+      if (qty.getAttribute('data-l') === q.l) return;
+      qty.setAttribute('data-l', q.l);
+      if (span) span.innerHTML = q.l + ' <em>*</em>';
+      qty.innerHTML = '<option value="" selected disabled>Select</option>' + q.o.map(function (x) { return '<option>' + x + '</option>'; }).join('');
+      if (q.o.indexOf(cur) > -1) qty.value = cur;
+    }
+    need.addEventListener('change', apply); apply();
+  });
+})();
