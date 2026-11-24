@@ -192,9 +192,11 @@ function hint(i,msg){var s=i.parentNode.querySelector('.fs-fe');if(!msg){if(s)s.
 function fields(F){return{e:F.querySelector('[data-k=email],[name=Email]'),p:F.querySelector('[data-k=phone],[name=PhoneNumber_countrycode]')};}
 function err(F,msg,fix,i){var E=F.querySelector('.rc-err');if(i)hint(i,msg);if(!E)return;E.textContent=msg+' ';if(fix){var b=document.createElement('button');b.type='button';b.className='fs-fix';b.textContent='Use '+fix;b.onclick=function(){var x=fields(F).e;x.value=fix;hint(x,'');E.hidden=true;x.focus();};E.appendChild(b);}E.hidden=false;if(i)i.focus();}
 document.addEventListener('focusout',function(e){var i=e.target;if(!i.form||!i.form.classList.contains('rc-form'))return;var f=fields(i.form);if(i!==f.e&&i!==f.p)return;
- if(!i.value.trim()){hint(i,'');return;}
+ var rt=e.relatedTarget;if(rt&&rt.type==='submit')return;
+ setTimeout(function(){blur(i,f)},250);},true);
+function blur(i,f){if(!i.value.trim()){hint(i,'');return;}
  if(i===f.p){var r=phone(i.value);hint(i,r.ok?'':r.msg);if(r.ok)i.value=r.v;return;}
- var r2=email(i.value);if(!r2.ok){hint(i,r2.msg);return;}hint(i,'');check(r2.d).then(function(ok){if(i.value.trim().toLowerCase()===r2.v.toLowerCase()&&!ok)hint(i,'We could not find the email domain '+r2.d+'. Please check your email address.');});},true);
+ var r2=email(i.value);if(!r2.ok){hint(i,r2.msg);return;}hint(i,'');check(r2.d).then(function(ok){if(i.value.trim().toLowerCase()===r2.v.toLowerCase()&&!ok)hint(i,'We could not find the email domain '+r2.d+'. Please check your email address.');});}
 document.addEventListener('input',function(e){var i=e.target;if(i.getAttribute&&i.getAttribute('aria-invalid'))hint(i,'');},true);
 window.addEventListener('submit',function(e){var F=e.target;if(!F.classList||!F.classList.contains('rc-form'))return;if(F.__fsPass){F.__fsPass=false;return;}
  var f=fields(F),stop=function(){e.preventDefault();e.stopImmediatePropagation();};
