@@ -154,5 +154,53 @@ var F=window.fetch;if(F)window.fetch=function(u,o){var r=F.apply(this,arguments)
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'';
 if(h.indexOf('tel:')===0)fsTrack('click_to_call');else if(h.indexOf('wa.me')>-1||h.indexOf('whatsapp')>-1)fsTrack('whatsapp_click');else if(h.indexOf('mailto:')===0)fsTrack('email_click');
 else if(a.hasAttribute('data-catalogue'))fsTrack('catalogue_request_open');else if(h.indexOf('aflip.in')>-1)fsTrack('brochure_open');else if(/\.pdf($|\?)/i.test(h))fsTrack('file_download',{file:h});});
-document.addEventListener('focusin',function(e){var f=e.target.closest&&e.target.closest('form.nf-form');if(f&&!f.__st){f.__st=1;fsTrack('form_start',{form_type:f.getAttribute('data-type')});}});})();</script><script id="fs-siq-track">(function(){var n=0;function h(){try{var s=window.$zoho&&window.$zoho.salesiq;if(!s||!s.visitor||typeof s.visitor.chat!=="function"){if(++n<40)setTimeout(h,1500);return;}s.visitor.chat(function(){window.fsTrack&&window.fsTrack("chat_start")});if(typeof s.visitor.offlineMessage==="function")s.visitor.offlineMessage(function(){window.fsTrack&&window.fsTrack("chat_offline_message")});}catch(e){}}if(document.readyState==="complete")h();else window.addEventListener("load",h);})();</script></body>
+document.addEventListener('focusin',function(e){var f=e.target.closest&&e.target.closest('form.nf-form');if(f&&!f.__st){f.__st=1;fsTrack('form_start',{form_type:f.getAttribute('data-type')});}});})();</script><script id="fs-siq-track">(function(){var n=0;function h(){try{var s=window.$zoho&&window.$zoho.salesiq;if(!s||!s.visitor||typeof s.visitor.chat!=="function"){if(++n<40)setTimeout(h,1500);return;}s.visitor.chat(function(){window.fsTrack&&window.fsTrack("chat_start")});if(typeof s.visitor.offlineMessage==="function")s.visitor.offlineMessage(function(){window.fsTrack&&window.fsTrack("chat_offline_message")});}catch(e){}}if(document.readyState==="complete")h();else window.addEventListener("load",h);})();</script><script id="fs-valid">(function(){
+var FREE={'gmail.com':1,'yahoo.com':1,'yahoo.co.in':1,'yahoo.in':1,'outlook.com':1,'hotmail.com':1,'live.com':1,'rediffmail.com':1,'icloud.com':1,'zoho.com':1,'zohomail.in':1,'protonmail.com':1,'proton.me':1,'msn.com':1,'aol.com':1};
+var TYPO={'gmial.com':'gmail.com','gamil.com':'gmail.com','gmai.com':'gmail.com','gmaill.com':'gmail.com','gnail.com':'gmail.com','gmail.co':'gmail.com','gmail.con':'gmail.com','gmail.cm':'gmail.com','gmail.om':'gmail.com','gmail.in':'gmail.com','gmail.co.in':'gmail.com','gmal.com':'gmail.com','gmaul.com':'gmail.com','gmsil.com':'gmail.com',
+'yaho.com':'yahoo.com','yahooo.com':'yahoo.com','yahoo.con':'yahoo.com','yaoo.com':'yahoo.com','yahoo.co':'yahoo.co.in','hotmial.com':'hotmail.com','hotmal.com':'hotmail.com','hotmail.co':'hotmail.com','hotmail.con':'hotmail.com',
+'outlok.com':'outlook.com','outloo.com':'outlook.com','outlook.co':'outlook.com','outlook.con':'outlook.com','redifmail.com':'rediffmail.com','rediffmail.co':'rediffmail.com','rediffmai.com':'rediffmail.com','iclod.com':'icloud.com'};
+var TEMP=/^(mailinator|yopmail|guerrillamail|sharklasers|10minutemail|tempmail|temp-mail|throwawaymail|trashmail|getnada|dispostable|maildrop|fakeinbox|mintemail|mohmal|emailondeck|moakt|tempr|discard|spamgourmet|mailnesia|burnermail|tmpmail|1secmail|emailfake|fakemail)\./;
+var FAKE=/^(test|testing|abc|abcd|asd|asdf|xyz|qwerty|example|sample|demo|none|na|null)\.(com|in|co\.in|net|org)$/;
+var mx={};
+function email(v){v=String(v||'').trim();var m=v.match(/^([^@\s]+)@([^@\s]+)$/);
+ if(!m)return{ok:false,msg:'Please enter a valid email address, like name@company.com.'};
+ var u=m[1],d=m[2].toLowerCase();
+ if(!/^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+$/.test(u)||/^\.|\.$|\.\./.test(u)||u.length>64||!/^([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}$/.test(d))return{ok:false,msg:'Please enter a valid email address, like name@company.com.'};
+ if(TEMP.test(d))return{ok:false,msg:'Please use your work or personal email. Temporary email addresses are not accepted.'};
+ if(FAKE.test(d)||d==='example.com')return{ok:false,msg:'Please enter your real email address so we can reply to you.'};
+ var fix=TYPO[d]||(/\.(con|cmo|comm|om|cm|vom|xom)$/.test(d)?d.replace(/\.[a-z]+$/,'.com'):null);
+ if(fix)return{ok:false,fix:u+'@'+fix,msg:'Did you mean '+u+'@'+fix+'?'};
+ return{ok:true,v:u+'@'+d,d:d};}
+function phone(v){v=String(v||'').trim();if(!/^[0-9+\-\s().]+$/.test(v))return{ok:false,msg:'Please enter a valid mobile number using digits only.'};
+ var d=v.replace(/\D/g,''),intl=/^\s*(\+|00)/.test(v),n=null;if(/^\s*00/.test(v))d=d.slice(2);
+ if(intl){if(d.indexOf('91')===0)n=d.slice(2);else return(d.length>=8&&d.length<=15&&!/^(\d)\1+$/.test(d))?{ok:true,v:'+'+d}:{ok:false,msg:'Please enter a valid mobile number with country code, like +971 50 123 4567.'};}
+ else if(d.length===10)n=d;else if(d.length===11&&d[0]==='0')n=d.slice(1);else if(d.length===12&&d.indexOf('91')===0)n=d.slice(2);
+ if(!n||!/^[6-9]\d{9}$/.test(n))return{ok:false,msg:'Please enter a valid 10-digit mobile number, like 98200 12345.'};
+ if(/^(\d)\1{9}$/.test(n)||/^(9876543210|6789012345|9123456789|9012345678)$/.test(n)||/^(\d)\1{6}/.test(n.slice(3)))return{ok:false,msg:'Please enter your real mobile number so we can call you back.'};
+ return{ok:true,v:'+91'+n};}
+function check(d){if(FREE[d])return Promise.resolve(true);if(d in mx)return mx[d];
+ var c=new AbortController(),t=setTimeout(function(){c.abort()},3500);
+ var P=fetch('/api/check-email?d='+encodeURIComponent(d),{signal:c.signal}).then(function(r){return r.ok?r.json():{ok:true}}).then(function(j){clearTimeout(t);return j.ok!==false}).catch(function(){return true}).then(function(ok){P.__v=ok;return ok});mx[d]=P;return P;}
+function fe(i){return i&&(i.form&&i.form.querySelector('[data-k=email],[name=Email]')===i)?'email':'phone';}
+function hint(i,msg){var s=i.parentNode.querySelector('.fs-fe');if(!msg){if(s)s.remove();i.removeAttribute('aria-invalid');return;}
+ if(!s){s=document.createElement('small');s.className='fs-fe';s.setAttribute('role','alert');i.insertAdjacentElement('afterend',s);}s.textContent=msg;i.setAttribute('aria-invalid','true');}
+function fields(F){return{e:F.querySelector('[data-k=email],[name=Email]'),p:F.querySelector('[data-k=phone],[name=PhoneNumber_countrycode]')};}
+function err(F,msg,fix,i){var E=F.querySelector('.rc-err');if(i)hint(i,msg);if(!E)return;E.textContent=msg+' ';if(fix){var b=document.createElement('button');b.type='button';b.className='fs-fix';b.textContent='Use '+fix;b.onclick=function(){var x=fields(F).e;x.value=fix;hint(x,'');E.hidden=true;x.focus();};E.appendChild(b);}E.hidden=false;if(i)i.focus();}
+document.addEventListener('focusout',function(e){var i=e.target;if(!i.form||!i.form.classList.contains('rc-form'))return;var f=fields(i.form);if(i!==f.e&&i!==f.p)return;
+ if(!i.value.trim()){hint(i,'');return;}
+ if(i===f.p){var r=phone(i.value);hint(i,r.ok?'':r.msg);if(r.ok)i.value=r.v;return;}
+ var r2=email(i.value);if(!r2.ok){hint(i,r2.msg);return;}hint(i,'');check(r2.d).then(function(ok){if(i.value.trim().toLowerCase()===r2.v.toLowerCase()&&!ok)hint(i,'We could not find the email domain '+r2.d+'. Please check your email address.');});},true);
+document.addEventListener('input',function(e){var i=e.target;if(i.getAttribute&&i.getAttribute('aria-invalid'))hint(i,'');},true);
+window.addEventListener('submit',function(e){var F=e.target;if(!F.classList||!F.classList.contains('rc-form'))return;if(F.__fsPass){F.__fsPass=false;return;}
+ var f=fields(F),stop=function(){e.preventDefault();e.stopImmediatePropagation();};
+ if(f.p&&f.p.value.trim()){var p=phone(f.p.value);if(!p.ok){stop();err(F,p.msg,null,f.p);return;}f.p.value=p.v;}
+ if(!f.e||!f.e.value.trim())return;
+ var r=email(f.e.value);if(!r.ok){if(r.fix&&F.__fsWarned===f.e.value.trim()){}else{stop();F.__fsWarned=f.e.value.trim();err(F,r.msg,r.fix,f.e);return;}}
+ else{f.e.value=r.v;
+  var done=FREE[r.d]||(r.d in mx&&mx[r.d].__v!==undefined);
+  if(done&&mx[r.d]&&mx[r.d].__v===false){stop();err(F,'We could not find the email domain '+r.d+'. Please check your email address.',null,f.e);return;}
+  if(!done){stop();var B=F.querySelector('[type=submit]');if(B)B.disabled=true;var E=F.querySelector('.rc-err');if(E){E.textContent='Checking your email…';E.hidden=false;}
+   var pr=check(r.d);pr.then(function(ok){pr.__v=ok;if(B)B.disabled=false;if(!ok){err(F,'We could not find the email domain '+r.d+'. Please check your email address.',null,f.e);return;}if(E)E.hidden=true;F.__fsPass=true;if(F.requestSubmit)F.requestSubmit();else F.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));});return;}}
+},true);
+window.fsValid={email:email,phone:phone};})();</script></body>
 </html>

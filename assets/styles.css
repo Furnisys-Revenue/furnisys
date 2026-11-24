@@ -1573,3 +1573,10 @@ img{height:auto}
 .kit-card em{font-style:normal;font-weight:600;color:var(--blue);font-size:.9rem;margin-top:.2rem}
 .kit-card:hover{border-color:var(--blue)}
 /* /v68 */
+
+
+/* v69 */
+.fs-fe{display:block;margin-top:.3rem;color:var(--red);font-size:.82rem;line-height:1.35}
+.rc-form [aria-invalid=true]{border-color:var(--red)}
+.fs-fix{margin-left:.35rem;padding:.15rem .55rem;border:1px solid var(--blue);border-radius:6px;background:#fff;color:var(--blue);font:inherit;font-size:.82rem;cursor:pointer}
+/* /v69 */
