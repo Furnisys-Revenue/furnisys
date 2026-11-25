@@ -10,6 +10,13 @@ Key facts:
 - Contact: enquiry@furnisys.co (projects), bd@furnisys.co (channel partners), +91 70457 63012, Mon–Sat 10:00–19:00 IST
 - Website: https://www.furnisys.co.in
 
+
+## Buyer guides for plant managers
+- [The plant manager's guide to buying industrial workstations](https://www.furnisys.co.in/industrial-workstation-buyers-guide): What to read at each stage of buying industrial workbenches and workstations: explore, evaluate, decide, install and expand. Guides, checklists and case studies.
+- [How to Specify an Industrial Workbench: A Plant Manager's Checklist](https://www.furnisys.co.in/how-to-specify-an-industrial-workbench): Load rating, worktop, height, ESD, storage and future changes: the seven decisions to settle before you ask for industrial workbench quotes.
+- [Workbench vs Workstation: What's the Difference?](https://www.furnisys.co.in/workbench-vs-workstation): A workbench is the surface you work on; a workstation is a bench built out for one task. How to tell which your line needs, with examples.
+- [Industrial Workstation RFQ Checklist: What to Send Suppliers and How to Compare Quotes](https://www.furnisys.co.in/industrial-workstation-rfq-checklist): What to send suppliers when you buy industrial workbenches and workstations, what to ask every one of them for, and how to compare the quotes fairly.
+
 ## Solutions by industry and application
 - [Manufacturing Workspace Solutions](https://www.furnisys.co.in/manufacturing): Assembly, rework, inspection, R&D, kitting and maintenance spaces configured as one modular system.
 - [Aerospace Workspace Solutions](https://www.furnisys.co.in/aerospace-workspace-solutions): Aerospace facilities operate across highly specialised environments. Furnisys approaches each space as a functional system, combining workstations, storage
