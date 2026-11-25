@@ -14,6 +14,7 @@ Key facts:
 ## Buyer guides for plant managers
 - [The plant manager's guide to buying industrial workstations](https://www.furnisys.co.in/industrial-workstation-buyers-guide): What to read at each stage of buying industrial workbenches and workstations: explore, evaluate, decide, install and expand. Guides, checklists and case studies.
 - [How to Specify an Industrial Workbench: A Plant Manager's Checklist](https://www.furnisys.co.in/how-to-specify-an-industrial-workbench): Load rating, worktop, height, ESD, storage and future changes: the seven decisions to settle before you ask for industrial workbench quotes.
+- [ESD Workstation Requirements: A Checklist for Electronics Assembly Lines](https://www.furnisys.co.in/esd-workstation-requirements): Worksurface below 1x10^9 ohms to ground, wrist strap system below 3.5x10^7 ohms, one common grounding point, insulator control and daily checks, per ANSI/ESD S20.20 and IEC 61340-5-1; what to ask suppliers.
 - [Workbench vs Workstation: What's the Difference?](https://www.furnisys.co.in/workbench-vs-workstation): A workbench is the surface you work on; a workstation is a bench built out for one task. How to tell which your line needs, with examples.
 - [Industrial Workstation RFQ Checklist: What to Send Suppliers and How to Compare Quotes](https://www.furnisys.co.in/industrial-workstation-rfq-checklist): What to send suppliers when you buy industrial workbenches and workstations, what to ask every one of them for, and how to compare the quotes fairly.
 

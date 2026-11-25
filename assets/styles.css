@@ -359,7 +359,7 @@ details p{margin-top:.7rem;max-width:68ch}
 .socials{display:flex;gap:.8rem;flex-wrap:wrap}
 .rich table{width:100%;border-collapse:collapse;font-size:.95rem;display:block;overflow-x:auto}
 .rich th,.rich td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--grey3);vertical-align:top}
-.rich th,.rich tr:first-child td{font-family:var(--f-sub);font-weight:600;color:var(--ink);background:var(--grey4)}
+.rich th,.rich table:not(:has(thead)) tr:first-child td{font-family:var(--f-sub);font-weight:600;color:var(--ink);background:var(--grey4)}
 .rich blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:4px solid var(--red);background:var(--grey4);border-radius:0 10px 10px 0}
 .rich .inline-img{margin:1.6rem 0}
 .rich .inline-img img{border-radius:var(--r);width:100%;height:auto;background:var(--tint)}
