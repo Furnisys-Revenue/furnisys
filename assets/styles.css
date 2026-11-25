@@ -1617,3 +1617,10 @@ img{height:auto}
 .rc-form [aria-invalid=true]{border-color:var(--red)}
 .fs-fix{margin-left:.35rem;padding:.15rem .55rem;border:1px solid var(--blue);border-radius:6px;background:#fff;color:var(--blue);font:inherit;font-size:.82rem;cursor:pointer}
 /* /v69 */
+
+
+/* v73 */
+.pfaq .sec{border-bottom:1px solid var(--grey3);padding:.2rem 0}
+.pfaq .sec summary h3{font-size:1.05rem;margin:.7rem 0}
+.pfaq .sec-body p{margin:0 0 .9rem;color:var(--grey1)}
+/* /v73 */
