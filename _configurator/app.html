@@ -34,9 +34,9 @@ button,select,input{font:inherit;color:inherit}
 .app{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;padding-block:12px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
 .top-quote{padding:7px 14px;font-size:15px;white-space:nowrap}
 @media (max-width:520px){.top-quote{padding:6px 10px;font-size:14px}}
-.brand{display:flex;align-items:center;gap:12px;min-width:0}
 .logo-chip{background:#ffffff;border-radius:6px;padding:4px 8px;display:flex;flex:none}
 .logo-chip img{height:30px;width:auto;display:block}
 .sep{width:1px;height:24px;background:var(--line)}
@@ -66,6 +66,17 @@ button,select,input{font:inherit;color:inherit}
 /* Panel = sticky head (category tabs) / flexible scrolling body / collapsible export foot */
 .panel-head{flex:none;display:grid;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel);z-index:2}
 .panel-head .seg.big button{padding:8px 4px;white-space:normal;line-height:1.1;text-wrap:balance}
+.panel-head .seg.big{display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.panel-head .seg.big button{grid-column:span 2;overflow-wrap:normal;word-break:normal;hyphens:none;font-size:14px;letter-spacing:.01em;padding:8px 2px}
+.panel-head .seg.big button:nth-child(n+4){grid-column:span 3}
+.seg[data-key="xLayout"]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.xruns{display:grid;gap:8px;margin-top:8px}
+.xrun{display:grid;grid-template-columns:minmax(70px,auto) 1fr auto auto;gap:6px;align-items:center}
+.xrun-n{font-size:13px;color:var(--muted)}
+.xrun-secs{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.xrun-secs select{width:auto;min-width:64px;padding:4px 6px}
+.xrun-b{width:30px;height:30px;border:1px solid var(--line);background:var(--panel);border-radius:6px;font-weight:600;cursor:pointer}
+.xrun-b:disabled{opacity:.35;cursor:not-allowed}
 .panel-head .seg.big button[aria-pressed="true"]{color:var(--accent)}
 .panel-head .catcode{padding:6px 10px}
 .panel-head .catcode code{font-size:12.5px}
@@ -233,7 +244,7 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
     <div class="top-right">
       <div class="ref"><span class="ref-label" id="refLabel">Part no.</span><code id="ref">—</code></div>
       <button type="button" class="btn top-quote" id="quoteBtnTop">Get a quote</button>
-       <button type="button" class="tour-btn" id="tourBtn" title="How to use the configurator" aria-label="Show the guided tour">?</button>
+      <button type="button" class="tour-btn" id="tourBtn" title="How to use the configurator" aria-label="Show the guided tour">?</button>
     </div>
   </header>
 
@@ -261,7 +272,7 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
       </div>
       <div class="panel-body" id="panelBody">
       <div class="group">
-        <h2>Catalog presets</h2>
+        <h2 id="presetsTitle">Catalog presets</h2>
         <div class="chips" id="presets" aria-label="Catalog presets"></div>
       </div>
 
@@ -340,6 +351,10 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
           <h3 class="subh">Apply to all sections</h3>
           <div class="row"><span>Panel</span><select id="panel" data-key="panel" aria-label="Link panel"></select></div>
           <div class="row" id="panelHRow"><span>Panel ht</span><div class="seg" data-key="panelH"></div></div>
+          <div class="row" id="uBoardRow"><span>Board on pegboard</span><div class="seg" data-key="board"></div></div>
+          <div class="row" id="uBWRow"><span>Board width</span><div class="seg wrap" data-key="bW"></div></div>
+          <div class="row" id="uBHRow"><span>Board ht</span><div class="seg" data-key="bH"></div></div>
+          <div class="row" id="uBPosRow"><span>Board at</span><div class="seg" data-key="bPos"></div></div>
           <div class="row"><span>Shelves</span><div class="seg" data-key="shelves"></div></div>
           <div class="row"><span>Shelf</span><div class="seg" data-key="shD"></div></div>
           <div class="two">
@@ -349,6 +364,7 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
             <label class="toggle" for="usl" id="uslRow">Undershelf task light <input type="checkbox" class="switch" id="usl" data-key="usl"></label>
             <label class="toggle" for="ohc" id="ohcRow">Overhead cabinet <input type="checkbox" class="switch" id="ohc" data-key="ohc"></label>
           </div>
+          <div class="row" id="utlLRow"><span>Light length</span><div class="seg" data-key="utlL"></div></div>
           <div class="row" id="ohcDoorRow"><span>OHC door</span><select id="ohcDoor" data-key="ohcDoor" aria-label="Overhead cabinet door"></select></div>
         </fieldset>
         <fieldset data-above="stand">
@@ -359,8 +375,13 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
           <div class="row"><span>Shelf</span><div class="seg" data-key="sShD"></div></div>
           <div class="row"><span>Panel</span><select id="sPanel" data-key="sPanel" aria-label="Workstand panel"></select></div>
           <div class="row" id="sPanelHRow"><span>Panel ht</span><div class="seg" data-key="sPanelH"></div></div>
+          <div class="row" id="sBoardRow"><span>Board on pegboard</span><div class="seg" data-key="sBoard"></div></div>
+          <div class="row" id="sBWRow"><span>Board width</span><div class="seg wrap" data-key="sBW"></div></div>
+          <div class="row" id="sBHRow"><span>Board ht</span><div class="seg" data-key="sBH"></div></div>
+          <div class="row" id="sBPosRow"><span>Board at</span><div class="seg" data-key="sBPos"></div></div>
           <label class="toggle" for="sPower">Vertical power strip (each side) <input type="checkbox" class="switch" id="sPower" data-key="sPower"></label>
           <label class="toggle" for="sUsl" id="sUslRow">Undershelf task light (each side) <input type="checkbox" class="switch" id="sUsl" data-key="sUsl"></label>
+          <div class="row" id="sUtlLRow"><span>Light length</span><div class="seg" data-key="sUtlL"></div></div>
         </fieldset>
         <fieldset data-above="riser">
           <div class="row" id="rTypeRow"><span>Type</span><div class="seg" data-key="rType"></div></div>
@@ -420,6 +441,152 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
         <div class="row" data-for="mob"><span>Handle</span><div class="seg" data-key="mhandle"></div></div>
       </div>
 
+      <!-- ===== Link system ===== -->
+      <div class="group" data-for="link">
+        <h2>Link product</h2>
+        <div class="seg" data-key="lType"></div>
+        <p class="hint" id="lFrameHint"></p>
+      </div>
+      <div class="group" data-for="link">
+        <h2>Frame <span class="unit">inch</span></h2>
+        <div class="row" data-lt="stand trolley"><span>Justified</span><div class="seg" data-key="lJust"></div></div>
+        <div class="row" data-lt="stand trolley"><span>Height</span><div class="seg wrap" data-key="lH"></div></div>
+        <div class="row"><span>Width</span><div class="seg wrap" data-key="lW"></div></div>
+        <div class="row" data-lt="stand flow"><span>Sections</span><div class="seg" data-key="lN"></div></div>
+        <div class="row" data-lt="stand trolley"><span>Depth</span><div class="seg" data-key="lDep"></div></div>
+      </div>
+      <div class="group" data-for="link" data-lt="flow">
+        <h2>Roller shelves</h2>
+        <div class="row"><span>Shelves</span><div class="seg" data-key="lFS"></div></div>
+        <p class="hint" id="lFlowHint"></p>
+      </div>
+      <div class="group" data-for="link" id="lTopGroup">
+        <h2>Worksurface</h2>
+        <div class="row"><span>Top</span><div class="seg" data-key="lTop"></div></div>
+        <div class="row" id="lTopDRow"><span>Depth</span><div class="seg" data-key="lTopD"></div></div>
+        <div class="row" id="lWHRow"><span>Height</span><div class="seg" data-key="lWH"></div></div>
+        <div class="row" id="lMatRow"><span>Mat</span><div class="seg" data-key="lMat"></div></div>
+        <div class="two">
+          <label class="toggle" for="lStop" id="lStopRow">Back stop <input type="checkbox" class="switch" id="lStop" data-key="lStop"></label>
+          <label class="toggle" for="lEsd" id="lEsdRow">ESD wrist strap + ground block <input type="checkbox" class="switch" id="lEsd" data-key="lEsd"></label>
+        </div>
+        <h3 class="subh" id="lBelowH">Below worksurface</h3>
+        <div class="two" id="lBotRow"><label class="toggle" for="lBot">Bottom shelf (adjustable) <input type="checkbox" class="switch" id="lBot" data-key="lBot"></label></div>
+        <div class="row" id="lBotDRow"><span>Shelf depth</span><div class="seg" data-key="lBotD"></div></div>
+        <p class="hint" id="lTopHint"></p>
+      </div>
+      <div class="group" data-for="link" id="lAccGroup">
+        <h2>Accessories <span class="unit" id="lAccSide"></span></h2>
+        <div class="row"><span>Panel</span><select id="lPanel" data-key="lPanel" aria-label="Link panel"></select></div>
+        <div class="row" id="lPanelHRow"><span>Panel ht</span><div class="seg" data-key="lPanelH"></div></div>
+        <div class="row" id="lBoardRow"><span>Board on pegboard</span><div class="seg" data-key="lBoard"></div></div>
+        <div class="row" id="lBWRow"><span>Board width</span><div class="seg wrap" data-key="lBW"></div></div>
+        <div class="row" id="lBHRow"><span>Board ht</span><div class="seg" data-key="lBH"></div></div>
+        <div class="row" id="lBPosRow"><span>Board at</span><div class="seg" data-key="lBPos"></div></div>
+        <div class="row"><span>Shelves</span><div class="seg" data-key="lShelves"></div></div>
+        <div class="row" id="lShTypeRow"><span>Shelf</span><div class="seg" data-key="lShType"></div></div>
+        <div class="row" id="lShDRow"><span>Shelf depth</span><div class="seg" data-key="lShD"></div></div>
+        <div class="two">
+          <label class="toggle" for="lBin">Bin rail <input type="checkbox" class="switch" id="lBin" data-key="lBin"></label>
+          <label class="toggle" for="lPower" id="lPowerRow"><span id="lPowerLabel">Horizontal power rail</span> <input type="checkbox" class="switch" id="lPower" data-key="lPower"></label>
+          <label class="toggle" for="lLight" id="lLightRow">Tube light <input type="checkbox" class="switch" id="lLight" data-key="lLight"></label>
+          <label class="toggle" for="lUsl" id="lUslRow">Undershelf task light <input type="checkbox" class="switch" id="lUsl" data-key="lUsl"></label>
+        </div>
+        <div class="row" id="lUtlLRow"><span>Light length</span><div class="seg" data-key="lUtlL"></div></div>
+        <p class="hint" id="lAccHint"></p>
+      </div>
+
+      <!-- ===== Flexi system ===== -->
+      <div class="group" data-for="flexi">
+        <h2>Flexi product</h2>
+        <div class="seg" data-key="xType"></div>
+        <p class="hint" id="xTypeHint"></p>
+      </div>
+      <div class="group" data-for="flexi" data-xt="ws">
+        <h2>Layout</h2>
+        <div class="seg wrap" data-key="xLayout"></div>
+        <p class="hint" id="xLayoutHint"></p>
+        <div id="xRuns" class="xruns"></div>
+      </div>
+      <div class="group" data-for="flexi" data-xt="ws">
+        <h2>Frame <span class="unit">inch</span></h2>
+        <div class="row"><span>Columns</span><div class="seg" data-key="xCol"></div></div>
+        <div class="row" id="xCornerRow"><span>Corner</span><div class="seg" data-key="xCorner"></div></div>
+        <div class="row" id="xModRow"><span>Module</span><div class="seg" data-key="xMod"></div></div>
+        <div class="row"><span>Privacy panel</span><div class="seg" data-key="xPriv"></div></div>
+      </div>
+      <div class="group" data-for="flexi" data-xt="cart">
+        <h2>Cart <span class="unit">inch</span></h2>
+        <div class="row"><span>Width</span><div class="seg" data-key="xCartW"></div></div>
+        <div class="row"><span>Sides</span><div class="seg" data-key="xCartS"></div></div>
+      </div>
+      <div class="group" data-for="flexi" data-xt="flow">
+        <h2>Flow rack <span class="unit">inch</span></h2>
+        <div class="row"><span>Height</span><div class="seg" data-key="xFH"></div></div>
+        <div class="row"><span>Width</span><div class="seg" data-key="xFW"></div></div>
+        <div class="row"><span>Sections</span><div class="seg" data-key="xFN"></div></div>
+        <div class="row"><span>Shelves</span><div class="seg" data-key="xFS"></div></div>
+        <div class="row"><span>Extra tracks</span><div class="seg" data-key="xFTr"></div></div>
+        <div class="two"><label class="toggle" for="xFCast">Castors <input type="checkbox" class="switch" id="xFCast" data-key="xFCast"></label></div>
+      </div>
+      <div class="group" data-for="flexi" data-xt="ws flow">
+        <h2>Worksurface</h2>
+        <div class="row"><span>Top</span><div class="seg" data-key="xTop"></div></div>
+        <div class="row" id="xDRow"><span>Depth</span><div class="seg" data-key="xD"></div></div>
+        <div class="row" id="xWHRow"><span>Height</span><div class="seg" data-key="xWH"></div></div>
+        <div class="row" data-xt="ws"><span>Mat</span><div class="seg" data-key="xMat"></div></div>
+        <div class="two" data-xt="ws">
+          <label class="toggle" for="xStop">Back stop <input type="checkbox" class="switch" id="xStop" data-key="xStop"></label>
+          <label class="toggle" for="xEsd" id="xEsdRow">ESD wrist strap + ground block <input type="checkbox" class="switch" id="xEsd" data-key="xEsd"></label>
+        </div>
+      </div>
+      <div class="group" data-for="flexi" data-xt="ws cart">
+        <h2>Above worksurface</h2>
+        <div class="row"><span>Panel</span><select id="xPanel" data-key="xPanel" aria-label="Flexi panel"></select></div>
+        <div class="row" id="xPanelHRow"><span>Panel ht</span><div class="seg" data-key="xPanelH"></div></div>
+        <div class="row"><span>Shelves</span><div class="seg" data-key="xShN"></div></div>
+        <div class="row" id="xShTRow"><span>Shelf</span><div class="seg wrap" data-key="xShT"></div></div>
+        <div class="row" id="xShDRow"><span>Shelf depth</span><div class="seg" data-key="xShD"></div></div>
+        <div class="row"><span>Bin rail</span><div class="seg" data-key="xBin"></div></div>
+        <div class="row"><span>Power</span><div class="seg" data-key="xPow"></div></div>
+        <div class="row" id="xOutRow"><span>Sockets</span><div class="seg" data-key="xOut"></div></div>
+        <div class="row" data-xt="ws"><span>Light</span><div class="seg" data-key="xLight"></div></div>
+        <div class="row" data-xt="ws"><span>Task light bracket</span><div class="seg" data-key="xTlb"></div></div>
+        <div class="two">
+          <label class="toggle" for="xLip" id="xLipRow">Shelf lip <input type="checkbox" class="switch" id="xLip" data-key="xLip"></label>
+          <label class="toggle" for="xVps" data-xt="ws">Vertical power strip <input type="checkbox" class="switch" id="xVps" data-key="xVps"></label>
+          <label class="toggle" for="xOhc" data-xt="ws">Overhead cabinet <input type="checkbox" class="switch" id="xOhc" data-key="xOhc"></label>
+          <label class="toggle" for="xUb" data-xt="ws">Utility bin <input type="checkbox" class="switch" id="xUb" data-key="xUb"></label>
+          <label class="toggle" for="xData">Data beam <input type="checkbox" class="switch" id="xData" data-key="xData"></label>
+          <label class="toggle" for="xAir">Air beam <input type="checkbox" class="switch" id="xAir" data-key="xAir"></label>
+        </div>
+        <p class="hint" id="xAccHint"></p>
+      </div>
+      <div class="group" data-for="flexi" data-xt="ws">
+        <h2>Below worksurface</h2>
+        <div class="row"><span>Hanging cabinet</span><select id="xHang" data-key="xHang" aria-label="Hanging cabinet"></select></div>
+        <div class="row" id="xHangPosRow"><span>Position</span><div class="seg" data-key="xHangPos"></div></div>
+        <div class="row" id="xLockRow"><span>Lock</span><div class="seg" data-key="xLock"></div></div>
+        <div class="two">
+          <label class="toggle" for="xLap">Lap drawer <input type="checkbox" class="switch" id="xLap" data-key="xLap"></label>
+          <label class="toggle" for="xKbd">Keyboard tray <input type="checkbox" class="switch" id="xKbd" data-key="xKbd"></label>
+          <label class="toggle" for="xCpu">CPU holder <input type="checkbox" class="switch" id="xCpu" data-key="xCpu"></label>
+          <label class="toggle" for="xCt">Cable tray <input type="checkbox" class="switch" id="xCt" data-key="xCt"></label>
+        </div>
+        <p class="hint" id="xBelowHint"></p>
+      </div>
+      <div class="group" data-for="flexi" data-xt="ws cart">
+        <h2>Pivoting accessories</h2>
+        <div class="row" data-xt="ws"><span>Monitor arm</span><div class="seg" data-key="xMon"></div></div>
+        <div class="two">
+          <label class="toggle" for="xEs">Equipment shelf <input type="checkbox" class="switch" id="xEs" data-key="xEs"></label>
+          <label class="toggle" for="xAs">Accessory shelf <input type="checkbox" class="switch" id="xAs" data-key="xAs"></label>
+          <label class="toggle" for="xDh">Document holder <input type="checkbox" class="switch" id="xDh" data-key="xDh"></label>
+          <label class="toggle" for="xLdh">Large document holder <input type="checkbox" class="switch" id="xLdh" data-key="xLdh"></label>
+          <label class="toggle" for="xDam">Double articulating arm <input type="checkbox" class="switch" id="xDam" data-key="xDam"></label>
+        </div>
+      </div>
+
       <div class="group">
         <h2 id="colourTitle">Powder coat colour</h2>
         <div class="swatches" data-key="frame"></div>
@@ -446,7 +613,7 @@ fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
         <label class="qty" for="dwgBy">Prepared by <input type="text" id="dwgBy" placeholder="Name" maxlength="40"></label>
         <label class="qty" for="qty">Quantity on drawing <input type="number" id="qty" min="1" max="999" value="1" inputmode="numeric"></label>
         <button type="button" class="btn" id="quoteBtn">Get a quote for this design</button>
-         <button type="button" class="btn ghost" id="pdfBtn" disabled>Preparing downloads…</button>
+        <button type="button" class="btn ghost" id="pdfBtn" disabled>Preparing downloads…</button>
         <div class="btnrow">
           <button type="button" class="btn ghost" id="sheetBtn" disabled>Drawing (.png)</button>
           <button type="button" class="btn ghost" id="exportBtn" disabled>SketchUp (.zip)</button>
@@ -559,6 +726,31 @@ const HANG = {
   '2x2+2x5': {n:'2 × 2¾″ + 2 × 5¾″',         s:[75,75,150,150],  p:'20', pv:'4D-001', b:'20', bv:'4OD-002'}
 };
 const LINK_PANELS = {none:'No panel', PP:'Pegboard', SP:'Solid panel', M:'Markerboard', T:'Tackboard'};
+/* Link: tackboard / markerboard hang on the pegboard with hooks and slide end to end (one per pegboard) */
+const LINK_PEG_PANELS = {none:'No panel', PP:'Pegboard', SP:'Solid panel'};
+const BOARD_W = [24, 30, 36, 42, 48];
+const BOARD_DEFAULTS = {utlL:48, sUtlL:48, lUtlL:48, board:'none', bW:24, bH:18, bPos:'centre', sBoard:'none', sBW:24, sBH:18, sBPos:'centre', lBoard:'none', lBW:24, lBH:18, lBPos:'centre'};
+const BOARD_NAME = {T:'Tackboard', M:'Markerboard'};
+function fixBoard(o, kB, kW, kH, kP, w, pegH){
+  if(o[kP] === 'T' || o[kP] === 'M'){ o[kB] = o[kP]; o[kP] = 'PP'; }
+  if(!['none', 'T', 'M'].includes(o[kB])) o[kB] = 'none';
+  if(o[kP] !== 'PP') o[kB] = 'none';
+  const ws = BOARD_W.filter(v => v <= w);
+  if(!ws.length) o[kB] = 'none';
+  else if(!ws.includes(o[kW])) o[kW] = ws.filter(v => v <= o[kW]).pop() || ws[0];
+  if(![18, 30].includes(o[kH]) || o[kH] > pegH) o[kH] = 18;
+}
+/* draw a board hung on a pegboard; f = side the pegboard faces */
+function hangBoard(kind, cx, pcy, pw, ph, z, f, bW, bH, pos){
+  const bw = bW*IN;
+  if(kind === 'none' || ph < 150 || bw > pw + 30) return false;
+  const bh = Math.min(bH*IN, ph - 30);   /* drawn pegboard may be trimmed to clear shelves */
+  const bx = pos === 'left' ? cx - pw/2 + bw/2 + 15 : pos === 'right' ? cx + pw/2 - bw/2 - 15 : cx;
+  const by = pcy + ph/2 - 25 - bh/2, bz = z + f*16;
+  panel(kind, bx, by, bw, bh, bz);
+  for(const s of [-1, 1]) box('Board hook (hangs on pegboard)', 22, 46, 20, bx + s*bw*0.3, by + bh/2 + 8, z + f*8, M.steel);
+  return true;
+}
 const OHC_DOORS = {MHD:'Metal hinged doors', GHD:'Glass hinged doors', MSD:'Metal sliding doors', GSD:'Glass sliding doors', ND:'No doors'};
 const RISER = {
   base:   {box:{n:'Riser shelf, box supports'}},
@@ -576,9 +768,64 @@ const RISER_PANELS = {
 
 const ifr = v => { const w = Math.floor(v + 1e-6), f = Math.round((v - w)*8)/8; const F = {0:'', .125:'⅛', .25:'¼', .375:'⅜', .5:'½', .625:'⅝', .75:'¾', .875:'⅞'}[f]; return F === undefined ? `${v}` : `${w || (F ? '' : 0)}${F}`; };
 const OPT = {
-  product:[['ws','Workbench'],['cab','Base Cabinet'],['mob','Mobile Cabinet']],
+  board:[['none','None'],['T','Tackboard'],['M','Markerboard']],
+  bW:[[24,'24″'],[30,'30″'],[36,'36″'],[42,'42″'],[48,'48″']],
+  bH:[[18,'18″'],[30,'30″']],
+  bPos:[['left','Left'],['centre','Centre'],['right','Right']],
+  sBoard:[['none','None'],['T','Tackboard'],['M','Markerboard']],
+  sBW:[[24,'24″'],[30,'30″'],[36,'36″'],[42,'42″'],[48,'48″']],
+  sBH:[[18,'18″'],[30,'30″']],
+  sBPos:[['left','Left'],['centre','Centre'],['right','Right']],
+  lBoard:[['none','None'],['T','Tackboard'],['M','Markerboard']],
+  lBW:[[24,'24″'],[30,'30″'],[36,'36″'],[42,'42″'],[48,'48″']],
+  lBH:[[18,'18″'],[30,'30″']],
+  lBPos:[['left','Left'],['centre','Centre'],['right','Right']],
+  utlL:[[18,'18″'],[36,'36″'],[48,'48″']],
+  sUtlL:[[18,'18″'],[36,'36″'],[48,'48″']],
+  lUtlL:[[18,'18″'],[36,'36″'],[48,'48″']],
+  product:[['ws','Workbench'],['cab','Base Cabinet'],['mob','Mobile Cabinet'],['link','Link'],['flexi','Flexi']],
+  xType:[['ws','Workstation'],['cart','Universal cart'],['flow','Flow rack']],
+  xLayout:Object.entries({inline:'In-line',b2b:'Back-to-back',L:'L',C:'C (U)',T:'T',X:'X'}),
+  xCol:[[54,'54″'],[72,'72″'],[84,'84″']],
+  xCorner:[['sq','Square back'],['rbc','Round back']],
+  xMod:[[30,'30″'],[36,'36″'],[48,'48″']],
+  xPriv:[[0,'None'],[12,'12″'],[18,'18″']],
+  xCartW:[[30,'30″'],[36,'36″'],[48,'48″']],
+  xCartS:[['single','Single sided'],['double','Double sided']],
+  xFH:[[72,'72″'],[84,'84″']],
+  xFW:[[30,'30″'],[36,'36″'],[48,'48″'],[60,'60″']],
+  xFN:[[1,'1'],[2,'2'],[3,'3'],[4,'4']],
+  xFS:[[2,'2'],[3,'3']],
+  xFTr:[[0,'0'],[1,'+1'],[2,'+2'],[3,'+3']],
+  xD:[[24,'24″'],[28,'28″'],[30,'30″'],[36,'36″']],
+  xWH:[[27,'27″'],[30,'30″'],[33,'33″'],[36,'36″'],[39,'39″']],
+  xMat:[['none','None'],['RM','Rubber'],['EM','ESD']],
+  xPanelH:[[12,'12″'],[18,'18″'],[30,'30″']],
+  xShN:[[0,'None'],[1,'1'],[2,'2'],[3,'3']],
+  xShT:[['MI','Steel (micro)'],['MA','Steel (macro)'],['LASS','Light duty'],['VAS','Variable angle']],
+  xBin:[[0,'None'],[2,'2″'],[4,'4″']],
+  xPow:[['none','None'],['beam','Power beam'],['rail','HPR rail']],
+  xOut:[[4,'4'],[6,'6'],[8,'8'],[10,'10']],
+  xLight:[['none','None'],['ola','Overhead'],['fta','Tube light']],
+  xTlb:[['none','None'],['9','9″'],['15','15″']],
+  xHangPos:[['left','Left'],['right','Right'],['both','Both']],
+  xLock:[['IL','Individual lock'],['NL','No lock']],
+  xMon:[['none','None'],['single','Single'],['dual','Dual']],
+  lType:[['stand','Workstand'],['trolley','Trolley'],['flow','Flow rack']],
+  lJust:[['rear','Rear'],['centre','Centre']],
+  lN:[[1,'1'],[2,'2'],[3,'3'],[4,'4']],
+  lDep:[[28,'28″'],[34,'34″']],
+  lTopD:[[24,'24″'],[30,'30″']],
+  lWH:[[30,'30″ sitting'],[36,'36″ standing']],
+  lMat:[['none','None'],['RM','Rubber'],['EM','ESD']],
+  lFS:[[2,'2'],[3,'3']],
+  lPanelH:[[18,'18″'],[30,'30″']],
+  lShelves:[[0,'None'],[1,'1'],[2,'2'],[3,'3']],
+  lShType:[['adj','Adjustable'],['var','Variable angle']],
+  lShD:[[12,'12″'],[15,'15″']],
+  lBotD:[[12,'12″'],[15,'15″']],
   units:[['in','in'],['mm','mm']],
-  series:Object.keys(SERIES).map(k => [k, SERIES[k].n]),
+  series:Object.keys(SERIES).filter(k => k !== 'flexi').map(k => [k, SERIES[k].n]),
   mat:[['none','None'],['RM','Rubber'],['EM','ESD']],
   rowCab:[[0,'None'],[1,'1'],[2,'2'],[3,'3'],[4,'4'],[5,'5'],[6,'6'],[7,'7']],
   rowMode:[['legs','Between legs'],['carry','Cabinets carry top']],
@@ -611,8 +858,8 @@ const OPT = {
   mhandle:[['PPH','Plastic front'],['MPH','Steel side']],
   lock:[['IL','With lock'],['NL','No lock']]
 };
-const NUMERIC = new Set(['rowCab','sH','sDep','sShelves','sShD','sPanelH','W','D','hc','ext','shelfD','upH','panelH','shelves','shD','rH','rD','colH','fRaise','fPanelH','fShelves','fShD','cd','model']);
-const REFIT = new Set(['rowCab','rowMode','rowCw','sH','sDep','product','series','W','D','hc','ext','castor','hang','upH','above','colH','sides','cw','cd','model','cbase','ctop','mhandle','rH','rType','ohc','fOhc','supL','supR','pedHB']);
+const NUMERIC = new Set(['utlL','sUtlL','lUtlL','lBotD','bW','bH','sBW','sBH','lBW','lBH','xCol','xMod','xPriv','xCartW','xFH','xFW','xFN','xFS','xFTr','xD','xWH','xPanelH','xShN','xShD','xBin','xOut','lH','lW','lN','lDep','lTopD','lWH','lFS','lPanelH','lShelves','lShD','rowCab','sH','sDep','sShelves','sShD','sPanelH','W','D','hc','ext','shelfD','upH','panelH','shelves','shD','rH','rD','colH','fRaise','fPanelH','fShelves','fShD','cd','model']);
+const REFIT = new Set(['xType','xLayout','xCol','xD','xMod','xCartW','xCartS','xFH','xFW','xFN','xTop','xFCast','lType','lJust','lH','lW','lN','lDep','lTop','lTopD','lFS','rowCab','rowMode','rowCw','sH','sDep','product','series','W','D','hc','ext','castor','hang','upH','above','colH','sides','cw','cd','model','cbase','ctop','mhandle','rH','rType','ohc','fOhc','supL','supR','pedHB']);
 
 const PRESETS = [
   {p:'ws', n:'PRWB-0100', s:{series:'pro',W:72,D:30,hc:34,top:'PLW',supL:'leg',supR:'leg',legStyle:'open',foot:true,above:'none',stops:'none'}},
@@ -626,8 +873,6 @@ const PRESETS = [
   {p:'ws', n:'Cabinet bench ×4', s:{series:'base',W:96,D:30,hc:36,top:'GW',rowCab:4,rowMode:'carry',rowCw:'28',rowVar:'7D-001',above:'riser',rType:'box',rH:19,rD:14,rPower:true,rLight:true}},
   {p:'ws', n:'Worktable 3 × 22″', s:{series:'base',W:72,D:30,hc:30,ext:4,top:'GW',rowCab:3,rowMode:'carry',rowCw:'22',rowHB:'600-102',rowVar:'3D-001',rowVars:['3D-001','1D1S-001','6D-001'],rowCws:['22','22','22'],above:'link',upH:48,panel:'PP',panelH:30,shelves:0,shD:12,rail:true,toolrail:false,light:false,ohc:false}},
   {p:'ws', n:'BWB mobile', s:{series:'base',W:60,D:30,hc:30,top:'PLW',castor:'std',shelf:true,shelfD:12,foot:true,above:'riser',rType:'box',rH:19,rD:14,rPower:true,rLight:true,mat:'RM'}},
-  {p:'ws', n:'FWS-1000', s:{series:'flexi',W:72,D:30,hc:36,top:'PLW',colH:72,sides:'single',fPanel:'PP',fPanelH:18,fShelves:1,fShD:12,beam:true,bins:true,fLight:true,fOhc:false,fStop:true,hang:'right',hangType:'2x2+5'}},
-  {p:'ws', n:'FWS-1300', s:{series:'flexi',W:60,D:30,hc:36,top:'PLW',colH:72,sides:'double',fPanel:'PP',fPanelH:18,fShelves:1,fShD:12,beam:true,bins:false,fLight:true,fOhc:false,fStop:false}},
   {p:'cab', n:'BC 10D-001', s:{cw:'34',cd:29,model:1200,cvar:'10D-001',cbase:'FLB',ctop:'none'}},
   {p:'cab', n:'BC 7D-001', s:{cw:'34',cd:29,model:750,cvar:'7D-001',cbase:'NB',ctop:'PLW'}},
   {p:'cab', n:'BC 4D-002', s:{cw:'28',cd:29,model:600,cvar:'4D-002',cbase:'4FB',ctop:'RT'}},
@@ -636,6 +881,18 @@ const PRESETS = [
   {p:'mob', n:'MC-5D (36″)', s:{cw:'28',cd:23,model:600,cvar:'5D-001',ctop:'PLW',mhandle:'MPH'}},
   {p:'mob', n:'MC-4D (36″)', s:{cw:'22',cd:23,model:600,cvar:'4D-001',ctop:'RT',mhandle:'PPH'}},
   {p:'mob', n:'MC-7D (42″)', s:{cw:'28',cd:29,model:750,cvar:'7D-001',ctop:'PLW',mhandle:'MPH'}},
+  {p:'flexi', n:'In-line workstation', s:{xType:'ws',xLayout:'inline',xRuns:[[48,48]],xCol:72,xD:30,xTop:'PLW',xWH:30,xPanel:'PP',xPanelH:18,xShN:1,xShT:'MI',xShD:12,xPow:'beam',xLight:'fta',xStop:true,xHang:'1',xHangPos:'right'}},
+  {p:'flexi', n:'Back-to-back', s:{xType:'ws',xLayout:'b2b',xRuns:[[60,60]],xCol:72,xD:30,xTop:'PELW',xWH:36,xPanel:'PP',xPanelH:18,xShN:1,xShT:'MI',xShD:12,xPow:'beam',xBin:2,xMat:'EM',xPriv:18}},
+  {p:'flexi', n:'L corner', s:{xType:'ws',xLayout:'L',xRuns:[[48],[48]],xCol:72,xD:30,xTop:'PLW',xWH:30,xCorner:'sq',xMod:36,xPanel:'PP',xPanelH:18,xShN:1,xShT:'MI',xShD:12,xPow:'beam'}},
+  {p:'flexi', n:'C (U) cell', s:{xType:'ws',xLayout:'C',xRuns:[[48],[48,48],[48]],xCol:72,xD:30,xTop:'PLW',xWH:36,xCorner:'sq',xMod:36,xPanel:'SP',xPanelH:18,xShN:1,xShT:'MI',xShD:12,xPow:'beam',xBin:2}},
+  {p:'flexi', n:'Universal cart', s:{xType:'cart',xCartW:36,xCartS:'single',xPanel:'PP',xPanelH:18,xShN:2,xShT:'MI',xShD:12,xPow:'none',xBin:2}},
+  {p:'flexi', n:'Flow rack', s:{xType:'flow',xFH:72,xFW:48,xFN:2,xFS:3,xTop:'none'}},
+  {p:'link', n:'Workstand + worksurface', s:{lType:'stand',lJust:'rear',lH:72,lW:42,lN:1,lDep:28,lTop:'PLW',lWH:30,lStop:true,lPanel:'PP',lPanelH:18,lShelves:1,lShType:'adj',lShD:12}},
+  {p:'link', n:'Workstand centre', s:{lType:'stand',lJust:'centre',lH:72,lW:48,lN:2,lDep:28,lTop:'none',lPanel:'PP',lPanelH:30,lShelves:2,lShD:12}},
+  {p:'link', n:'Trolley rear', s:{lType:'trolley',lJust:'rear',lH:60,lW:36,lDep:28,lTop:'none',lPanel:'none',lShelves:3,lShType:'var'}},
+  {p:'link', n:'Trolley centre', s:{lType:'trolley',lJust:'centre',lH:60,lW:36,lDep:28,lTop:'none',lPanel:'PP',lPanelH:18,lShelves:1,lShD:12}},
+  {p:'link', n:'Flow rack 3 shelves', s:{lType:'flow',lW:48,lN:2,lFS:3,lTop:'none'}},
+  {p:'link', n:'Flow rack + worksurface', s:{lType:'flow',lW:48,lN:1,lFS:2,lTop:'PLW',lTopD:30,lWH:36}},
   {p:'mob', n:'MC-9D (48″)', s:{cw:'34',cd:29,model:900,cvar:'9D-001',ctop:'SSW',mhandle:'MPH'}}
 ];
 const WS_DEFAULTS = {
@@ -659,7 +916,7 @@ const unitWord = () => S.units === 'in' ? 'in' : 'mm';
 const usableIn = h => Math.round((h - 20)/IN);
 const stackSum = () => S.stack.reduce((a, it) => a + it.h, 0);
 const isCabinet = () => S.product === 'cab' || S.product === 'mob';
-const Wmm = () => S.W*IN, Dmm = () => S.D*IN;
+const Wmm = () => (S.product === 'link' || S.product === 'flexi') && geo.W ? geo.W : S.W*IN, Dmm = () => (S.product === 'link' || S.product === 'flexi') && geo.D ? geo.D : S.D*IN;
 const col = () => S.frame;
 
 
@@ -854,7 +1111,7 @@ function rebuild(){
   build = new THREE.Group(); scene.add(build);
   geo = {};
   setMaterials();
-  if(isCabinet()) buildCabinetProduct(); else buildWorkstation();
+  if(isCabinet()) buildCabinetProduct(); else if(isLink()) buildLinkProduct(); else if(isFlexi()) buildFlexiProduct(); else buildWorkstation();
   buildDims();
   updateText();
 }
@@ -1209,14 +1466,18 @@ function linkSections(){
   return {n:1, sec:list.filter(v => v <= target).pop() || 24};
 }
 const LINK_W = [24, 30, 36, 42, 48, 60];
-const LINK_GLOBAL = ['panel','panelH','shelves','shD','rail','light','usl','ohc','ohcDoor'];
+const LINK_GLOBAL = ['utlL','board','bW','bH','bPos','panel','panelH','shelves','shD','rail','light','usl','ohc','ohcDoor'];
 /* Undershelf task light: LED bar under the lowest shelf, at the front edge, lighting the worktop. 48″ bar where the shelf takes it, else 24″. */
+/* Link undershelf task light L-UTL: 18″, 36″ or 48″, the longest that fits the section */
+const utlLen = wIn => [18, 36, 48].filter(v => v <= wIn).pop() || 18;
+/* chosen length, or the longest that fits if the choice is longer than the section */
+const utlPick = (sel, wIn) => sel && sel <= wIn ? sel : utlLen(wIn);
 const uslLen = wIn => wIn - 6 >= 48 ? 48 : 24;
 function uslBar(len, cx, y, z){
   box(`LED light ${len}″`, len*IN, 25, 50, cx, y, z, mat('#cfd2d5', {metalness:.5, roughness:.35}));
   box('LED lens', len*IN - 20, 2, 36, cx, y - 13, z, mat('#ffffff', {emissive:'#f4f8ff', emissiveIntensity:.95}));
 }
-const secDefaults = w => ({w, panel:S.panel, panelH:S.panelH, shelves:S.shelves, shD:S.shD, rail:S.rail, light:S.light, usl:S.usl, ohc:S.ohc, ohcDoor:S.ohcDoor});
+const secDefaults = w => ({w, utlL:S.utlL, panel:S.panel, panelH:S.panelH, board:S.board, bW:S.bW, bH:S.bH, bPos:S.bPos, shelves:S.shelves, shD:S.shD, rail:S.rail, light:S.light, usl:S.usl, ohc:S.ohc, ohcDoor:S.ohcDoor});
 const linkSecs = () => S.linkSecs.length ? S.linkSecs : (() => { const {n, sec} = linkSections(); return Array.from({length:n}, () => secDefaults(sec)); })();
 const linkSpan = () => linkSecs().reduce((a, x) => a + x.w, 0);
 function buildLink(H, D){
@@ -1240,7 +1501,7 @@ function buildLink(H, D){
     const firstY = useOhc ? top - 16*IN - 120 : top - 150, ys = [];
     for(let k = 0; k < nSh; k++){ const y = firstY - k*330; if(y > H + 300) ys.push(y); }
     geo.linkShelfCounts[i] = ys.length;
-    if(x.usl && ys.length) uslBar(uslLen(x.w), cx, Math.min(...ys) - 23, sz + sd/2 - 50);
+    if(x.usl && ys.length) uslBar(utlPick(x.utlL, x.w), cx, Math.min(...ys) - 23, sz + sd/2 - 50);
     ys.forEach(y => {
       lowestShelf = Math.min(lowestShelf, y);
       box(`Adjustable shelf ${x.w}″ x ${x.shD}″`, w, 20, sd, cx, y, sz, M.frame);
@@ -1272,7 +1533,8 @@ function buildLink(H, D){
       const lowShelf = ys.length ? Math.min(...ys) : (useOhc ? top - 20 - 16*IN : top - 30);
       const pBot = H + (x.rail ? 190 : 110);
       const ph = Math.min((S.upH < 48 ? 18 : x.panelH)*IN, lowShelf - 60 - pBot);
-      if(ph > 120) panel(x.panel, cx, pBot + ph/2, w - 6, ph, uz + 26);
+      x._board = false;
+      if(ph > 120){ panel(x.panel, cx, pBot + ph/2, w - 6, ph, uz + 26); if(x.panel === 'PP') x._board = hangBoard(x.board, cx, pBot + ph/2, w - 6, ph, uz + 26, 1, x.bW, x.bH, x.bPos); }
     }
     if(x.light){
       const bd = Math.min(D - 120, (D <= 30*IN ? 19 : 26)*IN), by = top - 10;
@@ -1311,7 +1573,7 @@ function buildStand(H, D){
   const sd = S.sShD*IN, ys = [];
   for(let k = 0; k < S.sShelves; k++){ const y = top - 140 - k*360; if(y > H + 280) ys.push(y); }
   geo.standShelves = ys.length;
-  if(S.sUsl && ys.length) secs.forEach(([a, b]) => { for(const f of [1, -1]) uslBar(uslLen(sec), (a + b)/2, Math.min(...ys) - 23, f*(25 + S.sShD*IN - 50)); });
+  if(S.sUsl && ys.length) secs.forEach(([a, b]) => { for(const f of [1, -1]) uslBar(utlPick(S.sUtlL, sec), (a + b)/2, Math.min(...ys) - 23, f*(25 + S.sShD*IN - 50)); });
   secs.forEach(([a, b]) => {
     const w = b - a, cx = (a + b)/2;
     for(const f of [1, -1]){
@@ -1330,7 +1592,7 @@ function buildStand(H, D){
     if(S.sPanel !== 'none'){
       const pBot = H + 60, lim = (ys.length ? Math.min(...ys) - 120 : top - 60);
       const ph = Math.min(S.sPanelH*IN, lim - pBot);
-      if(ph > 120) panel(S.sPanel, cx, pBot + ph/2, w - 6, ph, 0);
+      if(ph > 120){ panel(S.sPanel, cx, pBot + ph/2, w - 6, ph, 0); if(S.sPanel === 'PP' && hangBoard(S.sBoard, cx, pBot + ph/2, w - 6, ph, 0, 1, S.sBW, S.sBH, S.sBPos)) geo.sBoards = (geo.sBoards || 0) + 1; }
     }
   });
   if(S.sPower){
@@ -1489,6 +1751,1112 @@ function buildFlexi(topM, t, H){
    Base Cabinet and Mobile Cabinet
    ===================================================================== */
 const mobBaseH = () => S.cw === '17' && S.cd === 29 ? 120 : 206;
+/* =====================================================================
+   Link system: standalone Workstand, mobile Trolley and Flow rack
+   (Uprighter stays under "Above worktop" on Base / Pro / Scitec benches)
+   Frames: heavy gauge steel uprights 1 3/16" x 1 9/16", notched front and back at 1".
+   ===================================================================== */
+const LINK_DEFAULTS = {
+  lType:'stand', lJust:'rear', lH:60, lW:42, lN:1, lDep:28,
+  lTop:'PLW', lTopD:30, lWH:30, lMat:'none', lStop:true, lEsd:false, lBot:false, lBotD:12,
+  lFS:3, lPanel:'PP', lPanelH:30, lShelves:1, lShType:'adj', lShD:12,
+  lBin:false, lPower:false, lLight:false, lUsl:false
+};
+const LINK_TYPES = {stand:'Link Workstand', trolley:'Link Trolley', flow:'Link Flow Rack'};
+const LINK_H = {stand:[48, 60, 72, 84], trolley:[48, 60]};
+const LINK_WS = [24, 30, 36, 42, 48, 60], FLOW_WS = [30, 36, 42, 48, 60];
+/* Catalogue tracks + guides per roller shelf, by number of shelves and width */
+const FLOW_TRACKS = {2:{30:[4, 1], 36:[4, 1], 42:[6, 2], 48:[6, 2], 60:[8, 3]}, 3:{30:[4, 1], 36:[6, 1], 42:[6, 2], 48:[9, 2], 60:[12, 3]}};
+const FLOW_H = 87, FLOW_D = 48;          /* frame height from the LFRS-87 code; depth matches 48" tracks. Both to confirm. */
+const LINK_CASTOR = 6;                   /* 5" castors add 6" to trolley height */
+const RM_DEPTHS = [14, 19, 20, 25, 31, 36], EM_DEPTHS = [12, 15, 18, 24, 30, 36], MAT_LENS = [48, 60, 72, 84, 90, 96];
+const isLink = () => S.product === 'link';
+const lMobile = () => S.lType === 'trolley';
+const lCentre = () => S.lType !== 'flow' && S.lJust === 'centre';
+const lSecs = () => S.lType === 'trolley' ? 1 : S.lN;
+const lSides = () => lCentre() ? [1, -1] : [1];
+const lWsDepth = () => S.lType === 'flow' ? S.lTopD : (S.lDep === 34 ? 30 : 24);
+function lWsOK(){
+  if(S.lType === 'trolley') return false;
+  if(S.lType === 'stand') return S.lJust === 'rear' && !(S.lW === 24 && lWsDepth() === 30);
+  return true;
+}
+const lBotOn = () => S.lType === 'stand' && S.lBot && lHasTop();
+const lHasTop = () => S.lTop !== 'none' && lWsOK();
+const lTopCode = () => S.lType === 'flow' ? 'PLW' : S.lTop;
+/* Mats cover the whole worksurface run: fewest mats of one catalogue length that fit */
+function lMatPlan(){
+  if(S.lType !== 'stand' || !lHasTop() || S.lMat === 'none') return null;
+  const total = S.lW*lSecs(), k = Math.ceil(total/96), per = total/k;
+  const len = MAT_LENS.filter(v => v <= per + 0.01).pop();
+  const wd = lWsDepth(), dep = (S.lMat === 'EM' ? EM_DEPTHS : RM_DEPTHS).filter(v => v <= wd).pop();
+  if(!len || !dep) return null;
+  return {code:S.lMat === 'EM' ? `EM-2-${len}${dep}` : `RM-6-${len}${dep}`, len, dep, k};
+}
+function lPanelOptions(){ return Object.entries(LINK_PEG_PANELS); }
+
+function normLink(key){
+  if(!LINK_TYPES[S.lType]) S.lType = 'stand';
+  if(S.lType === 'flow'){
+    S.lW = nearest(S.lW, FLOW_WS);
+    if(![2, 3].includes(S.lFS)) S.lFS = 3;
+    if(!['none', 'PLW'].includes(S.lTop)) S.lTop = 'PLW';
+    if(![24, 30].includes(S.lTopD)) S.lTopD = 30;
+  } else {
+    S.lW = nearest(S.lW, LINK_WS);
+    S.lH = nearest(S.lH, LINK_H[S.lType]);
+    if(![28, 34].includes(S.lDep)) S.lDep = 28;
+    if(!['rear', 'centre'].includes(S.lJust)) S.lJust = 'rear';
+    if(!['none', 'PLW', 'PELW'].includes(S.lTop)) S.lTop = 'PLW';
+    fixBoard(S, 'lBoard', 'lBW', 'lBH', 'lPanel', S.lW, S.lPanelH);
+    if(S.lPanel !== 'none' && !lPanelOptions().some(([k]) => k === S.lPanel)) S.lPanel = 'PP';
+    if(S.lShType === 'var') S.lShD = 18; else if(![12, 15].includes(S.lShD)) S.lShD = 12;
+  }
+  S.lN = Math.max(1, Math.min(4, S.lN));
+  if(S.lType === 'trolley'){ S.lN = 1; S.lPower = false; S.lLight = false; S.lUsl = false; }
+  if(![30, 36].includes(S.lWH)) S.lWH = 30;
+  if(!lHasTop()){ S.lMat = 'none'; S.lLight = false; }
+  if(!lMatPlan()) S.lMat = 'none';
+  if(!(lHasTop() && (S.lTop === 'PELW' || S.lMat === 'EM'))) S.lEsd = false;
+}
+
+function buildLinkProduct(){
+  if(S.lType === 'flow') return buildFlowRack();
+  const mobile = lMobile(), centre = lCentre();
+  const lift = mobile ? LINK_CASTOR*IN : 0;
+  const n = lSecs(), sec = S.lW*IN, span = n*sec;
+  const top = lift + (S.lH + 4.75)*IN;
+  const fl = S.lDep*IN, zU = centre ? 0 : -fl/2 + 75;
+  const xs = [...Array(n + 1).keys()].map(i => -span/2 + i*sec);
+  const kind = mobile ? 'trolley' : 'stand';
+  const footY = lift + (mobile ? 20 : 25);
+  xs.forEach(x => {
+    const y0 = footY + 20, h = top - 6 - y0;
+    box(`Link ${kind} upright`, 30, h, 40, x, y0 + h/2, zU, M.frame);
+    for(const f of [1, -1]) box('Upright notch row', 6, h - 80, 2, x, y0 + h/2, zU + f*21, M.dark);
+    box(`Link ${kind} foot`, 50, 40, fl, x, footY, 0, M.frame);
+    box('Top cap', 34, 6, 44, x, top - 3, zU, M.dark);
+    for(const z of [-fl/2 + 45, fl/2 - 45]){
+      if(mobile){
+        box('Castor mount', 60, 8, 60, x, lift - 4, z, M.steel);
+        const r = 63.5, fh = lift - 8 - r;
+        box('Castor fork', 34, fh, 26, x, r + fh/2, z, M.steel);
+        cyl('Castor 5″', r, 30, x, r, z, M.glide, 'x');
+      } else cyl('Leveling glide', 16, 12, x, 6, z, M.glide);
+    }
+  });
+  box('Horizontal rail (top)', span, 40, 25, 0, top - 40, zU, M.frame);
+  box('Horizontal rail (lower)', span, 40, 25, 0, lift + 230, zU, M.frame);
+  const secs = [];
+  for(let i = 0; i < n; i++) secs.push([xs[i] + 15, xs[i + 1] - 15]);
+  const sides = lSides();
+  const ws = lHasTop(), wd = lWsDepth()*IN, wy = S.lWH*IN;
+  /* Bottom shelf below the worksurface (rear-justified workstand) */
+  if(ws && S.lBot && S.lType === 'stand'){
+    const bd = S.lBotD*IN, by = lift + 300;
+    secs.forEach(([a, b]) => {
+      const w = b - a, cx = (a + b)/2;
+      box(`Adjustable bottom shelf ${S.lW}″ x ${S.lBotD}″`, w, 20, bd, cx, by, zU + 20 + bd/2, M.frame);
+      box('Shelf lip', w, 30, 10, cx, by + 15, zU + 20 + bd - 5, M.frame);
+      for(const s of [-1, 1]) box('Shelf bracket', 10, 90, bd - 30, cx + s*(w/2 - 6), by - 50, zU + 20 + (bd - 30)/2, M.dark);
+    });
+  }
+  /* Worksurface (rear-justified stands only) */
+  if(ws){
+    const tm = mat(TOPS[S.lTop].c, {roughness:.55});
+    secs.forEach(([a, b], i) => {
+      const cx = (xs[i] + xs[i + 1])/2, w = sec - 4;
+      topSlab(`Link worksurface ${S.lTop} ${S.lW}x${lWsDepth()}`, w, 25, wd, cx, wy, zU + 20 + wd/2, tm, 'PLW', 1);
+      for(const s of [-1, 1]){
+        const bx = cx + s*(sec/2 - 28);
+        box('Worksurface bracket', 12, 60, wd - 60, bx, wy - 25 - 30, zU + 20 + (wd - 60)/2, M.frame);
+        box('Worksurface bracket', 12, 200, 50, bx, wy - 25 - 100, zU + 45, M.frame);
+      }
+      if(S.lStop) box('Worksurface back stop', w, 40, 4, cx, wy + 20, zU + 24, M.frame);
+    });
+    const mp = lMatPlan();
+    if(mp){
+      const ml = mp.len*IN, md = mp.dep*IN, th = S.lMat === 'EM' ? 2 : 6;
+      for(let k = 0; k < mp.k; k++){
+        const cx = -span/2 + (k + 0.5)*span/mp.k;
+        box(S.lMat === 'EM' ? 'ESD mat 2 mm' : 'Rubber mat 6 mm', Math.min(ml, span/mp.k - 10), th, md, cx, wy + th/2, zU + 20 + wd - 15 - md/2, mat(S.lMat === 'EM' ? '#3f6f86' : '#2b2e31', {roughness:.95}));
+      }
+    }
+  }
+  /* Accessory stack. With a worksurface: shelves from the top, panel fills the space below them down to the
+     worksurface (as on the Uprighter). Without one: panel at the top, then bin rail, then shelves below. */
+  const yTop = top - 70;
+  const floorMin = lift + 300;
+  const pwr = S.lPower && !centre && !mobile;
+  const binWs = S.lBin && ws;
+  const spread = (zoneTop, lo, n, maxGap) => {
+    let gap = 0;
+    if(n > 1){
+      gap = Math.min(maxGap, (zoneTop - lo)/(n - 1));
+      if(gap < 230){ n = Math.max(1, Math.floor((zoneTop - lo)/230) + 1); gap = n > 1 ? Math.min(maxGap, (zoneTop - lo)/(n - 1)) : 0; }
+    }
+    const out = [];
+    for(let k = 0; k < n; k++){ const y = zoneTop - k*gap; if(y >= lo - 1) out.push(y); }
+    return out;
+  };
+  let ys = [], panelTop = null, ph = 0, binY = null;
+  if(ws){
+    const panelLow = wy + (binWs ? 440 : pwr ? 200 : 60);
+    if(binWs) binY = wy + 320;
+    const shelfMin = S.lPanel !== 'none' ? panelLow + 18*IN + 110 : wy + (binWs ? 560 : 300);
+    ys = spread(yTop - 60, shelfMin, S.lShelves, 330);
+    if(S.lShelves && !ys.length) ys = spread(yTop - 60, wy + (binWs ? 560 : 300), S.lShelves, 330);
+    if(S.lPanel !== 'none'){
+      const pt = ys.length ? Math.min(...ys) - 110 : yTop - 20;
+      ph = Math.min(S.lPanelH*IN, pt - panelLow);
+      if(ph > 120) panelTop = pt; else ph = 0;
+    }
+  } else {
+    let cur = yTop - 20;
+    if(S.lPanel !== 'none'){
+      ph = Math.min(S.lPanelH*IN, cur - floorMin);
+      if(ph > 120){ panelTop = cur; cur -= ph + 50; } else ph = 0;
+    }
+    if(S.lBin){ binY = cur - 70; cur = binY - 110; }
+    const zoneTop = panelTop !== null || binY !== null ? cur - 40 : yTop - 60;
+    ys = spread(zoneTop, floorMin, S.lShelves, S.lShType === 'var' ? 420 : 380);
+  }
+  geo.lShelfN = ys.length; geo.lPanelH = ph;
+  const sd = S.lShD*IN;
+  secs.forEach(([a, b], i) => {
+    const w = b - a, cx = (a + b)/2;
+    sides.forEach(f => {
+      const z0 = zU + f*20;
+      if(ph){ panel(S.lPanel, cx, panelTop - ph/2, w - 6, ph, zU + f*26); if(S.lPanel === 'PP' && hangBoard(S.lBoard, cx, panelTop - ph/2, w - 6, ph, zU + f*26, f, S.lBW, S.lBH, S.lBPos)) geo.lBoards = (geo.lBoards || 0) + 1; }
+      ys.forEach(y => {
+        if(S.lShType === 'var'){
+          const m = box(`Variable angle shelf ${S.lW}″ x 18″`, w, 18, sd, cx, y, z0 + f*sd/2, M.frame);
+          m.rotation.x = f*0.24;
+          const lipZ = z0 + f*(sd - 6)*Math.cos(0.24), lipY = y - (sd/2)*Math.sin(0.24) + 18;
+          box('Shelf front lip', w, 40, 8, cx, lipY, lipZ, M.frame);
+        } else {
+          box(`Adjustable shelf ${S.lW}″ x ${S.lShD}″`, w, 20, sd, cx, y, z0 + f*sd/2, M.frame);
+          box('Shelf lip', w, 30, 10, cx, y + 15, z0 + f*(sd - 5), M.frame);
+        }
+        for(const s of [-1, 1]) box('Shelf bracket', 10, 90, sd - 30, cx + s*(w/2 - 6), y - 50, z0 + f*(sd/2 - 15), M.dark);
+      });
+      if(S.lUsl && ys.length && S.lShType === 'adj') uslBar(utlPick(S.lUtlL, S.lW), cx, Math.min(...ys) - 23, z0 + f*(sd - 50));
+      if(binY !== null){
+        box('Bin rail', w - 10, 40, 14, cx, binY, z0 + f*10, M.frame);
+        const nb = Math.floor((w - 40)/125);
+        for(let j = 0; j < nb; j++) box('Parts bin (not supplied)', 105, 75, 140, a + 92 + j*125, binY - 20, z0 + f*84, mat('#2c62b6', {roughness:.6}));
+      }
+      if(pwr){
+        const ry = ws ? wy + 110 : lift + 30*IN, rz = z0 + 25;
+        box(`Horizontal power rail ${S.lW}″`, w - 10, 60, 50, cx, ry, rz, mat('#e6e8ea', {roughness:.45}));
+        const k = Math.max(2, Math.floor((w - 120)/280)), step = (w - 160)/(k - 1);
+        for(let j = 0; j < k; j++){
+          const px = cx - (w - 160)/2 + j*step;
+          box('Socket', 62, 48, 4, px, ry, rz + 27, M.white);
+          box('Socket switch', 12, 20, 6, px + 44, ry, rz + 27, M.red);
+        }
+      }
+      if(S.lLight && ws){
+        const bd = (wd <= 24*IN + 1 ? 19 : 26)*IN, by = top - 60;
+        for(const s of [-1, 1]) box('Light bracket', 20, 30, bd, cx + s*(w/2 - 30), by, zU + bd/2, M.frame);
+        box(`Link tube light ${S.lW}″`, w - 120, 50, 140, cx, by - 40, zU + bd - 100, mat('#d8dadc', {roughness:.4, metalness:.3}));
+        box('Light diffuser', w - 140, 3, 120, cx, by - 66, zU + bd - 100, mat('#ffffff', {emissive:'#fff4d8', emissiveIntensity:.95}));
+      }
+    });
+  });
+  if(S.lPower && centre && !mobile){
+    const x = xs[0] + 15 + 40;
+    for(const f of [1, -1]){
+      box('Vertical power strip', 60, 420, 40, x, lift + 1100, f*40, mat('#1d1f22', {roughness:.5}));
+      for(let i = 0; i < 4; i++) box('Socket', 44, 44, 4, x, lift + 950 + i*100, f*62, M.white);
+      box('Strip switch', 18, 24, 6, x, lift + 1280, f*62, M.red);
+    }
+  }
+  if(mobile){
+    const hx = xs[n] + 15, hy = lift + 1000;
+    for(const s of [-1, 1]) box('Handle bracket', 60, 30, 30, hx + 30, hy + s*140, zU, M.steel);
+    cyl('Trolley side handle', 13, 330, hx + 65, hy, zU, M.steel);
+  }
+  logoPlate(110, 0, top - 40, zU + 13.1, 0);
+  geo = Object.assign(geo, {W:span + 30, D:fl, H:ws ? wy : null, overall:top});
+}
+
+function buildFlowRack(){
+  const n = S.lN, sec = S.lW*IN, span = n*sec, D = FLOW_D*IN, ws = lHasTop();
+  const lift = ws ? 3*IN : 0, Hf = FLOW_H*IN, top = lift + Hf;
+  const xs = [...Array(n + 1).keys()].map(i => -span/2 + i*sec);
+  const zF = D/2 - 20, zB = -D/2 + 20;
+  const wd = S.lTopD*IN, wy = S.lWH*IN;
+  xs.forEach((x, i) => {
+    for(const z of [zF, zB]){
+      const h = Hf - 10;
+      box(i === 0 ? 'Flow rack upright (starter)' : 'Flow rack upright', 30, h, 40, x, lift + h/2, z, M.frame);
+      box('Upright notch row', 6, h - 80, 2, x, lift + h/2, z + 21, M.dark);
+      if(!ws) cyl('Leveling glide', 16, 12, x, 6, z, M.glide);
+    }
+    for(const y of [lift + 60, top - 30]) box('Flow rack rail', 25, 40, D - 40, x, y, 0, M.frame);
+    if(ws){
+      const fl = D + wd + 20, fz = (20 + wd)/2;
+      box('Worksurface foot', 50, lift, fl, x, lift/2, fz, M.frame);
+      for(const z of [fz - fl/2 + 30, fz + fl/2 - 30]) cyl('Leveling glide', 16, 12, x, 6, z, M.glide);
+    }
+  });
+  for(const z of [zF, zB]) for(const y of [lift + 60, top - 30]) box('Flow rack rail', span, 40, 25, 0, y, z, M.frame);
+  const fs = S.lFS, [T, G] = FLOW_TRACKS[fs][S.lW];
+  const backs = ws ? (fs === 3 ? [1900, 1550, 1200] : [1850, 1350]) : (fs === 3 ? [1650, 1200, 750] : [1500, 900]);
+  const drop = 130, L = D - 60, ang = Math.atan2(drop, L);
+  for(let i = 0; i < n; i++){
+    const a = xs[i] + 15, b = xs[i + 1] - 15, w = b - a, cx = (a + b)/2;
+    backs.forEach(yb0 => {
+      const yb = lift + yb0, yf = yb - drop, ym = (yb + yf)/2;
+      box(`Roller shelf frame ${S.lW}″`, w, 40, 25, cx, yb, -L/2, M.frame);
+      box('Roller shelf frame front', w, 60, 25, cx, yf + 10, L/2, M.frame);
+      for(const s of [-1, 1]){ const m = box('Roller shelf side', 25, 40, L, cx + s*(w/2 - 12), ym, 0, M.frame); m.rotation.x = ang; }
+      const usable = w - 80, step = usable/T;
+      for(let t = 0; t < T; t++){
+        const tx = a + 40 + step*(t + 0.5);
+        const m = box('Roller track', 25, 22, L - 20, tx, ym + 12, 0, M.alu); m.rotation.x = ang;
+        const rollers = 5;
+        for(let r = 0; r < rollers; r++){
+          const zz = -L/2 + 80 + r*(L - 160)/(rollers - 1), yy = ym + 24 - Math.tan(ang)*zz;
+          cyl('Roller', 9, 22, tx, yy, zz, M.steel, 'x');
+        }
+      }
+      for(let g = 0; g < G; g++){
+        const gx = a + 40 + usable*(g + 1)/(G + 1);
+        const m = box('Roller guide', 4, 60, L - 40, gx, ym + 45, 0, M.dark); m.rotation.x = ang;
+      }
+    });
+    if(ws){
+      const tm = mat(TOPS.PLW.c, {roughness:.55});
+      topSlab(`Link worksurface PLW ${S.lW}x${S.lTopD}`, sec - 4, 25, wd, (xs[i] + xs[i + 1])/2, wy, D/2 + 20 + wd/2, tm, 'PLW', 1);
+      for(const s of [-1, 1]) box('Worksurface bracket', 12, 70, wd - 40, (xs[i] + xs[i + 1])/2 + s*(sec/2 - 28), wy - 25 - 35, D/2 + 20 + (wd - 40)/2, M.frame);
+      box('Worksurface rail', sec, 40, 25, (xs[i] + xs[i + 1])/2, lift + 300, D/2 + 20 + wd - 60, M.frame);
+    }
+  }
+  logoPlate(140, 0, top - 30, zF + 13.1, 0);
+  geo = Object.assign(geo, {W:span + 30, D:D + (ws ? wd + 20 : 0), H:ws ? wy : null, overall:top});
+}
+
+/* Parts list rows for the Link product (add = bomRows' row adder) */
+function linkBom(add){
+  const ins = (a, b) => fmtSize(a*IN, b*IN);
+  const W = S.lW, n = lSecs(), sides = lSides().length;
+  if(S.lType === 'flow'){
+    const fs = S.lFS, [T, G] = FLOW_TRACKS[fs][W];
+    add(`LFRS-87${W}-${fs}`, `Link flow rack starter set, ${fs} roller shelves (4 uprights, 8 rails, 4 glides, 1,800 lb)`, ins(W, FLOW_H));
+    add('', `↳ Roller shelf LFR-RS-${W}, 600 lb`, ins(W, FLOW_D), fs);
+    add('', '↳ Roller track LFR-S-TRACK48', '48″', T*fs);
+    add('', '↳ Roller guide LFRS-S-GUIDE48', '48″', G*fs);
+    if(n > 1){
+      add(`LFRA-87${W}-${fs}`, `Link flow rack adder set, ${fs} roller shelves (2 uprights, 6 rails)`, ins(W, FLOW_H), n - 1);
+      add('', `↳ Roller shelf LFR-RS-${W}`, ins(W, FLOW_D), fs*(n - 1));
+      add('', '↳ Roller track LFR-S-TRACK48', '48″', T*fs*(n - 1));
+      add('', '↳ Roller guide LFRS-S-GUIDE48', '48″', G*fs*(n - 1));
+    }
+    if(lHasTop()){
+      const d = S.lTopD;
+      add(`PLW-${W}${d}`, `Postform laminate worksurface, 1″ thick`, ins(W, d), n);
+      add(`PLFRWBFK-S-${W}${d}`, 'Worksurface bracket / foot kit, starter (2 brackets, 2 feet, 1 rail; adds 3″ height)', '—', 1);
+      if(n > 1) add(`PLFRWBFK-A-${W}${d}`, 'Worksurface bracket / foot kit, adder (2 brackets, 1 foot, 1 rail)', '—', n - 1);
+    }
+    return;
+  }
+  const J = S.lJust === 'rear' ? 'R' : 'C', jw = S.lJust === 'rear' ? 'rear-justified' : 'centre-justified';
+  if(S.lType === 'trolley'){
+    add(`LMT${J}-${S.lH}${W}${S.lDep}`, `Link mobile trolley frame, ${jw}, ${S.lH}″ high, ${S.lDep}″ deep`, ins(W, S.lH + 4.75 + LINK_CASTOR));
+    add('', '↳ 5″ castors: 2 × LFR-CASTS-1S swivel + 2 × LFR-CASTS-1SL swivel with lock', '+6″ height', 1);
+    add('', '↳ Side handle LFR-SH', '—', 1);
+  } else {
+    add(`LWS${J}-${S.lH}${W}-${S.lDep}`, `Link workstand starter set, ${jw}, ${S.lH}″ high (${ifr(S.lH + 4.75)}″ overall), ${S.lDep}″ feet`, ins(W, S.lH + 4.75));
+    if(n > 1) add(`LWA${J}-${S.lH}${W}-${S.lDep}`, 'Link workstand adder set (1 upright, 2 rails, 1 foot)', ins(W, S.lH + 4.75), n - 1);
+  }
+  if(lHasTop()){
+    const d = lWsDepth();
+    add(`${S.lTop}-01${W}${d}`, `Worksurface, ${S.lTop === 'PELW' ? 'postform electrostatic laminate' : 'postform laminate'}, bullnose front`, ins(W, d), n);
+    if(S.lTop === 'PELW') add('', '↳ ESD ground kit WS-A-WCK, 8′ cord (supplied with ESD worksurface)', '—', n);
+    add(`LS-WBK-${d}`, `Worksurface brackets, set of 2, for ${d}″ deep worksurface`, '—', n);
+    if(S.lStop) add(`L-BS-${W}`, 'Worksurface back stop (code to confirm)', fmt(W*IN), n);
+    const mp = lMatPlan();
+    if(mp) add(mp.code, S.lMat === 'EM' ? 'ESD mat, 2 mm, grey' : 'Rubber mat, 4–6 mm, black', ins(mp.len, mp.dep), mp.k);
+    if(S.lEsd){ add('WS-A-WS', 'ESD ground block, under worksurface, 2 wrist-strap receptacles', '—', 1); add('WS-A-CB', 'ESD wrist strap with 6′ coil cord', '—', 2); }
+  }
+  if(S.lPanel !== 'none' && geo.lPanelH){
+    const ph = S.lPanelH;
+    add(`L-${S.lPanel}-${ph}${W}`, `${LINK_PANELS[S.lPanel]}, ${ph}″ high`, ins(W, ph), n*sides);
+    if(S.lPanel === 'PP' && S.lBoard !== 'none') add(`L-${S.lBoard}-${S.lBH}${S.lBW}`, `${BOARD_NAME[S.lBoard]} with hooks, hangs on pegboard and slides end to end, ${S.lBH}″ high`, ins(S.lBW, S.lBH), n*sides);
+  }
+  const sh = geo.lShelfN || 0;
+  if(sh){
+    if(S.lShType === 'var') add(`L-VAS-${W}18`, 'Variable angle shelf, 18″ deep (code to confirm)', ins(W, 18), sh*n*sides);
+    else add(`L-ADS-${W}${S.lShD}-L`, `Adjustable shelf, ${S.lShD}″ deep${lBotOn() && S.lBotD === S.lShD ? ' (incl. bottom shelf)' : ''}`, ins(W, S.lShD), sh*n*sides + (lBotOn() && S.lBotD === S.lShD ? n : 0));
+  }
+  if(lBotOn() && !(sh && S.lShType === 'adj' && S.lBotD === S.lShD)) add(`L-ADS-${W}${S.lBotD}-L`, `Adjustable shelf, ${S.lBotD}″ deep, as bottom shelf below worksurface`, ins(W, S.lBotD), n);
+  if(S.lUsl && sh && S.lShType === 'adj') add(`L-UTL-${utlPick(S.lUtlL, W)}`, 'Undershelf task light', fmt(utlPick(S.lUtlL, W)*IN), n*sides);
+  if(S.lBin) add(`L-BR-${W}`, 'Bin rail, bins not included (code to confirm)', fmt(W*IN), n*sides);
+  if(S.lPower && S.lType === 'stand'){
+    if(S.lJust === 'rear') add(`L-HPDU-${W}-15`, 'Horizontal power rail, 15 A', fmt(W*IN), n);
+    else add('L-VPDU-15', 'Vertical power strip, 15 A', '—', 2);
+  }
+  if(S.lLight && lHasTop()) add(`FTA-1-${W}-${lWsDepth() <= 24 ? 19 : 26}`, 'Fixed tube light assembly', fmt(W*IN), n);
+}
+function linkCode(){
+  const W = S.lW, n = lSecs();
+  if(S.lType === 'flow') return `LFRS-87${W}-${S.lFS}` + (n > 1 ? ` + ${n - 1}×LFRA-87${W}-${S.lFS}` : '');
+  const J = S.lJust === 'rear' ? 'R' : 'C';
+  if(S.lType === 'trolley') return `LMT${J}-${S.lH}${W}${S.lDep}`;
+  return `LWS${J}-${S.lH}${W}-${S.lDep}` + (n > 1 ? ` + ${n - 1}×LWA${J}-${S.lH}${W}-${S.lDep}` : '');
+}
+function linkTitle(){
+  const W = S.lW*lSecs();
+  if(S.lType === 'flow') return `LINK FLOW RACK ${W}" WIDE, ${S.lFS} ROLLER SHELVES${lHasTop() ? ' WITH WORKSURFACE' : ''}`;
+  const j = S.lJust === 'rear' ? 'REAR JUSTIFIED' : 'CENTRE JUSTIFIED';
+  if(S.lType === 'trolley') return `LINK MOBILE TROLLEY ${S.lH}" X ${W}" ${j}`;
+  return `LINK WORKSTAND ${S.lH}" X ${W}" ${j}${lHasTop() ? ' WITH WORKSURFACE' : ''}`;
+}
+function linkSpecRows(rows){
+  const W = S.lW, n = lSecs();
+  rows.push(['PRODUCT', LINK_TYPES[S.lType]]);
+  if(S.lType === 'flow'){
+    rows.push(['FRAME', `${FLOW_H}" high x ${FLOW_D}" deep (to confirm), ${n} section${n > 1 ? 's' : ''} x ${W}" (starter${n > 1 ? ` + ${n - 1} adder` : ''})`]);
+    const [T, G] = FLOW_TRACKS[S.lFS][W];
+    rows.push(['ROLLER SHELVES', `${S.lFS} per section, each ${T} roller tracks + ${G} guide${G > 1 ? 's' : ''}`]);
+  } else {
+    rows.push(['FRAME', `${S.lJust === 'rear' ? 'Rear' : 'Centre'}-justified, ${S.lH}" high, ${n} section${n > 1 ? 's' : ''} x ${W}", ${S.lDep}" ${lMobile() ? 'deep' : 'feet'}`]);
+    if(lMobile()) rows.push(['MOBILITY', '4 x 5" castors (2 swivel + 2 swivel with lock), side handle; castors add 6"']);
+  }
+  if(lHasTop()) rows.push(['WORKSURFACE', `${lTopCode()} ${W}" x ${lWsDepth()}" at ${S.lWH}" high${S.lType === 'flow' ? ', on bracket / foot kit' : ''}`]);
+  if(S.lType !== 'flow'){
+    const acc = [];
+    if(S.lPanel !== 'none' && geo.lPanelH) acc.push(`${LINK_PANELS[S.lPanel].toLowerCase()} ${S.lPanelH}"`);
+    if(geo.lShelfN) acc.push(`${geo.lShelfN} ${S.lShType === 'var' ? 'variable angle' : 'adjustable'} shelf ${S.lShD}"${lCentre() ? ' per side' : ''}`);
+    if(S.lBin) acc.push('bin rail');
+    if(S.lPower) acc.push(S.lJust === 'rear' ? 'horizontal power rail' : 'vertical power strips');
+    if(S.lLight && lHasTop()) acc.push('tube light');
+    if(S.lUsl && geo.lShelfN) acc.push('undershelf task light');
+    if(lHasTop() && S.lStop) acc.push('back stop');
+    if(lBotOn()) acc.push(`bottom shelf ${S.lBotD}"`);
+    if(lMatPlan()) acc.push(S.lMat === 'EM' ? 'ESD mat' : 'rubber mat');
+    if(S.lEsd) acc.push('ESD wrist strap + ground block');
+    rows.push(['ACCESSORIES', acc.length ? acc.join(', ') : 'None']);
+  }
+}
+function syncLinkUI(){
+  const t = S.lType;
+  document.querySelectorAll('[data-lt]').forEach(el => { el.hidden = !el.dataset.lt.split(' ').includes(t); });
+  makeSeg(segEl('lH'), (LINK_H[t] || [48]).map(v => [v, `${v}″`]));
+  makeSeg(segEl('lW'), (t === 'flow' ? FLOW_WS : LINK_WS).map(v => [v, `${v}″`]));
+  makeSeg(segEl('lTop'), t === 'flow' ? [['none','None'],['PLW','PLW']] : [['none','None'],['PLW','PLW'],['PELW','PELW (ESD)']]);
+  document.querySelectorAll('[data-key^="l"] > [data-val]').forEach(b => b.setAttribute('aria-pressed', String(String(S[b.parentElement.dataset.key]) === b.dataset.val)));
+  const ws = lHasTop();
+  document.getElementById('lTopGroup').hidden = !isLink() || t === 'trolley' || (t === 'stand' && S.lJust !== 'rear');
+  document.getElementById('lTopDRow').hidden = t !== 'flow' || S.lTop === 'none';
+  document.getElementById('lWHRow').hidden = S.lTop === 'none';
+  document.getElementById('lMatRow').hidden = t !== 'stand' || S.lTop === 'none';
+  document.getElementById('lStopRow').hidden = t !== 'stand' || S.lTop === 'none';
+  document.getElementById('lEsdRow').hidden = !(ws && (S.lTop === 'PELW' || S.lMat === 'EM'));
+  for(const id of ['lBelowH', 'lBotRow']) document.getElementById(id).hidden = !(t === 'stand' && ws);
+  document.getElementById('lBotDRow').hidden = !(t === 'stand' && ws && S.lBot);
+  document.getElementById('lAccGroup').hidden = !isLink() || t === 'flow';
+  document.getElementById('lPanelHRow').hidden = S.lPanel === 'none';
+  document.getElementById('lShDRow').hidden = S.lShType === 'var' || !S.lShelves;
+  document.getElementById('lShTypeRow').hidden = !S.lShelves;
+  document.getElementById('lPowerRow').hidden = t !== 'stand';
+  document.getElementById('lPowerLabel').textContent = S.lJust === 'centre' ? 'Vertical power strip (each side)' : 'Horizontal power rail';
+  document.getElementById('lLightRow').hidden = !(t === 'stand' && ws);
+  document.getElementById('lUslRow').hidden = t !== 'stand' || !S.lShelves || S.lShType === 'var';
+  document.getElementById('lAccSide').textContent = lCentre() ? 'each side' : '';
+  const dis2 = (key, fn) => document.querySelectorAll(`[data-key="${key}"] > button`).forEach(b => { b.disabled = fn(b.dataset.val); });
+  dis2('lTop', v => v !== 'none' && t === 'stand' && S.lW === 24 && S.lDep === 34);
+  dis2('lMat', v => { if(v === 'none') return false; const k = S.lMat; S.lMat = v; const ok = !!lMatPlan(); S.lMat = k; return !ok; });
+  fillSel('lPanel', lPanelOptions());
+}
+function linkHints(){
+  const t = S.lType, h = [];
+  if(t === 'stand') h.push(S.lJust === 'rear' ? 'Rear-justified: uprights at the back, feet run forward, used from one side. Takes a worksurface (28″ feet → 24″ deep, 34″ feet → 30″ deep).' : 'Centre-justified: uprights in the middle, feet both sides; shelves and panels serve both sides. No worksurface.');
+  if(t === 'trolley') h.push('Single frame on 5″ castors (2 swivel + 2 with lock) with a side handle. Castors add 6″ to the height.');
+  if(t === 'flow') h.push(`Gravity roller shelves for picking and kitting. Frame ${FLOW_H}″ high × ${FLOW_D}″ deep (to confirm).`);
+  document.getElementById('lFrameHint').textContent = h.join(' ');
+  const th = [];
+  if(t === 'stand' && S.lW === 24 && S.lDep === 34) th.push('There is no 24″ × 30″ worksurface; choose 28″ feet or a wider section.');
+  if(t === 'stand' && S.lTop !== 'none' && S.lMat === 'none' && S.lW*lSecs() < 48) th.push('Mats start at 48″ long.');
+  if(t === 'flow' && lHasTop()) th.push('Bracket / foot kits mount the worksurface to the front of the rack and add 3″ to the height.');
+  document.getElementById('lTopHint').textContent = th.join(' ');
+  const ah = [];
+  if(t !== 'flow'){
+    if(S.lShelves && (geo.lShelfN || 0) < S.lShelves) ah.push(`Only ${geo.lShelfN || 0} of ${S.lShelves} shelves fit at this height.`);
+    if(S.lPanel !== 'none' && !geo.lPanelH) ah.push('No room for the panel at this height.');
+    else if(S.lPanel !== 'none' && geo.lPanelH < S.lPanelH*IN - 25) ah.push(`The ${S.lPanelH}″ panel is cut to ${inch(geo.lPanelH)} to clear the worksurface; choose 18″ or a taller frame.`);
+    if(S.lW === 60) ah.push('Markerboard and tackboard are not available 60″ wide.');
+  } else {
+    const [T, G] = FLOW_TRACKS[S.lFS][S.lW];
+    ah.push(`Each shelf: ${T} roller tracks and ${G} guide${G > 1 ? 's' : ''} (catalogue).`);
+  }
+  document.getElementById('lAccHint').textContent = ah.join(' ');
+  document.getElementById('lFlowHint').textContent = t === 'flow' ? ah.join(' ') : '';
+}
+
+Object.keys(LINK_DEFAULTS).forEach(k => { if(!(k in S)) S[k] = LINK_DEFAULTS[k]; });
+Object.keys(BOARD_DEFAULTS).forEach(k => { if(!(k in S)) S[k] = BOARD_DEFAULTS[k]; });
+/* =====================================================================
+   Flexi system: Workstation (in-line, back-to-back, L, C, T, X), Universal Cart, Flow Rack
+   Columns: 50 × 50 mm, one macro slot + two micro slots each side.
+   Macro slot (worksurfaces, heavy shelves) adjusts in 3″ steps; micro slot (beams, rails, panels) in 1″ steps.
+   ===================================================================== */
+const FLEXI_DEFAULTS = {
+  xType:'ws', xLayout:'inline', xRuns:[[48, 48]], xCol:72, xD:30, xTop:'PLW', xWH:30,
+  xCorner:'sq', xMod:36, xPriv:0, xMat:'none', xStop:true, xEsd:false,
+  xPanel:'PP', xPanelH:18, xShN:1, xShT:'MI', xShD:12, xLip:false,
+  xBin:0, xPow:'beam', xOut:6, xVps:false, xLight:'none', xTlb:'none', xOhc:false, xUb:false,
+  xHang:'none', xHangPos:'right', xLock:'IL', xLap:false, xCpu:false, xKbd:false, xCt:false,
+  xData:false, xAir:false, xMon:'none', xEs:false, xAs:false, xDh:false, xLdh:false, xDam:false,
+  xCartW:36, xCartS:'single',
+  xFH:72, xFW:48, xFN:1, xFS:2, xFTr:0, xFCast:false
+};
+const FLEXI_TYPES = {ws:'Flexi Workstation', cart:'Flexi Universal Cart', flow:'Flexi Flow Rack'};
+const FX_W = [24, 30, 36, 48, 60, 72];                       /* frame + worksurface section widths */
+const FX_WH = [27, 30, 33, 36, 39];                          /* macro slot: 3″ steps */
+const FX_TOP = {PLW:{n:'Postform laminate wood', t:25.4, vis:'PLW'}, HPL:{n:'High pressure laminate', t:15.9, vis:'HPL'}, SS:{n:'Stainless steel', t:25.4, vis:'SSW'}, PELW:{n:'Postform electrostatic laminate (ESD)', t:25.4, vis:'PELW'}};
+const FX_LAYOUTS = {
+  inline:{n:'In-line', runs:['Run']},
+  b2b:{n:'Back-to-back', runs:['Run']},
+  L:{n:'L', runs:['Back run', 'Side run']},
+  C:{n:'C (U)', runs:['Left wing', 'Back run', 'Right wing']},
+  T:{n:'T', runs:['Left arm', 'Right arm', 'Stem']},
+  X:{n:'X', runs:['Arm 1', 'Arm 2', 'Arm 3', 'Arm 4']}
+};
+const FX_SHELF = {
+  MI:{n:'Steel shelf, micro slot (150 lb)', code:(w, d) => `F-SS-MI-${w}${d}`, d:[12, 16, 20], w:FX_W},
+  MA:{n:'Steel shelf, macro slot (300 lb)', code:(w, d) => `F-SS-MA-${w}${d}`, d:[12, 16, 20], w:FX_W},
+  LASS:{n:'Light duty adjustable steel shelf (100 lb)', code:(w, d) => `F-LASS-${w}${d}`, d:[12, 15], w:[24, 30, 36, 48, 60]},
+  VAS:{n:'Variable angle shelf, 0–25° (150 lb)', code:(w, d) => `F-VAS-${w}${d}`, d:[18, 24], w:[24, 30, 36, 48, 60]}
+};
+const fxShelfOK = (t, w, d) => FX_SHELF[t].w.includes(w) && !(t === 'VAS' && d === 24 && w === 60);
+const HPR_OUT = {24:[4], 30:[4, 6], 36:[4, 6], 48:[4, 6, 8, 10], 60:[4, 6, 8, 10]};
+/* Hanging cabinets (catalogue p. 127, for 30″ deep worksurfaces). Fronts in inches, top to bottom. */
+const FX_HANG = {
+  1:{c:'F-141730-3D-001', n:'Two 2¾″ + one 5¾″ drawers', h:14, f:[2.75, 2.75, 5.75]},
+  2:{c:'F-141730-4D-001', n:'Four 2¾″ drawers', h:14, f:[2.75, 2.75, 2.75, 2.75]},
+  3:{c:'F-221730-3D-001', n:'Two 2¾″ + one 13 15⁄16″ file drawer', h:22, f:[2.75, 2.75, 13.94]},
+  4:{c:'F-201330-4D-001', n:'Two 2¾″ + two 5¾″ drawers', h:20, f:[2.75, 2.75, 5.75, 5.75]},
+  5:{c:'F-081730-1D-001', n:'Single 5¾″ drawer', h:8, f:[5.75]},
+  6:{c:'F-081730-2D-001', n:'Two 2¾″ drawers', h:8, f:[2.75, 2.75]},
+  7:{c:'F-171730-1D-001', n:'Single 13 15⁄16″ file drawer', h:17, f:[13.94]},
+  8:{c:'F-141730-2D-001', n:'Two 5¾″ drawers', h:14, f:[5.75, 5.75]},
+  9:{c:'F-221730-2D-001', n:'One 5¾″ + one 13 15⁄16″ file drawer', h:22, f:[5.75, 13.94]},
+  10:{c:'F-201730-3D-002', n:'Three 5¾″ drawers', h:20, f:[5.75, 5.75, 5.75]}
+};
+const isFlexi = () => S.product === 'flexi';
+const fxMatDepth = d => [12, 15, 18, 24, 30, 36].filter(v => v <= d).pop();
+const fxReach = () => S.xD >= 36 ? 30 : 22;                  /* F-FS-22 for 24–30″ worksurfaces, F-FS-30 for 36″ */
+const fxBr = () => S.xD >= 36 ? 26 : 19;                     /* light bracket reach */
+function fxPanelOK(k, h, w){
+  if(k === 'none') return true;
+  if(k === 'T' || k === 'M') return h === 18 && w <= 48;
+  return !(h === 30 && w > 60);
+}
+
+/* Plan of the workstation: runs of frame sections from a node, corner modules, faces (worksurface sides) */
+function fxModel(){
+  const L = S.xLayout, R = S.xRuns, C = {w:S.xMod, corner:true};
+  const sec = a => a.map(w => ({w}));
+  const lenOf = list => list.reduce((s, x) => s + x.w*IN, 0);
+  const runs = [], corners = [];
+  const run = (name, o, a, faces, secs, skipFirst) => runs.push({name, o, a, faces, secs, skipFirst});
+  if(L === 'inline' || L === 'b2b'){
+    const s = sec(R[0]), Ln = lenOf(s);
+    run('Run', {x:-Ln/2, z:0}, {x:1, z:0}, L === 'b2b' ? [{x:0, z:1}, {x:0, z:-1}] : [{x:0, z:1}], s, false);
+  } else if(L === 'L'){
+    run('Back run', {x:0, z:0}, {x:1, z:0}, [{x:0, z:1}], [C, ...sec(R[0])], false);
+    run('Side run', {x:0, z:0}, {x:0, z:1}, [{x:1, z:0}], [C, ...sec(R[1])], true);
+    corners.push({x:0, z:0, qx:1, qz:1});
+  } else if(L === 'C'){
+    const back = [C, ...sec(R[1]), C], Lb = lenOf(back);
+    run('Back run', {x:0, z:0}, {x:1, z:0}, [{x:0, z:1}], back, false);
+    run('Left wing', {x:0, z:0}, {x:0, z:1}, [{x:1, z:0}], [C, ...sec(R[0])], true);
+    run('Right wing', {x:Lb, z:0}, {x:0, z:1}, [{x:-1, z:0}], [C, ...sec(R[2])], true);
+    corners.push({x:0, z:0, qx:1, qz:1}, {x:Lb, z:0, qx:-1, qz:1});
+  } else if(L === 'T'){
+    run('Left arm', {x:0, z:0}, {x:-1, z:0}, [{x:0, z:1}], [C, ...sec(R[0])], false);
+    run('Right arm', {x:0, z:0}, {x:1, z:0}, [{x:0, z:1}], [C, ...sec(R[1])], true);
+    run('Stem', {x:0, z:0}, {x:0, z:1}, [{x:1, z:0}, {x:-1, z:0}], [C, ...sec(R[2])], true);
+    corners.push({x:0, z:0, qx:1, qz:1}, {x:0, z:0, qx:-1, qz:1});
+  } else {
+    const dirs = [{x:0, z:-1}, {x:1, z:0}, {x:0, z:1}, {x:-1, z:0}];
+    dirs.forEach((a, i) => run(`Arm ${i + 1}`, {x:0, z:0}, a, a.x ? [{x:0, z:1}, {x:0, z:-1}] : [{x:1, z:0}, {x:-1, z:0}], [C, ...sec(R[i])], i > 0));
+    for(const qx of [1, -1]) for(const qz of [1, -1]) corners.push({x:0, z:0, qx, qz});
+  }
+  /* columns: unique world points with the face normals they carry */
+  const cols = new Map();
+  runs.forEach(r => {
+    let u = 0;
+    const pts = [0];
+    r.secs.forEach(s => { u += s.w*IN; pts.push(u); });
+    pts.forEach((u, i) => {
+      const x = r.o.x + r.a.x*u, z = r.o.z + r.a.z*u, k = `${Math.round(x)}|${Math.round(z)}`;
+      if(!cols.has(k)) cols.set(k, {x, z, n:[], node:false});
+      const c = cols.get(k);
+      r.faces.forEach(f => { if(!c.n.some(m => m.x === f.x && m.z === f.z)) c.n.push(f); });
+    });
+  });
+  corners.forEach(c => { const k = `${Math.round(c.x)}|${Math.round(c.z)}`; if(cols.has(k)) cols.get(k).node = true; });
+  const frames = runs.flatMap(r => r.secs.map(s => s.w));
+  return {runs, corners, cols:[...cols.values()], frames};
+}
+
+/* --- drawing with a deferred op list so the whole layout can be centred --- */
+let FXOPS = [];
+const fxB = (name, w, h, d, x, y, z, m, rx, rz) => FXOPS.push({k:'b', name, w, h, d, x, y, z, m, rx, rz});
+const fxC = (name, r, h, x, y, z, m, axis) => FXOPS.push({k:'c', name, r, h, x, y, z, m, axis});
+const fxP = (kind, cx, cy, w, h, z, alongZ) => FXOPS.push({k:'p', kind, cx, cy, w, h, z, alongZ});
+/* run-local placement: u along the run, v across (towards face n), y up */
+function rb(r, name, lu, h, lv, u, y, v, m, n, tilt){
+  const x = r.o.x + r.a.x*u + (n ? n.x : 0)*v, z = r.o.z + r.a.z*u + (n ? n.z : 0)*v;
+  const alongX = r.a.x !== 0;
+  const rx = tilt && n ? n.z*tilt : 0, rz = tilt && n ? -n.x*tilt : 0;
+  fxB(name, alongX ? lu : lv, h, alongX ? lv : lu, x, y, z, m, rx, rz);
+}
+function fxEmit(){
+  let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity, y1 = 0;
+  FXOPS.forEach(o => {
+    if(o.k === 'b'){ x0 = Math.min(x0, o.x - o.w/2); x1 = Math.max(x1, o.x + o.w/2); z0 = Math.min(z0, o.z - o.d/2); z1 = Math.max(z1, o.z + o.d/2); y1 = Math.max(y1, o.y + o.h/2); }
+  });
+  const cx = (x0 + x1)/2, cz = (z0 + z1)/2;
+  FXOPS.forEach(o => {
+    if(o.k === 'b'){ const m = box(o.name, o.w, o.h, o.d, o.x - cx, o.y, o.z - cz, o.m); if(o.rx) m.rotation.x = o.rx; if(o.rz) m.rotation.z = o.rz; }
+    else if(o.k === 'c') cyl(o.name, o.r, o.h, o.x - cx, o.y, o.z - cz, o.m, o.axis);
+    else if(o.k === 'p'){
+      const n0 = build.children.length;
+      panel(o.kind, o.alongZ ? 0 : o.cx - cx, o.cy, o.w, o.h, o.alongZ ? 0 : o.z - cz);
+      if(o.alongZ) build.children.slice(n0).forEach(m => {
+        const lx = m.position.x*1000, lz = m.position.z*1000;   /* panel drawn in x; turn it to run along z */
+        m.rotation.y = Math.PI/2;
+        m.position.set((o.z + lz - cx)/1000, m.position.y, (o.cx - lx - cz)/1000);
+      });
+    }
+  });
+  FXOPS = [];
+  return {W:x1 - x0, D:z1 - z0, overall:y1};
+}
+function fxPanel(r, n, kind, u, cy, w, h, v){
+  const x = r.o.x + r.a.x*u + n.x*v, z = r.o.z + r.a.z*u + n.z*v;
+  if(r.a.x !== 0) fxP(kind, x, cy, w, h, z, false);
+  else fxP(kind, z, cy, w, h, x, true);
+}
+function fxColumn(x, z, CH, y0, faces, mm){
+  fxB('Flexi slotted column 50 × 50', 50, CH - y0, 50, x, y0 + (CH - y0)/2, z, M.frame);
+  faces.forEach(f => {
+    const ox = x + f.x*26, oz = z + f.z*26, wx = f.x ? 2 : 10, wz = f.x ? 10 : 2;
+    fxB('Macro slot', wx, CH - y0 - 100, wz, ox, y0 + (CH - y0)/2, oz, M.dark);
+    for(const s of [-1, 1]) fxB('Micro slot', f.x ? 2 : 3, CH - y0 - 100, f.x ? 3 : 2, ox + (f.x ? 0 : s*15), y0 + (CH - y0)/2, oz + (f.x ? s*15 : 0), M.dark);
+  });
+}
+function fxOutrigger(x, z, n, reachIn, castor){
+  const L = reachIn*IN, ox = x + n.x*L/2, oz = z + n.z*L/2;
+  fxB(`Outrigger foot ${reachIn}″`, n.x ? L : 60, 60, n.x ? 60 : L, ox, castor ? castor + 30 : 45, oz, M.frame);
+  fxB('Outrigger gusset', n.x ? 160 : 14, 220, n.x ? 14 : 160, x + n.x*100, (castor || 15) + 140, z + n.z*100, M.frame);
+  const ex = x + n.x*(L - 30), ez = z + n.z*(L - 30);
+  if(castor){ fxC('Castor 3½″', 44, 26, ex, 44, ez, M.glide, n.x ? 'z' : 'x'); fxB('Castor fork', 30, castor - 50, 30, ex, 44 + (castor - 50)/2 + 10, ez, M.steel); }
+  else fxC('Leveling glide', 18, 12, ex, 6, ez, M.glide);
+}
+
+/* Accessory stack on one face of one section above the worksurface (or above the cart / rack base) */
+function fxAccessories(r, n, u0, w, base0, colTop, opts){
+  let base = base0;
+  const cu = u0 + w/2, iw = w - 60, sk = S.xShT, sd = S.xShD*IN;
+  if(opts.light === 'ola' && w/IN < 30) opts = Object.assign({}, opts, {light:'none'});
+  if(opts.pow === 'rail' && !HPR_OUT[Math.round(w/IN)]) opts = Object.assign({}, opts, {pow:null});
+  const g = {shelves:0, panelH:0};
+  const v0 = 26;
+  let top = colTop - 70;
+  if(opts.ohc){
+    const oh = 16*IN, od = 15*IN;
+    rb(r, `Overhead cabinet ${w/IN}″`, iw, oh, od, cu, top - oh/2, v0 + od/2, M.frame, n);
+    rb(r, 'Overhead cabinet door', iw - 20, oh - 30, 6, cu, top - oh/2, v0 + od + 3, M.front, n);
+    rb(r, 'Overhead cabinet lock', 24, 24, 8, cu + iw/2 - 50, top - 40, v0 + od + 8, M.alu, n);
+    top -= oh + 40;
+  }
+  if(opts.light !== 'none'){
+    const bd = fxBr()*IN, ly = top - 30;
+    for(const s of [-1, 1]) rb(r, 'Light bracket', 20, 30, bd, cu + s*(iw/2 - 10), ly, v0 + bd/2, M.frame, n);
+    if(opts.light === 'ola'){
+      rb(r, `Overhead light fixture ${w/IN}″`, iw - 100, 50, 190, cu, ly - 40, v0 + bd - 120, mat('#d8dadc', {roughness:.4, metalness:.3}), n);
+      rb(r, 'Light diffuser', iw - 130, 3, 160, cu, ly - 66, v0 + bd - 120, mat('#ffffff', {emissive:'#fff4d8', emissiveIntensity:.95}), n);
+    } else {
+      rb(r, `Fixed tubelight assembly ${w/IN}″`, iw - 120, 50, 140, cu, ly - 40, v0 + bd - 100, mat('#d8dadc', {roughness:.4, metalness:.3}), n);
+      rb(r, 'Light diffuser', iw - 140, 3, 120, cu, ly - 66, v0 + bd - 100, mat('#ffffff', {emissive:'#fff4d8', emissiveIntensity:.95}), n);
+    }
+    top -= 120;
+  }
+  /* cart: all but the top shelf go at the bottom, rails and panel between */
+  const bottomYs = [];
+  if(opts.cartShelves){ for(let k = 0; k < opts.cartShelves; k++) bottomYs.push(base + k*300); base = (bottomYs.length ? bottomYs[bottomYs.length - 1] : base) + 120; }
+  /* bottom-up rails just above the worksurface */
+  let low = base + 40;
+  if(opts.pow){
+    const py = base + 110;
+    rb(r, `Horizontal power ${opts.pow === 'rail' ? 'rail' : 'beam'} ${w/IN}″`, iw, 60, 50, cu, py, v0 + 25, mat('#e6e8ea', {roughness:.45}), n);
+    const k = Math.max(2, Math.min(5, Math.floor((iw - 120)/250))), step = (iw - 160)/(k - 1);
+    for(let j = 0; j < k; j++){ rb(r, 'Socket', 62, 48, 4, cu - (iw - 160)/2 + j*step, py, v0 + 52, M.white, n); rb(r, 'Socket switch', 12, 20, 6, cu - (iw - 160)/2 + j*step + 44, py, v0 + 52, M.red, n); }
+    low = py + 60;
+  }
+  if(opts.data){ rb(r, 'Data beam', iw, 50, 45, cu, low + 40, v0 + 22, mat('#e6e8ea', {roughness:.45}), n); low += 80; }
+  if(opts.air){ rb(r, 'Air beam', iw, 45, 45, cu, low + 40, v0 + 22, M.alu, n); low += 80; }
+  if(opts.bin){
+    const by = low + 160, bh = opts.bin === 4 ? 100 : 50;
+    rb(r, `Bin rail ${opts.bin}″`, iw, bh, 18, cu, by, v0 + 9, M.frame, n);
+    const nb = Math.floor((iw - 40)/125);
+    for(let j = 0; j < nb; j++) rb(r, 'Parts bin (not supplied)', 105, 75, 140, cu - iw/2 + 82 + j*125, by - 10, v0 + 88, mat('#2c62b6', {roughness:.6}), n);
+    low = by + 90;
+  }
+  if(opts.ub){ const uy = low + 120; rb(r, `Utility bin ${w/IN}″`, iw, 90, 150, cu, uy, v0 + 75, M.frame, n); low = uy + 70; }
+  /* shelves from the top, panel fills between shelves and the rails */
+  const nWant = opts.shelves, minY = low + (opts.panel !== 'none' ? 12*IN + 80 : 220);
+  const ys = [];
+  if(nWant){
+    let gap = 340, zoneTop = top - 40;
+    if(nWant > 1) gap = Math.min(340, (zoneTop - minY)/(nWant - 1));
+    let n2 = nWant;
+    if(nWant > 1 && gap < 230){ n2 = Math.max(1, Math.floor((zoneTop - minY)/230) + 1); gap = n2 > 1 ? Math.min(340, (zoneTop - minY)/(n2 - 1)) : 0; }
+    for(let k = 0; k < n2; k++){ const y = zoneTop - k*gap; if(y >= minY - 1) ys.push(y); }
+    if(!ys.length && zoneTop > low + 220) ys.push(zoneTop);
+  }
+  ys.push(...bottomYs);
+  g.shelves = ys.length;
+  ys.forEach(y => {
+    if(sk === 'VAS'){
+      rb(r, `Variable angle shelf ${w/IN}″ × ${S.xShD}″`, iw, 18, sd, cu, y, v0 + sd/2, M.frame, n, 0.22);
+      for(const s of [-1, 1]) rb(r, 'Shelf bracket', 10, 120, 120, cu + s*(iw/2 - 6), y + 20, v0 + 60, M.dark, n);
+    } else {
+      rb(r, `Steel shelf ${w/IN}″ × ${S.xShD}″`, iw, 20, sd, cu, y, v0 + sd/2, M.frame, n);
+      if(opts.lip) rb(r, 'Shelf lip', iw, 40, 8, cu, y + 25, v0 + sd - 4, M.frame, n);
+      for(const s of [-1, 1]) rb(r, 'Shelf bracket', 10, 90, sd - 40, cu + s*(iw/2 - 6), y - 50, v0 + (sd - 40)/2, M.dark, n);
+    }
+  });
+  if(opts.tlb !== 'none' && opts.tlb){
+    const bl = Number(opts.tlb)*IN, ty = ys.length ? Math.min(...ys) - 70 : top - 60;
+    rb(r, `Task light bracket ${opts.tlb}″`, 30, 25, bl, cu - iw/2 + 40, ty, v0 + bl/2, M.steel, n);
+  }
+  if(opts.panel !== 'none'){
+    const above = ys.filter(y => y > low);
+    const pt = above.length ? Math.min(...above) - 110 : top - 40;
+    const want = opts.panelH*IN, ph = Math.min(want, pt - low);
+    if(ph > 120){ fxPanel(r, n, opts.panel, cu, pt - ph/2, iw, ph, v0 + 6); g.panelH = ph; }
+  }
+  return g;
+}
+
+function buildFlexiProduct(){
+  FXOPS = [];
+  if(S.xType === 'cart') return buildFlexiCart();
+  if(S.xType === 'flow') return buildFlexiFlow();
+  const mdl = fxModel(), CH = S.xCol*IN, WH = S.xWH*IN, D = S.xD*IN, tp = FX_TOP[S.xTop], t = tp.t;
+  const tm = mat(TOPS[tp.vis].c, tp.vis === 'SSW' ? {roughness:.3, metalness:.62} : {roughness:.72});
+  const y0 = 60;
+  mdl.cols.forEach(c => {
+    fxColumn(c.x, c.z, CH, y0, c.n, M);
+    c.n.forEach(f => fxOutrigger(c.x, c.z, f, c.node ? 15 : fxReach(), 0));
+  });
+  const stats = {shelves:0, panelShort:false, skipShelf:0, skipPanel:0};
+  const accOpts = {ohc:S.xOhc, light:S.xLight, pow:S.xPow === 'none' ? null : S.xPow, data:S.xData, air:S.xAir, bin:S.xBin, ub:S.xUb, shelves:S.xShN, lip:S.xLip, tlb:S.xTlb, panel:S.xPanel, panelH:S.xPanelH};
+  let hangDone = false;
+  mdl.runs.forEach((r, ri) => {
+    let u = 0;
+    r.secs.forEach((s, si) => {
+      const w = s.w*IN, cu = u + w/2;
+      /* frame: top beam, open stabilizer, worksurface support beams */
+      rb(r, 'Flexi top beam', w - 50, 40, 40, cu, CH - 20, 0, M.frame);
+      rb(r, 'Open stabilizer', w - 50, 60, 40, cu, 300, 0, M.frame);
+      if(!s.corner){
+        if(S.xPriv){ const ph = S.xPriv*IN; fxPanel(r, {x:-r.a.z, z:r.a.x}, 'SP', cu, WH - t - 90 - ph/2, w - 60, ph, 0); }
+        r.faces.forEach((n, fi) => {
+          const v0 = 25;
+          rb(r, `Flexi worksurface ${S.xTop} ${s.w}x${S.xD}`, w - 4, t, D, cu, WH - t/2, v0 + D/2, tm, n);
+          rb(r, 'Worksurface support beam', w - 50, 50, 30, cu, WH - t - 25, v0 + 40, M.frame, n);
+          rb(r, 'Worksurface support beam', w - 50, 50, 30, cu, WH - t - 25, v0 + D - 80, M.frame, n);
+          for(const sx of [-1, 1]) rb(r, 'Worksurface bracket', 40, 60, D - 40, cu + sx*(w/2 - 30), WH - t - 30, v0 + (D - 40)/2, M.frame, n);
+          if(S.xStop) rb(r, 'Back stop 3″', w - 10, 76, 4, cu, WH + 38, v0 + 4, M.frame, n);
+          if(S.xMat !== 'none'){ const md = fxMatDepth(S.xD)*IN, th = S.xMat === 'EM' ? 2 : 6; rb(r, S.xMat === 'EM' ? 'ESD mat 2 mm' : 'Rubber mat 6 mm', w - 30, th, md, cu, WH + th/2, v0 + D - 15 - md/2, mat(S.xMat === 'EM' ? '#7a8288' : '#2b2e31', {roughness:.95}), n); }
+          if(S.xCt) rb(r, 'Cable tray', w - 80, 60, 100, cu, WH - t - 120, v0 + 90, M.dark, n);
+          const shOK = !S.xShN || fxShelfOK(S.xShT, s.w, S.xShD);
+          if(!shOK) stats.skipShelf++;
+          const pOK = fxPanelOK(S.xPanel, S.xPanelH, s.w);
+          if(!pOK) stats.skipPanel++;
+          const g = fxAccessories(r, n, u, w, WH, CH, Object.assign({}, accOpts, {shelves:shOK ? S.xShN : 0, panel:pOK ? S.xPanel : 'none'}));
+          stats.shelves = Math.max(stats.shelves, g.shelves);
+          if(S.xPanel !== 'none' && pOK && g.panelH && g.panelH < S.xPanelH*IN - 25) stats.panelShort = true;
+          if(S.xPanel !== 'none' && pOK && !g.panelH) stats.panelShort = true;
+          /* below worksurface: hanging cabinets, lap drawer, keyboard, CPU on the first run, first face */
+          if(ri === 0 && fi === 0){
+            const first = r.secs.findIndex(x => !x.corner), last = r.secs.length - 1 - [...r.secs].reverse().findIndex(x => !x.corner);
+            const wantL = S.xHang !== 'none' && (S.xHangPos === 'left' || S.xHangPos === 'both') && si === first;
+            const wantR = S.xHang !== 'none' && (S.xHangPos === 'right' || S.xHangPos === 'both') && si === last;
+            const hc = FX_HANG[S.xHang];
+            const sides = [];
+            if(wantL) sides.push(-1);
+            if(wantR && !(wantL && first === last && S.xHangPos !== 'both')) sides.push(1);
+            if(hc && S.xD === 30) sides.forEach(sd => {
+              const hw = 17*IN, hh = hc.h*IN, hd = D - 60, hx = cu + sd*(w/2 - 60 - hw/2), hy = WH - t - 60 - hh/2;
+              rb(r, `Hanging cabinet ${hc.c}`, hw, hh, hd, hx, hy, v0 + 20 + hd/2, M.frame, n);
+              let fy = WH - t - 60 - 15; const sc = (hh - 30)/hc.f.reduce((a, b) => a + b, 0);
+              hc.f.forEach(fh => { const h2 = fh*sc; rb(r, 'Drawer front', hw - 24, h2 - 6, 18, hx, fy - h2/2, v0 + 20 + hd + 9, M.front, n); rb(r, 'Drawer handle', hw - 120, 14, 14, hx, fy - 16, v0 + 20 + hd + 25, M.alu, n); fy -= h2; });
+              hangDone = true;
+            });
+            if(S.xLap && si === first){
+              const lx = sides.includes(-1) && first === last ? cu + w/2 - 60 - 21.375*IN/2 - (sides.includes(1) ? 17*IN + 40 : 0) : cu;
+              rb(r, 'Lap drawer', 21.375*IN, 90, 18.75*IN, lx, WH - t - 60 - 45, v0 + D - 30 - 18.75*IN/2, M.frame, n);
+              rb(r, 'Lap drawer handle', 21.375*IN - 40, 18, 12, lx, WH - t - 60 - 45, v0 + D - 24, M.alu, n);
+            }
+            if(S.xKbd && si === first) rb(r, 'Keyboard tray with mouse', 26*IN, 30, 11*IN, cu, WH - t - 160, v0 + D - 11*IN/2 - 10, M.dark, n);
+            if(S.xCpu && si === last) rb(r, 'CPU holder', 9*IN, 18*IN, 20*IN, cu + w/2 - 60 - 4.5*IN - (wantR ? 17*IN + 40 : 0), WH - t - 60 - 9*IN, v0 + 40 + 10*IN, M.frame, n);
+          }
+        });
+        if(S.xVps && si === r.secs.findIndex(x => !x.corner)) r.faces.forEach(n => {
+          rb(r, 'Vertical power strip', 50, 450, 40, u + 40, WH + 500, 52, mat('#1d1f22', {roughness:.5}), n);
+          for(let i = 0; i < 6; i++) rb(r, 'Socket', 36, 36, 4, u + 40, WH + 320 + i*68, 74, M.white, n);
+        });
+      }
+      u += w;
+    });
+  });
+  /* corner worksurfaces */
+  const Mm = S.xMod*IN;
+  mdl.corners.forEach(c => {
+    const g = 25, sz = Mm - g;
+    const x = c.x + c.qx*(g + sz/2), z = c.z + c.qz*(g + sz/2);
+    fxB(`Flexi corner worksurface ${S.xCorner === 'rbc' ? 'round back' : 'square back'} ${S.xTop}`, sz, t, sz, x, WH - t/2, z, tm);
+    if(S.xCorner === 'rbc') fxC('Round back corner edge', 40, t, c.x + c.qx*(g + 20), WH - t/2, c.z + c.qz*(g + 20), tm);
+    fxB('Corner support beam', sz, 50, 30, x, WH - t - 25, c.z + c.qz*(g + sz - 40), M.frame);
+    fxB('Corner support beam', 30, 50, sz, c.x + c.qx*(g + sz - 40), WH - t - 25, z, M.frame);
+    if(S.xMat !== 'none'){ const th = S.xMat === 'EM' ? 2 : 6; fxB('Corner mat (cut to suit)', sz - 40, th, sz - 40, x, WH + th/2, z, mat(S.xMat === 'EM' ? '#7a8288' : '#2b2e31', {roughness:.95})); }
+  });
+  /* pivoting accessories / monitor arm on the first column of the first run */
+  {
+    const r = mdl.runs[0], n = r.faces[0];
+    const firstU = r.secs.findIndex(x => !x.corner) >= 0 ? r.secs.slice(0, r.secs.findIndex(x => !x.corner)).reduce((a, b) => a + b.w*IN, 0) : 0;
+    let py = WH + 380;
+    const piv = (label, pw, pd, ph) => { rb(r, `${S.xDam ? 'Double articulating arm' : 'Pivot arm'}`, 30, 30, 260, firstU + 30, py, 160, M.steel, n); rb(r, label, pw, ph, pd, firstU + 30 + pw/2 + 20, py + ph/2, 300 + pd/2, M.frame, n); py += 220; };
+    if(S.xEs) piv('Equipment shelf', 12.375*IN, 12.375*IN, 20);
+    if(S.xAs) piv('Accessory shelf', 21.375*IN*0.5, 7*IN, 20);
+    if(S.xDh) piv('Document holder', 11.375*IN, 6, 13.875*IN);
+    if(S.xLdh) piv('Large document holder', 23.375*IN, 6, 13.875*IN);
+    if(S.xMon !== 'none'){
+      rb(r, 'Monitor arm', 30, 30, 360, firstU + 60, WH + 700, 200, M.steel, n);
+      const k = S.xMon === 'dual' ? 2 : 1;
+      for(let i = 0; i < k; i++) rb(r, 'Monitor (not supplied)', 21*IN, 13*IN, 30, firstU + 60 + 280 + i*(21*IN + 20), WH + 700, 420, mat('#15181b', {roughness:.4}), n);
+    }
+  }
+  const dims = fxEmit();
+  geo = Object.assign(geo, {W:dims.W, D:dims.D, H:WH, overall:dims.overall, fxStats:stats});
+}
+
+function buildFlexiCart(){
+  const w = S.xCartW*IN, dbl = S.xCartS === 'double', cast = 120, CH = 54*IN;
+  const r = {o:{x:-w/2, z:0}, a:{x:1, z:0}, faces:dbl ? [{x:0, z:1}, {x:0, z:-1}] : [{x:0, z:1}]};
+  for(const x of [-w/2, w/2]){
+    fxColumn(x, 0, CH, cast + 60, r.faces, M);
+    for(const n of [{x:0, z:1}, {x:0, z:-1}]) fxOutrigger(x, 0, n, 12, cast);
+  }
+  rb(r, 'Flexi top beam', w - 50, 40, 40, w/2, CH - 20, 0, M.frame);
+  rb(r, 'Open stabilizer', w - 50, 60, 40, w/2, cast + 300, 0, M.frame);
+  rb(r, 'Cart handle', w - 50, 30, 30, w/2, CH - 200, 0, M.steel);
+  let sh = 0, skip = 0, ps = false;
+  const shOK = !S.xShN || (fxShelfOK(S.xShT, S.xCartW, S.xShD) && S.xShD <= 14 && S.xShT !== 'VAS');
+  if(!shOK) skip++;
+  const pOK = fxPanelOK(S.xPanel, S.xPanelH, S.xCartW);
+  r.faces.forEach(n => {
+    const nS = shOK ? S.xShN : 0;
+    const g = fxAccessories(r, n, 0, w, cast + 220, CH, {ohc:false, light:'none', pow:S.xPow === 'beam' ? 'beam' : null, data:S.xData, air:S.xAir, bin:S.xBin, ub:false, shelves:nS ? 1 : 0, cartShelves:Math.max(0, nS - 1), lip:S.xLip, tlb:'none', panel:pOK ? S.xPanel : 'none', panelH:S.xPanelH});
+    sh = Math.max(sh, g.shelves); if(S.xPanel !== 'none' && pOK && g.panelH < S.xPanelH*IN - 25) ps = true;
+  });
+  const dims = fxEmit();
+  geo = Object.assign(geo, {W:dims.W, D:dims.D, H:null, overall:dims.overall, fxStats:{shelves:sh, skipShelf:skip, skipPanel:pOK ? 0 : 1, panelShort:ps}});
+}
+
+function buildFlexiFlow(){
+  const n = S.xFN, w = S.xFW*IN, span = n*w, D = 48*IN, cast = S.xFCast ? 6*IN : 0, H = S.xFH*IN, top = cast + H;
+  const ws = S.xTop !== 'none', WH = S.xWH*IN + cast, wd = S.xD*IN, tp = FX_TOP[S.xTop] || FX_TOP.PLW;
+  const xs = [...Array(n + 1).keys()].map(i => -span/2 + i*w);
+  const zF = D/2 - 25, zB = -D/2 + 25;
+  xs.forEach((x, i) => {
+    for(const z of [zF, zB]){
+      fxB(i < 2 ? 'Flow rack column (starter)' : 'Flow rack column (adder)', 50, H - 60, 50, x, cast + 60 + (H - 60)/2, z, M.frame);
+      fxB('Macro slot', 10, H - 160, 2, x, cast + 60 + (H - 60)/2, z + (z > 0 ? 26 : -26), M.dark);
+    }
+    for(const y of [cast + 260, top - 30]) fxB('Side frame rail', 40, 40, D - 50, x, y, 0, M.frame);
+    const fl = D + 120 + (ws ? wd : 0), fz = ws ? wd/2 : 0;
+    fxB('Flow rack outrigger', 60, 60, fl, x, cast + 30, fz, M.frame);
+    for(const z of [fz - fl/2 + 30, fz + fl/2 - 30]){
+      if(cast){ fxC('Castor (code to confirm)', 63, 30, x, 63, z, M.glide, 'x'); fxB('Castor fork', 34, cast - 63 - 8, 26, x, 63 + (cast - 71)/2, z, M.steel); }
+      else fxC('Leveling glide', 18, 12, x, 6, z, M.glide);
+    }
+  });
+  for(const z of [zF, zB]) for(const y of [cast + 260, top - 30]) fxB('Connector beam', span, 40, 25, 0, y, z, M.frame);
+  const fs = S.xFS, base = ws ? WH + 380 : cast + 600, zTop = top - 260;
+  const ys = fs === 1 ? [zTop] : [...Array(fs).keys()].map(k => zTop - k*(zTop - base)/(fs - 1));
+  const [T, G] = S.xFW >= 48 ? [6, 2] : [4, 1], Tt = T + S.xFTr;
+  const L = D - 60, drop = 130, ang = Math.atan2(drop, L);
+  for(let i = 0; i < n; i++){
+    const a = xs[i] + 25, b = xs[i + 1] - 25, iw = b - a, cx = (a + b)/2;
+    ys.forEach(yb => {
+      const yf = yb - drop, ym = (yb + yf)/2;
+      fxB(`Flow rack shelf assembly ${S.xFW}″`, iw, 40, 25, cx, yb, -L/2, M.frame);
+      fxB('Flow rack shelf front', iw, 76, 25, cx, yf + 10, L/2, M.frame);
+      for(const s of [-1, 1]) fxB('Shelf side', 25, 40, L, cx + s*(iw/2 - 12), ym, 0, M.frame, ang, 0);
+      const usable = iw - 80, step = usable/Tt;
+      for(let t2 = 0; t2 < Tt; t2++){
+        const tx = a + 40 + step*(t2 + 0.5);
+        fxB('Roller track', 25, 22, L - 20, tx, ym + 12, 0, M.alu, ang, 0);
+        for(let k = 0; k < 5; k++){ const zz = -L/2 + 80 + k*(L - 160)/4; fxC('Roller', 9, 22, tx, ym + 24 - Math.tan(ang)*zz, zz, M.steel, 'x'); }
+      }
+      for(let g2 = 0; g2 < G; g2++) fxB('Roller guide', 4, 60, L - 40, a + 40 + usable*(g2 + 1)/(G + 1), ym + 45, 0, M.dark, ang, 0);
+    });
+    if(ws){
+      const tm = mat(TOPS[tp.vis].c, tp.vis === 'SSW' ? {roughness:.3, metalness:.62} : {roughness:.72});
+      fxB(`Flexi worksurface ${S.xTop} ${S.xFW}x${S.xD}`, w - 4, tp.t, wd, (xs[i] + xs[i + 1])/2, WH - tp.t/2, D/2 + wd/2, tm);
+      for(const s of [-1, 1]) fxB('Worksurface bracket', 40, 60, wd - 40, (xs[i] + xs[i + 1])/2 + s*(w/2 - 30), WH - tp.t - 30, D/2 + (wd - 40)/2, M.frame);
+      fxB('Worksurface support beam', w - 50, 50, 30, (xs[i] + xs[i + 1])/2, WH - tp.t - 25, D/2 + wd - 80, M.frame);
+    }
+  }
+  const dims = fxEmit();
+  geo = Object.assign(geo, {W:dims.W, D:dims.D, H:ws ? WH : null, overall:dims.overall, fxStats:{flowShelves:fs}});
+}
+
+/* -------- normalisation -------- */
+function normFlexi(key){
+  if(!FLEXI_TYPES[S.xType]) S.xType = 'ws';
+  if(!FX_LAYOUTS[S.xLayout]) S.xLayout = 'inline';
+  const need = FX_LAYOUTS[S.xLayout].runs.length;
+  if(!Array.isArray(S.xRuns)) S.xRuns = [[48]];
+  while(S.xRuns.length < need) S.xRuns.push(S.xRuns.length ? [S.xRuns[S.xRuns.length - 1][0]] : [48]);
+  if(S.xRuns.length > need) S.xRuns = S.xRuns.slice(0, need);
+  S.xRuns = S.xRuns.map(a => (a.length ? a : [48]).slice(0, 6).map(v => nearest(Number(v), FX_W)));
+  if(!FX_WH.includes(S.xWH)) S.xWH = nearest(S.xWH, FX_WH);
+  if(![54, 72, 84].includes(S.xCol)) S.xCol = 72;
+  if(![24, 28, 30, 36].includes(S.xD)) S.xD = 30;
+  const tops = S.xType === 'flow' ? ['none', ...Object.keys(FX_TOP)] : Object.keys(FX_TOP);
+  if(!tops.includes(S.xTop)) S.xTop = 'PLW';
+  const mods = [30, 36, 48].filter(m => m >= S.xD);
+  if(!mods.includes(S.xMod)) S.xMod = mods[0];
+  if(!FX_SHELF[S.xShT]) S.xShT = 'MI';
+  if(S.xType === 'cart' && S.xShT === 'VAS') S.xShT = 'MI';
+  if(!FX_SHELF[S.xShT].d.includes(S.xShD)) S.xShD = FX_SHELF[S.xShT].d[0];
+  if(S.xType === 'cart' && S.xShD > 14) S.xShD = 12;
+  if((S.xPanel === 'T' || S.xPanel === 'M')) S.xPanelH = 18;
+  if(S.xType === 'cart'){ S.xLight = 'none'; S.xTlb = 'none'; S.xOhc = false; S.xUb = false; S.xVps = false; if(S.xPow === 'rail') S.xPow = 'beam'; if(![30, 36, 48].includes(S.xCartW)) S.xCartW = 36; }
+  if(S.xType === 'flow'){ if(![30, 36, 48, 60].includes(S.xFW)) S.xFW = 48; S.xFN = Math.max(1, Math.min(4, S.xFN)); if(![72, 84].includes(S.xFH)) S.xFH = 72; if(![2, 3].includes(S.xFS)) S.xFS = 2; }
+  if(S.xD !== 30) S.xHang = 'none';
+  if(S.xTop !== 'PELW' && S.xMat !== 'EM') S.xEsd = false;
+}
+
+/* -------- parts list -------- */
+function fxSections(){
+  const m = fxModel(), out = [];
+  m.runs.forEach(r => r.secs.forEach(s => { if(!s.corner) out.push({w:s.w, faces:r.faces.length, run:r.name}); }));
+  return {m, secs:out};
+}
+function flexiBom(add){
+  const ins = (a, b) => fmtSize(a*IN, b*IN);
+  const st = geo.fxStats || {};
+  const group = (list) => { const m = new Map(); list.forEach(([c, d, s, q]) => { const k = c + '|' + d + '|' + s; m.set(k, (m.get(k) || 0) + q); }); [...m.entries()].forEach(([k, q]) => { const [c, d, s] = k.split('|'); add(c, d, s, q); }); };
+  const accRows = (secs, kind) => {
+    const L = [];
+    secs.forEach(({w, faces}) => {
+      if(S.xPanel !== 'none' && fxPanelOK(S.xPanel, S.xPanelH, w)) L.push([`F-${S.xPanel}-${S.xPanelH}${w}`, `${LINK_PANELS[S.xPanel]}, ${S.xPanelH}″ high`, ins(w, S.xPanelH), faces]);
+      const shOK = S.xShN && fxShelfOK(S.xShT, w, S.xShD) && !(kind === 'cart' && (S.xShT === 'VAS' || S.xShD > 14));
+      if(shOK && st.shelves){
+        L.push([FX_SHELF[S.xShT].code(w, S.xShD), `${FX_SHELF[S.xShT].n}, ${S.xShD}″ deep`, ins(w, S.xShD), st.shelves*faces]);
+        if(S.xLip && S.xShT !== 'VAS') L.push([`F-SL-${w}`, 'Shelf lip', fmt(w*IN), st.shelves*faces]);
+      }
+      if(S.xBin) L.push([`F-HDBR-0${S.xBin}${w}`, `Heavy duty parts bin rail, ${S.xBin}″`, fmt(w*IN), faces]);
+      if(S.xPow === 'beam') L.push([`F-HPDU-SS-15-${w}`, 'Horizontal power beam, 15 A', fmt(w*IN), faces]);
+      if(S.xPow === 'rail'){
+        const o = HPR_OUT[w];
+        if(o){ const k = o.filter(v => v <= S.xOut).pop() || o[0]; L.push([`HPR-${w}-${String(k).padStart(2, '0')}-15`, `Horizontal power rail, 15 A, ${k} sockets`, fmt(w*IN), faces]); }
+      }
+      if(S.xData) L.push([`F-DB-${faces > 1 ? 'DS' : 'SS'}-${w}`, `Data beam, ${faces > 1 ? 'double' : 'single'} sided (jacks not included)`, fmt(w*IN), 1]);
+      if(S.xAir) L.push([`F-AB-${faces > 1 ? 'DS' : 'SS'}-${w}`, `Air beam, ${faces > 1 ? 'double' : 'single'} sided`, fmt(w*IN), 1]);
+      if(kind === 'ws'){
+        if(S.xLight === 'ola' && w >= 30) L.push([`F-OLA-2-${w}${fxBr()}`, `Overhead light fixture, 2 bulb, ${fxBr()}″ micro bracket`, fmt(w*IN), faces]);
+        if(S.xLight === 'fta') L.push([`FTA-1-${w}-${fxBr()}`, `Fixed tubelight assembly with reflector, ${fxBr()}″ bracket`, fmt(w*IN), faces]);
+        if(S.xTlb !== 'none') L.push([`F-TLB-${S.xTlb === 9 || S.xTlb === '9' ? '09' : '15'}`, `Task light bracket, column mounting ${S.xTlb}″ (light not included)`, '—', faces]);
+        if(S.xOhc) L.push([`F-OHC-VO-${w}`, 'Overhead cabinet with lock', fmt(w*IN), faces]);
+        if(S.xUb) L.push([`F-UB-${w}`, 'Utility bin', fmt(w*IN), faces]);
+      }
+    });
+    return L;
+  };
+  if(S.xType === 'cart'){
+    const dbl = S.xCartS === 'double', f = dbl ? 2 : 1;
+    add(`FC${dbl ? 'DS' : 'SS'}-${S.xCartW}`, `Flexi universal cart, ${dbl ? 'double' : 'single'} sided, 54″ high, 2 locking + 2 non-locking 3½″ castors`, ins(S.xCartW, 54));
+    group(accRows([{w:S.xCartW, faces:f}], 'cart'));
+    fxPivBom(add);
+    return;
+  }
+  if(S.xType === 'flow'){
+    const n = S.xFN, w = S.xFW, H = S.xFH, fs = S.xFS, [T, G] = w >= 48 ? [6, 2] : [4, 1];
+    add(`FFRS-${H}${w}`, `Flexi flow rack starter (2 starter assemblies, 2 outriggers, 1 shelf assembly, 4 connectors), 1,400 lb`, ins(w, 48));
+    if(n > 1) add(`FFRA-${H}${w}`, 'Flexi flow rack adder (1 adder assembly, 1 outrigger, 1 shelf assembly, 2 connectors)', ins(w, 48), n - 1);
+    if(fs > 1) add(`FFRSH-${w}`, `Additional flow rack shelf assembly, 3″ high, 48″ deep, 600 lb (${T} roller tracks, ${G} guide${G > 1 ? 's' : ''})`, ins(w, 48), (fs - 1)*n);
+    if(S.xFTr) add('FFRTR', 'Additional roller track', '48″', S.xFTr*fs*n);
+    if(S.xFCast) add('FFR-CS (code to confirm)', 'Caster set for flow rack, adds about 6″ (to confirm)', '—', n + 1);
+    if(S.xTop !== 'none') add(`F-WSA-${w}${S.xD}-${S.xTop}`, `Worksurface assembly, ${FX_TOP[S.xTop].n} (2 brackets, 2 support beams)`, ins(w, S.xD), n);
+    if(S.xTop === 'PELW') add('WS-WGK', 'ESD worksurface ground kit, 8′ cord (supplied with ESD worksurface)', '—', n);
+    return;
+  }
+  const {m, secs} = fxSections();
+  /* frames */
+  const fr = m.frames;
+  add(`F-OSUA-${S.xCol}${fr[0]}`, `Starter upright assembly, open stabilizer, ${S.xCol}″ columns`, ins(fr[0], S.xCol));
+  const ad = {}; fr.slice(1).forEach(w => { ad[w] = (ad[w] || 0) + 1; });
+  Object.entries(ad).forEach(([w, q]) => add(`F-OAUA-${S.xCol}${w}`, `Adder upright assembly, open stabilizer, ${S.xCol}″ columns`, ins(Number(w), S.xCol), q));
+  /* outriggers */
+  let o15 = 0, oR = 0;
+  m.cols.forEach(c => { if(c.node) o15 += c.n.length; else oR += c.n.length; });
+  if(oR) add(`F-FS-${fxReach()}`, `Outrigger ${fxReach()}″ (${fxReach() === 22 ? '24″–30″' : '36″'} worksurface)`, '—', oR);
+  if(o15) add('F-FS-15', 'Outrigger 15″ (shelving and corners)', '—', o15);
+  if(S.xPriv) group(secs.map(s => [`F-SP-${S.xPriv}${s.w}`, `Solid privacy panel below worksurface, ${S.xPriv}″ high`, ins(s.w, S.xPriv), 1]));
+  /* worksurfaces */
+  group(secs.map(s => [`F-WSA-${s.w}${S.xD}-${S.xTop}`, `Worksurface assembly, ${FX_TOP[S.xTop].n} (2 brackets, 2 support beams)`, ins(s.w, S.xD), s.faces]));
+  if(m.corners.length) add(S.xCorner === 'rbc' ? `F-CWSA-RBC-${S.xD}-${S.xTop}` : `F-CWSA-${S.xMod}-${S.xD}-${S.xTop}`, S.xCorner === 'rbc' ? 'Corner worksurface assembly, round back corner' : `Corner worksurface assembly, square back, ${S.xMod}″ module`, S.xCorner === 'rbc' ? `${S.xD}″` : ins(S.xMod, S.xMod), m.corners.length);
+  const nWs = secs.reduce((a, s) => a + s.faces, 0) + m.corners.length;
+  if(S.xTop === 'PELW') add('WS-WGK', 'ESD worksurface ground kit, 8′ cord (supplied with ESD worksurface)', '—', nWs);
+  if(S.xStop) group(secs.map(s => [`F-BS-${s.w}`, 'Back stop, 3″ high', fmt(s.w*IN), s.faces]));
+  if(S.xMat !== 'none'){
+    const md = fxMatDepth(S.xD);
+    group(secs.map(s => [`${S.xMat === 'RM' ? 'RM-6' : 'EM-2'}-${s.w}${md}`, S.xMat === 'RM' ? 'Rubber mat, 4–6 mm, black' : 'ESD mat, 2 mm, grey', ins(s.w, md), s.faces]));
+  }
+  if(S.xEsd){ add('WS-WS-GB', 'ESD ground block', '—', 1); add('WS-WS06-GB', 'SC15 wrist strap with 6′ coil cord, 1 megohm resistor', '—', 2); }
+  group(accRows(secs, 'ws'));
+  if(S.xVps) add('F-VPDU-15', 'Vertical power strip, 15 A, 6 outlets', '—', m.runs.reduce((a, r) => a + r.faces.length, 0));
+  if(S.xCt) group(secs.map(s => [`F-CT-${s.w}`, 'Cable tray', fmt(s.w*IN), s.faces]));
+  if(S.xHang !== 'none' && S.xD === 30){
+    const hc = FX_HANG[S.xHang], q = S.xHangPos === 'both' ? 2 : 1;
+    add(`${hc.c}-WO-${S.xLock}-BH`, `Hanging cabinet, ${hc.n}, ${S.xLock === 'IL' ? 'individual lock' : 'no lock'}`, ins(17, hc.h), q);
+  }
+  if(S.xLap) add('F-032119-1D-001-WO-NL-BH', 'Lap / pencil drawer, 21⅜″ × 18¾″, no lock', ins(21.375, 18.75));
+  if(S.xCpu) add('F-CH', 'CPU holder (mounts to worksurface support beams)', '—');
+  if(S.xKbd) add('KBPT-M', 'Keyboard tray with mouse tray', '—');
+  fxPivBom(add);
+}
+function fxPivBom(add){
+  const d = S.xDam ? '-DAM' : '', dn = S.xDam ? ', double articulating arm' : '';
+  if(S.xEs) add(`F-ES${d}`, `Equipment shelf, 12⅜″ × 12⅜″, 75 lb${dn}`, '—');
+  if(S.xAs) add(`F-AS${d}`, `Accessory shelf, 21⅜″ × 7″, 75 lb${dn}`, '—');
+  if(S.xDh) add(`F-DH${d}`, `Document holder, 11⅜″ × 13⅞″${dn}`, '—');
+  if(S.xLdh) add(`F-LDH${d}`, `Large document holder, 23⅜″ × 13⅞″${dn}`, '—');
+  if(S.xMon === 'single') add('F-FFSM', 'Flat panel monitor arm, single (column mount, VESA 75/100, 18 lb)', '—');
+  if(S.xMon === 'dual') add('F-FFDM', 'Flat panel monitor arm, dual (column mount)', '—');
+}
+function flexiCode(){
+  if(S.xType === 'cart') return `FC${S.xCartS === 'double' ? 'DS' : 'SS'}-${S.xCartW}`;
+  if(S.xType === 'flow') return `FFRS-${S.xFH}${S.xFW}` + (S.xFN > 1 ? ` + ${S.xFN - 1}×FFRA-${S.xFH}${S.xFW}` : '');
+  const fr = fxModel().frames;
+  return `F-OSUA-${S.xCol}${fr[0]}` + (fr.length > 1 ? ` + ${fr.length - 1}×F-OAUA` : '');
+}
+function flexiTitle(){
+  if(S.xType === 'cart') return `FLEXI UNIVERSAL CART ${S.xCartW}" ${S.xCartS === 'double' ? 'DOUBLE' : 'SINGLE'} SIDED`;
+  if(S.xType === 'flow') return `FLEXI FLOW RACK ${S.xFH}" HIGH, ${S.xFN} X ${S.xFW}", ${S.xFS} SHELVES${S.xTop !== 'none' ? ' WITH WORKSURFACE' : ''}`;
+  return `FLEXI WORKSTATION ${FX_LAYOUTS[S.xLayout].n.toUpperCase()} LAYOUT, ${S.xCol}" COLUMNS, ${S.xD}" DEEP`;
+}
+function flexiSpecRows(rows){
+  rows.push(['PRODUCT', FLEXI_TYPES[S.xType]]);
+  if(S.xType === 'ws'){
+    const m = fxModel();
+    rows.push(['LAYOUT', `${FX_LAYOUTS[S.xLayout].n}: ` + FX_LAYOUTS[S.xLayout].runs.map((nm, i) => `${nm} ${S.xRuns[i].join(' + ')}"`).join('; ') + (m.corners.length ? `; ${m.corners.length} corner${m.corners.length > 1 ? 's' : ''} (${S.xCorner === 'rbc' ? 'round back' : S.xMod + '" square'})` : '')]);
+    rows.push(['FRAME', `${S.xCol}" columns, open stabilizer, ${m.frames.length} section${m.frames.length > 1 ? 's' : ''}${S.xPriv ? `, ${S.xPriv}" privacy panels` : ''}`]);
+    rows.push(['WORKSURFACE', `${S.xTop} ${S.xD}" deep at ${S.xWH}" high`]);
+  } else if(S.xType === 'cart'){
+    rows.push(['FRAME', `${S.xCartW}" wide, 54" high, ${S.xCartS === 'double' ? 'double' : 'single'} sided, 3½" castors (2 locking)`]);
+  } else {
+    rows.push(['FRAME', `${S.xFH}" high x 48" deep, ${S.xFN} section${S.xFN > 1 ? 's' : ''} x ${S.xFW}", ${S.xFS} shelf assemblies per section${S.xFCast ? ', castors' : ''}`]);
+    if(S.xTop !== 'none') rows.push(['WORKSURFACE', `${S.xTop} ${S.xD}" deep at ${S.xWH}" high`]);
+  }
+  if(S.xType !== 'flow'){
+    const st = geo.fxStats || {}, a = [];
+    if(S.xPanel !== 'none') a.push(`${LINK_PANELS[S.xPanel].toLowerCase()} ${S.xPanelH}"`);
+    if(st.shelves) a.push(`${st.shelves} x ${FX_SHELF[S.xShT].n.split(' (')[0].toLowerCase()} ${S.xShD}"`);
+    if(S.xBin) a.push(`${S.xBin}" bin rail`);
+    if(S.xPow !== 'none') a.push(S.xPow === 'rail' ? 'power rail' : 'power beam');
+    if(S.xVps) a.push('vertical power strip');
+    if(S.xLight !== 'none') a.push(S.xLight === 'ola' ? 'overhead light' : 'tube light');
+    if(S.xTlb !== 'none') a.push(`task light bracket ${S.xTlb}"`);
+    if(S.xOhc) a.push('overhead cabinet');
+    if(S.xUb) a.push('utility bin');
+    if(S.xData) a.push('data beam'); if(S.xAir) a.push('air beam');
+    rows.push(['ACCESSORIES', a.length ? a.join(', ') : 'None']);
+  }
+}
+
+/* -------- UI -------- */
+function syncFlexiUI(){
+  const t = S.xType;
+  document.querySelectorAll('[data-xt]').forEach(el => { el.hidden = !isFlexi() || !el.dataset.xt.split(' ').includes(t); });
+  makeSeg(segEl('xTop'), (t === 'flow' ? [['none', 'None']] : []).concat(Object.keys(FX_TOP).map(k => [k, k])));
+  document.querySelectorAll('[data-key="xMod"] > button').forEach(b => { b.disabled = Number(b.dataset.val) < S.xD; });
+  document.querySelectorAll('[data-key="xShT"] > button').forEach(b => { b.disabled = t === 'cart' && b.dataset.val === 'VAS'; });
+  makeSeg(segEl('xShD'), FX_SHELF[S.xShT].d.map(v => [v, `${v}″`]));
+  document.querySelectorAll('[data-key="xShD"] > button').forEach(b => { b.disabled = t === 'cart' && Number(b.dataset.val) > 14; });
+  document.querySelectorAll('[data-key="xPanelH"] > button').forEach(b => { b.disabled = (S.xPanel === 'T' || S.xPanel === 'M') && b.dataset.val !== '18'; });
+  document.querySelectorAll('[data-key="xPow"] > button').forEach(b => { b.disabled = t === 'cart' && b.dataset.val === 'rail'; });
+  document.querySelectorAll('[data-key^="x"] > [data-val]').forEach(b => b.setAttribute('aria-pressed', String(String(S[b.parentElement.dataset.key]) === b.dataset.val)));
+  const hasC = t === 'ws' && fxModel().corners.length > 0;
+  document.getElementById('xCornerRow').hidden = !hasC;
+  document.getElementById('xModRow').hidden = !hasC || S.xCorner === 'rbc';
+  document.getElementById('xPanelHRow').hidden = S.xPanel === 'none';
+  document.getElementById('xShTRow').hidden = !S.xShN;
+  document.getElementById('xShDRow').hidden = !S.xShN;
+  document.getElementById('xLipRow').hidden = !S.xShN || S.xShT === 'VAS';
+  document.getElementById('xOutRow').hidden = S.xPow !== 'rail';
+  document.getElementById('xHangPosRow').hidden = S.xHang === 'none';
+  document.getElementById('xLockRow').hidden = S.xHang === 'none';
+  document.getElementById('xWHRow').hidden = t === 'flow' && S.xTop === 'none';
+  document.getElementById('xDRow').hidden = t === 'flow' && S.xTop === 'none';
+  document.getElementById('xEsdRow').hidden = !(S.xTop === 'PELW' || S.xMat === 'EM') || t !== 'ws';
+  fillSel('xPanel', Object.entries(LINK_PANELS));
+  fillSel('xHang', [['none', 'None']].concat(Object.entries(FX_HANG).map(([k, h]) => [k, `Fig ${k}: ${h.n}`])));
+  selects.xHang.disabled = S.xD !== 30;
+  /* section editor */
+  const box = document.getElementById('xRuns'), names = FX_LAYOUTS[S.xLayout].runs;
+  const sig = JSON.stringify([S.xLayout, S.xRuns]);
+  if(box.dataset.sig !== sig){
+    box.dataset.sig = sig; box.textContent = '';
+    names.forEach((nm, ri) => {
+      const row = document.createElement('div'); row.className = 'xrun';
+      const lab = document.createElement('span'); lab.className = 'xrun-n'; lab.textContent = nm;
+      const secs = document.createElement('div'); secs.className = 'xrun-secs';
+      S.xRuns[ri].forEach((w, si) => {
+        const sel = document.createElement('select'); sel.dataset.xrun = ri; sel.dataset.xsec = si; sel.setAttribute('aria-label', `${nm} section ${si + 1} width`);
+        FX_W.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = `${v}″`; sel.append(o); });
+        sel.value = String(w); secs.append(sel);
+      });
+      const add = document.createElement('button'); add.type = 'button'; add.className = 'xrun-b'; add.dataset.xadd = ri; add.textContent = '+'; add.title = 'Add an adder section'; add.disabled = S.xRuns[ri].length >= 6;
+      const del = document.createElement('button'); del.type = 'button'; del.className = 'xrun-b'; del.dataset.xdel = ri; del.textContent = '−'; del.title = 'Remove the last section'; del.disabled = S.xRuns[ri].length <= 1;
+      row.append(lab, secs, del, add); box.append(row);
+    });
+  }
+}
+function flexiHints(){
+  const t = S.xType, st = geo.fxStats || {}, h = [];
+  const typeHint = {ws:'Starter and adder sections on 50 mm slotted columns. Macro slots (worksurfaces, heavy shelves) adjust in 3″ steps; micro slots (beams, rails, panels) in 1″ steps.', cart:'54″ high mobile cart on the Flexi starter column; takes the same accessories as the workstations, shelves up to 14″ deep.', flow:'Gravity flow rack, 48″ deep, 1,400 lb. Sections join side by side with starter and adder assemblies.'}[t];
+  document.getElementById('xTypeHint').textContent = typeHint;
+  if(t === 'ws'){
+    const m = fxModel();
+    document.getElementById('xLayoutHint').textContent = `${m.frames.length} frame section${m.frames.length > 1 ? 's' : ''} (1 starter${m.frames.length > 1 ? ` + ${m.frames.length - 1} adder${m.frames.length > 2 ? 's' : ''}` : ''})${m.corners.length ? `, incl. ${m.corners.length} corner module${m.corners.length > 1 ? 's' : ''}` : ''}. Set each run's section widths below.`;
+  }
+  if(st.skipShelf) h.push(`${FX_SHELF[S.xShT].n.split(' (')[0]} ${S.xShD}″ is not made for some section widths; those sections have no shelf.`);
+  if(st.skipPanel) h.push(S.xPanel === 'T' || S.xPanel === 'M' ? 'Tackboard and markerboard come 18″ high, up to 48″ wide.' : '30″ panels are not made 72″ wide.');
+  if(S.xShN && st.shelves !== undefined && st.shelves < S.xShN && !st.skipShelf) h.push(`Only ${st.shelves} of ${S.xShN} shelves fit ${t === 'cart' ? 'on the 54″ cart' : `with ${S.xCol}″ columns; remove an accessory or choose taller columns`}.`);
+  if(st.panelShort) h.push('The panel is cut down to fit under the shelves.');
+  const ws = t === 'ws' ? S.xRuns.flat() : [];
+  if(S.xPow === 'rail' && ws.includes(72)) h.push('HPR power rails are made 24–60″ wide; 72″ sections get none.');
+  if(S.xLight === 'ola' && ws.includes(24)) h.push('Overhead lights start at 30″ wide; 24″ sections get none.');
+  document.getElementById('xAccHint').textContent = h.join(' ');
+  document.getElementById('xBelowHint').textContent = S.xD !== 30 ? 'Hanging cabinets are listed for 30″ deep worksurfaces only.' : '';
+}
+
+Object.keys(FLEXI_DEFAULTS).forEach(k => { if(!(k in S)) S[k] = JSON.parse(JSON.stringify(FLEXI_DEFAULTS[k])); });
+
 function buildCabinetProduct(){
   const mob = S.product === 'mob';
   const w = CABW[S.cw], d = CABD[S.cd], model = S.model;
@@ -1704,6 +3072,8 @@ function preconfigCode(){
 /* {code, kind}: kind 'pre' = catalog preconfigured number, 'part' = catalog part, 'custom' = build from parts list */
 function catalogCode(){
   if(isCabinet()) return {code:cabinetCode(), kind:S.cvar === 'custom' ? 'custom' : 'part'};
+  if(isLink()) return {code:linkCode(), kind:'part'};
+  if(isFlexi()) return {code:flexiCode(), kind:'part'};
   const s = S.series;
   if(carryOn()) return {code:`WS-BC-${S.W}${S.D}-${S.top} + ${S.rowCab}×BC`, kind:'custom'};
   if(s === 'base'){
@@ -1720,6 +3090,8 @@ function catalogCode(){
 }
 function productTitle(){
   if(isCabinet()) return `${S.product === 'mob' ? 'MOBILE CABINET' : 'BASE CABINET'} -${drawerCount()}D${doorCount() ? '+DOOR' : ''}`;
+  if(isLink()) return linkTitle();
+  if(isFlexi()) return flexiTitle();
   const t = `${SERIES[S.series].n.toUpperCase()} WORKBENCH ${S.W}" X ${S.D}"${S.series === 'base' && S.above === 'stand' ? ' X2 WITH LINK WORKSTAND' : ''}`;
   return S.series === 'flexi' && S.sides === 'double' ? `${t} DOUBLE SIDED` : t;
 }
@@ -1748,6 +3120,8 @@ function bomRows(){
     if(rem > 0) add('', 'Open space (not filled)', fmt(rem));
     return r;
   }
+  if(isLink()){ linkBom(add); return r; }
+  if(isFlexi()){ flexiBom(add); return r; }
   const ser = S.series, W = S.W, D = S.D, top = TOPS[S.top];
   const cst = castorOn();
   if(ser === 'base'){
@@ -1769,10 +3143,10 @@ function bomRows(){
     if(nLeg){
       if(pro){
         const pre = S.legStyle === 'panel' ? 'PRPL' : 'PRL';
-        add(cst ? `${pre}-${S.castor}-${S.hc}${D}` : `${pre}-${S.hc}${D}`, `${S.legStyle === 'panel' ? 'Panel leg' : 'Leg'} frame 2½″, ${ifr(S.hc - .5)}″${cst ? (S.castor === 'FC' ? ', 6″ fixed castors' : ', 6″ swivel castors with locks') : ''}${W >= 84 ? ' (incl. centre leg)' : ''}`, fmtSize(D*IN - 76, (S.hc - .5)*IN), nLeg);
+        add(cst ? `${pre}-${S.castor}-${S.hc}${D}` : `${pre}-${S.hc}${D}`, `${S.legStyle === 'panel' ? 'Panel leg' : 'Leg'} frame 2½″, ${ifr(S.hc - .5)}″ high${cst ? (S.castor === 'FC' ? ', 6″ fixed castors' : ', 6″ swivel castors with locks') : ''}${W >= 84 ? ' (incl. centre leg)' : ''}`, fmtSize(D*IN - 76, (S.hc - .5)*IN), nLeg);
         if(S.ext && !cst) add('PR-LE-2-6-1', `Leg extender pair (one per leg frame), set at +${S.ext}″, 1″ steps (code to confirm)`, `+${fmt(S.ext*IN)}`, nLeg);
       } else {
-        add(`${S.legStyle === 'panel' ? 'SPL' : 'SL'}-${S.hc}${D}`, `${S.legStyle === 'panel' ? 'Panel tech leg' : 'Tech leg'}, 2″ × 2″ pair${sciMid() ? ' (incl. centre leg)' : ''}`, fmtSize(D*IN - 50, (S.hc - .5)*IN), nLeg);
+        add(`${S.legStyle === 'panel' ? 'SPL' : 'SL'}-${S.hc}${D}`, `${S.legStyle === 'panel' ? 'Panel tech leg' : 'Tech leg'} ${ifr(S.hc - .5)}″ high, 2″ × 2″ pair${sciMid() ? ' (incl. centre leg)' : ''}`, fmtSize(D*IN - 50, (S.hc - .5)*IN), nLeg);
         if(S.ext) add('SLE-2-6-1', `Leg extender pair, set at +${S.ext}″`, `+${fmt(S.ext*IN)}`, nLeg);
         if(cst) add('S-CSTR-WB', 'Castor pair 5″ × 1¼″ with brake (adds 6″)', `+${fmt(6*IN)}`, nLeg);
       }
@@ -1826,8 +3200,9 @@ function bomRows(){
     if(n > 1) add(`LWAC-${S.sH}${sec}-${S.sDep}`, 'Link workstand adder set', ins(sec, S.sH + 4.75), n - 1);
     if(geo.standShelves) add(`L-ADS-${sec}${S.sShD}-L`, `Adjustable shelf, ${S.sShD}″ deep (both sides)`, ins(sec, S.sShD), geo.standShelves*2*n);
     if(S.sPanel !== 'none') add(`L-${S.sPanel}-${S.sPanelH}${sec}`, `${LINK_PANELS[S.sPanel]}, ${S.sPanelH}″ high`, ins(sec, S.sPanelH), n);
+    if(S.sPanel === 'PP' && S.sBoard !== 'none') add(`L-${S.sBoard}-${S.sBH}${S.sBW}`, `${BOARD_NAME[S.sBoard]} with hooks, hangs on pegboard and slides end to end, ${S.sBH}″ high`, ins(S.sBW, S.sBH), n);
     if(S.sPower) add('L-VPDU-15', 'Vertical power strip, 15 A', '—', 2);
-    if(S.sUsl && geo.standShelves) add(`L-LED-${uslLen(sec)}`, 'LED undershelf task light, under lowest shelf each side (code to confirm)', fmt(uslLen(sec)*IN), 2*n);
+    if(S.sUsl && geo.standShelves) add(`L-UTL-${utlPick(S.sUtlL, sec)}`, 'Undershelf task light, under lowest shelf each side', fmt(utlPick(S.sUtlL, sec)*IN), 2*n);
   }
   if(ser !== 'flexi' && S.above === 'link'){
     const secs = linkSecs(), h = S.upH, grp = {}, order = [];
@@ -1838,9 +3213,10 @@ function bomRows(){
       const cnt = (geo.linkShelfCounts || [])[i] || 0;
       if(cnt) g(`L-ADS-${x.w}${x.shD}-L`, `Adjustable shelf, ${x.shD}″ deep`, ins(x.w, x.shD), cnt);
       if(x.panel !== 'none'){ const ph = h < 48 ? 18 : x.panelH; g(`L-${x.panel}-${ph}${x.w}`, `${LINK_PANELS[x.panel]}, ${ph}″ high`, ins(x.w, ph)); }
+      if(x.panel === 'PP' && x.board !== 'none') g(`L-${x.board}-${x.bH}${x.bW}`, `${BOARD_NAME[x.board]} with hooks, hangs on pegboard and slides end to end, ${x.bH}″ high`, ins(x.bW, x.bH));
       if(x.rail) g(`L-HPDU-${x.w}-15`, 'Horizontal power rail, 15 A', fmt(x.w*IN));
       if(x.light) g(`FTA-1-${x.w}-${D <= 30 ? 19 : 26}`, 'Fixed tube light assembly', fmt(x.w*IN));
-      if(x.usl && cnt) g(`L-LED-${uslLen(x.w)}`, 'LED undershelf task light (code to confirm)', fmt(uslLen(x.w)*IN));
+      if(x.usl && cnt) g(`L-UTL-${utlPick(x.utlL, x.w)}`, 'Undershelf task light', fmt(utlPick(x.utlL, x.w)*IN));
       if(x.ohc && h >= 48){ g(`L-OHC-16${x.w}-${x.ohcDoor}-${S.lock}-${c}`, `Overhead cabinet 16″ high, 15″ deep, ${OHC_DOORS[x.ohcDoor].toLowerCase()}`, ins(x.w, 16)); g('L-OHC-BKT-16', 'Overhead cabinet brackets', '—'); }
     });
     order.forEach(k => add(...grp[k]));
@@ -1878,6 +3254,11 @@ function specText(){
   if(isCabinet()){
     lines.push(`Size: ${fmt(CABW[S.cw])} W × ${fmt(CABD[S.cd])} D × ${fmt(geo.overall)} H${u}`);
     lines.push(`Drawer fronts (top to bottom): ${S.stack.map(i => i.door ? 'door' : `${FRONT_IN[i.h]}″`).join(', ')}`);
+  } else if(isFlexi()){
+    lines.push(`Size: ${fmt(geo.W)} W × ${fmt(geo.D)} D × ${fmt(geo.overall)} H${u}`);
+  } else if(isLink()){
+    lines.push(`Size: ${fmt(geo.W)} W × ${fmt(geo.D)} D × ${fmt(geo.overall)} H${u}`);
+    if(lHasTop()) lines.push(`Worksurface: ${lTopCode()} ${S.lW}″ × ${lWsDepth()}″ at ${S.lWH}″`);
   } else {
     lines.push(`Size: ${fmt(Wmm())} W × ${fmt(Dmm())} D × ${fmt(geo.H)} H${u}` + (geo.overall !== geo.H ? ` (overall ${fmt(geo.overall)}${u})` : ''));
     lines.push(`Worktop: ${TOPS[S.top].n}`);
@@ -1896,7 +3277,11 @@ function updateText(){
   document.getElementById('catState').textContent = cc.kind === 'pre' ? 'Matches catalog preconfigured bench' : cc.kind === 'custom' ? (isCabinet() ? 'Custom drawer layout, variant no. to be assigned' : 'Custom build, order from the parts list') : 'Catalog part number';
   document.getElementById('catCode').textContent = cc.code;
   const u = S.units === 'mm' ? ' mm' : '';
-  document.getElementById('readout').textContent = isCabinet()
+  if(isLink()) linkHints();
+  if(isFlexi()) flexiHints();
+  document.getElementById('readout').textContent = isLink() || isFlexi()
+    ? `${fmt(geo.W)} × ${fmt(geo.D)} × ${fmt(geo.overall)}${u}` + (geo.H ? `  ·  worksurface ${fmt(geo.H)}` : '')
+    : isCabinet()
     ? `${fmt(CABW[S.cw])} × ${fmt(CABD[S.cd])} × ${fmt(geo.overall)}${u}  ·  ${drawerCount()} drawers`
     : `${fmt(Wmm())} × ${fmt(geo.D)} × ${fmt(geo.H)}${u}` + (geo.overall !== geo.H ? `  ·  overall ${fmt(geo.overall)}` : '');
   document.getElementById('seriesHint').textContent = SERIES[S.series].hint;
@@ -2022,7 +3407,7 @@ function makeSwatches(el, src){
 makeSwatches(document.querySelector('[data-key="top"]'), TOPS);
 makeSwatches(document.querySelector('[data-key="frame"]'), COLORS);
 const selects = {};
-['rowHB','sPanel','hangType','pedHB','pedL','pedR','panel','ohcDoor','rPanel','fPanel','cvar','ctop'].forEach(k => { selects[k] = document.getElementById(k); });
+['rowHB','sPanel','hangType','pedHB','pedL','pedR','panel','ohcDoor','rPanel','fPanel','cvar','ctop','lPanel','xPanel','xHang'].forEach(k => { selects[k] = document.getElementById(k); });
 function fillSel(k, entries){
   const el = selects[k], sig = JSON.stringify(entries);
   if(el.dataset.sig !== sig){
@@ -2088,6 +3473,9 @@ function normalise(key){
     }
     if(LINK_GLOBAL.includes(key)) S.linkSecs.forEach(x => { x[key] = S[key]; });
     S.linkSecs.forEach(x => { if(S.upH < 48){ x.shelves = Math.min(1, x.shelves); x.panelH = 18; x.ohc = false; } });
+    S.linkSecs.forEach(x => { if(x.board === undefined) Object.assign(x, {board:'none', bW:24, bH:18, bPos:'centre'}); fixBoard(x, 'board', 'bW', 'bH', 'panel', x.w, S.upH < 48 ? 18 : x.panelH); });
+    fixBoard(S, 'board', 'bW', 'bH', 'panel', S.linkSecs.length ? Math.min(...S.linkSecs.map(x => x.w)) : 48, S.upH < 48 ? 18 : S.panelH);
+    if(S.above === 'stand') fixBoard(S, 'sBoard', 'sBW', 'sBH', 'sPanel', linkSections().sec, S.sPanelH);
     if(rowOn()){
       S.supL = S.supR = 'leg'; S.hang = 'none'; S.lap = false; S.foot = false; S.shelf = false; S.privacy = false; S.castor = 'none';
       if(carryOn()){ const need = Math.ceil((rowTotal() + 40)/IN); if(S.W < need || (!W_OPT[ser].includes(S.W) && S.W !== need)) S.W = W_OPT[ser].find(w => w >= need) || need; }
@@ -2101,6 +3489,10 @@ function normalise(key){
     if(!po.find(o => o.key === S.pedHB)) S.pedHB = po[0].key;
     const vl = (CAB_VARIANTS[pedInfo().model] || []).map(v => v.code);
     S.pedL = pick(S.pedL, vl); S.pedR = pick(S.pedR, vl);
+  } else if(S.product === 'flexi'){
+    normFlexi(key);
+  } else if(S.product === 'link'){
+    normLink(key);
   } else {
     const mob = S.product === 'mob';
     const models = Object.keys(mob ? MOB_H : CAB_H).map(Number);
@@ -2132,7 +3524,8 @@ function syncUI(){
   // series-dependent option lists
   makeSeg(segEl('W'), W_OPT[ser].map(v => [v, `${v}″`]));
   makeSeg(segEl('D'), D_OPT[ser].map(v => [v, `${v}″`]));
-  makeSeg(segEl('hc'), HC_OPT[ser]);
+  makeSeg(segEl('hc'), HC_OPT[ser].map(([v, l]) => [v, ser === 'scitec' ? `${S.legStyle === 'panel' ? 'SPL' : 'SL'}-${v} · ${ifr(v - .5)}″` : ser === 'pro' ? `${ifr(v - .5)}″` : l]));
+  { const lg = ser === 'pro' || ser === 'scitec' ? ` ${ifr(S.hc - .5)}″` : ''; for(const k of ['supL', 'supR']) makeSeg(segEl(k), [['leg', 'Leg' + lg], ['cab', 'Cabinet']]); }
   makeSeg(segEl('ext'), EXT_OPT[ser].map(v => [v, v ? `+${v}″` : 'None']));
   makeSeg(segEl('castor'), castorOpts());
   makeSeg(segEl('rType'), Object.entries(RISER[ser] || {}).map(([k, o]) => [k, o.n]));
@@ -2224,18 +3617,43 @@ function syncUI(){
   document.getElementById('pedSet').hidden = !anyCab;
   document.getElementById('pedLRow').hidden = !hasCab('left');
   document.getElementById('pedRRow').hidden = !hasCab('right');
-  fillSel('panel', Object.entries(LINK_PANELS));
-  fillSel('sPanel', Object.entries(LINK_PANELS));
+  fillSel('panel', Object.entries(LINK_PEG_PANELS));
+  fillSel('sPanel', Object.entries(LINK_PEG_PANELS));
   fillSel('ohcDoor', Object.entries(OHC_DOORS));
   fillSel('rPanel', Object.entries(RISER_PANELS[S.rType] || {none:'Open'}));
   fillSel('fPanel', Object.entries(LINK_PANELS));
   fillSel('cvar', variantList().map(v => [v.code, `${v.code}${Array.isArray(v.s) ? `  (${v.s.map(h => FRONT_IN[h] + '″').join(', ')})` : v.s ? '' : '  (layout to confirm)'}`]).concat([['custom', 'Custom layout (###)']]));
   fillSel('ctop', Object.entries(CTOPS).map(([k, o]) => [k, o.n]));
-  document.getElementById('hcLabel').textContent = ser === 'pro' || ser === 'scitec' ? 'Leg' : 'Height';
+  document.getElementById('hcLabel').textContent = ser === 'pro' || ser === 'scitec' ? 'Leg height' : 'Height';
   const hint = MOB_HINT[ser];
   if(hint) document.getElementById('mobHint').textContent = hint[S.castor] || hint.none;
   document.getElementById('workH').textContent = `worktop ${fmt(workHeight())}${S.units === 'mm' ? ' mm' : ''}`;
   document.getElementById('colourTitle').textContent = isCabinet() ? 'Housing colour' : 'Powder coat colour';
+  document.getElementById('presetsTitle').textContent = isLink() || isFlexi() ? 'Starting points' : 'Catalog presets';
+  if(isLink()){ document.getElementById('lockRow').hidden = true; syncLinkUI(); }
+  if(isFlexi()) document.getElementById('lockRow').hidden = true;
+  syncFlexiUI();
+  syncBoards();
+}
+function syncBoards(){
+  const set = (pre, kB, kW, kH, kP, kPH, w) => {
+    const peg = S[kP] === 'PP', on = peg && S[kB] !== 'none';
+    document.getElementById(pre + 'BoardRow').hidden = !peg;
+    for(const r of ['BWRow', 'BHRow', 'BPosRow']) document.getElementById(pre + r).hidden = !on;
+    document.querySelectorAll(`[data-key="${kW}"] > button`).forEach(b => { b.disabled = Number(b.dataset.val) > w; });
+    document.querySelectorAll(`[data-key="${kH}"] > button`).forEach(b => { b.disabled = Number(b.dataset.val) > S[kPH]; });
+    for(const k of [kB, kW, kH, kB.replace(/Board$|board$/, m => m[0] === 'B' ? 'BPos' : 'bPos')]) document.querySelectorAll(`[data-key="${k}"] > [data-val]`).forEach(b => b.setAttribute('aria-pressed', String(String(S[k]) === b.dataset.val)));
+  };
+  const lens = (k, row, show, w) => {
+    document.getElementById(row).hidden = !show;
+    document.querySelectorAll(`[data-key="${k}"] > button`).forEach(b => { b.disabled = Number(b.dataset.val) > w; b.setAttribute('aria-pressed', String(String(utlPick(S[k], w)) === b.dataset.val)); });
+  };
+  lens('utlL', 'utlLRow', S.above === 'link' && S.usl && linkSecs().some(x => x.shelves > 0), S.linkSecs && S.linkSecs.length ? Math.min(...S.linkSecs.map(x => x.w)) : 48);
+  lens('sUtlL', 'sUtlLRow', S.sUsl && !!S.sShelves, linkSections().sec);
+  lens('lUtlL', 'lUtlLRow', S.lType === 'stand' && S.lUsl && !!S.lShelves && S.lShType !== 'var', S.lW);
+  set('u', 'board', 'bW', 'bH', 'panel', 'panelH', S.linkSecs && S.linkSecs.length ? Math.min(...S.linkSecs.map(x => x.w)) : 48);
+  set('s', 'sBoard', 'sBW', 'sBH', 'sPanel', 'sPanelH', linkSections().sec);
+  set('l', 'lBoard', 'lBW', 'lBH', 'lPanel', 'lPanelH', S.lW);
 }
 function renderLinkSecs(){
   const el = document.getElementById('linkSecList'), secs = S.linkSecs;
@@ -2259,13 +3677,22 @@ function renderLinkSecs(){
     del.dataset.secdel = i; del.disabled = secs.length < 2; del.setAttribute('aria-label', `Remove section ${i + 1}`);
     hd.append(del);
     const gg = mk('div', {className:'lsec-g'});
-    gg.append(sel(i, 'panel', Object.entries(LINK_PANELS), `Section ${i + 1} panel`));
+    gg.append(sel(i, 'panel', Object.entries(LINK_PEG_PANELS), `Section ${i + 1} panel`));
     gg.append(sel(i, 'panelH', S.upH < 48 ? [[18, '18″ high']] : [[18, '18″ high'], [30, '30″ high']], `Section ${i + 1} panel height`));
     gg.append(sel(i, 'shelves', (S.upH < 48 ? [0, 1] : [0, 1, 2]).map(v => [v, v ? `${v} shelf${v > 1 ? 'ves' : ''}` : 'No shelf']), `Section ${i + 1} shelves`));
     gg.append(sel(i, 'shD', [[12, '12″ deep'], [15, '15″ deep']], `Section ${i + 1} shelf depth`));
+    if(x.panel === 'PP'){
+      gg.append(sel(i, 'board', [['none', 'No board on pegboard'], ['T', 'Tackboard on pegboard'], ['M', 'Markerboard on pegboard']], `Section ${i + 1} board on pegboard`));
+      if(x.board !== 'none'){
+        gg.append(sel(i, 'bW', BOARD_W.map(v => [v, `Board ${v}″ wide`, v > x.w]), `Section ${i + 1} board width`));
+        gg.append(sel(i, 'bH', [[18, 'Board 18″ high'], [30, 'Board 30″ high', (S.upH < 48 ? 18 : x.panelH) < 30]], `Section ${i + 1} board height`));
+        gg.append(sel(i, 'bPos', [['left', 'Board at left'], ['centre', 'Board at centre'], ['right', 'Board at right']], `Section ${i + 1} board position`));
+      }
+    }
     const tt = mk('div', {className:'lsec-t'});
     tt.append(chk(i, 'rail', 'Power rail'), chk(i, 'light', 'Tube light'));
     if(x.shelves > 0) tt.append(chk(i, 'usl', 'Undershelf task light'));
+    if(x.shelves > 0 && x.usl) gg.append(sel(i, 'utlL', [18, 36, 48].map(v => [v, `Light ${v}″ (L-UTL-${v})`, v > x.w]), `Section ${i + 1} undershelf light length`));
     if(S.upH >= 48) tt.append(chk(i, 'ohc', 'Overhead cabinet'));
     card.append(hd, gg, tt);
     if(x.ohc && S.upH >= 48){ const og = mk('div', {className:'lsec-g'}); og.append(sel(i, 'ohcDoor', Object.entries(OHC_DOORS), `Section ${i + 1} overhead cabinet door`)); card.append(og); }
@@ -2284,7 +3711,7 @@ const linkList = document.getElementById('linkSecList');
 linkList.addEventListener('change', e => {
   const t = e.target; if(!t.dataset || t.dataset.sec === undefined) return;
   const i = Number(t.dataset.sec), f = t.dataset.f;
-  S.linkSecs[i][f] = t.type === 'checkbox' ? t.checked : (['w','panelH','shelves','shD'].includes(f) ? Number(t.value) : t.value);
+  S.linkSecs[i][f] = t.type === 'checkbox' ? t.checked : (['w','panelH','shelves','shD','bW','bH','utlL'].includes(f) ? Number(t.value) : t.value);
   if(f === 'w') S.linkAuto = false;
   normalise('linkSec'); markPreset(null); syncUI(); rebuild(); if(f === 'w') fit();
 });
@@ -2300,12 +3727,27 @@ linkList.addEventListener('click', e => {
   S.linkAuto = false;
   normalise('linkSec'); markPreset(null); syncUI(); rebuild(); fit();
 });
+const xRunsEl = document.getElementById('xRuns');
+xRunsEl.addEventListener('change', e => {
+  const t = e.target; if(t.dataset.xrun === undefined) return;
+  S.xRuns[Number(t.dataset.xrun)][Number(t.dataset.xsec)] = Number(t.value);
+  normalise('xRuns'); markPreset(null); syncUI(); rebuild(); fit();
+});
+xRunsEl.addEventListener('click', e => {
+  const a = e.target.closest('[data-xadd]'), d = e.target.closest('[data-xdel]');
+  if(!a && !d) return;
+  if(a && !a.disabled){ const r = S.xRuns[Number(a.dataset.xadd)]; r.push(r[r.length - 1]); }
+  if(d && !d.disabled) S.xRuns[Number(d.dataset.xdel)].pop();
+  normalise('xRuns'); markPreset(null); syncUI(); rebuild(); fit();
+});
 function markPreset(i){ presetsEl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(Number(c.dataset.preset) === i))); }
 function loadPreset(i){
   const p = PRESETS[i];
   S.product = p.p;
   const s = JSON.parse(JSON.stringify(p.s));
-  if(p.p === 'ws') Object.assign(S, JSON.parse(JSON.stringify(WS_DEFAULTS)));
+  if(p.p === 'ws') Object.assign(S, JSON.parse(JSON.stringify(WS_DEFAULTS)), BOARD_DEFAULTS);
+  if(p.p === 'link') Object.assign(S, JSON.parse(JSON.stringify(LINK_DEFAULTS)), BOARD_DEFAULTS);
+  if(p.p === 'flexi') Object.assign(S, JSON.parse(JSON.stringify(FLEXI_DEFAULTS)));
   Object.assign(S, s);
   normalise('product'); syncUI(); rebuild(); fit('iso'); markPreset(i);
 }
@@ -2433,7 +3875,7 @@ async function makeSheet(){
       label(t, mmX(minX) - 30, mmY((d.top + d.bot)/2), 'right', 46, 700);
     });
   } else {
-    vdim(mmX(minX) - 80, mmY(0), mmY(geo.H), fmt(geo.H), -1);
+    if(geo.H) vdim(mmX(minX) - 80, mmY(0), mmY(geo.H), fmt(geo.H), -1);
     vdim(mmZ(minZ) + 80, mmY(0), mmY(maxY), fmt(maxY), 1);
   }
   x.fillStyle = '#111111';
@@ -2474,8 +3916,8 @@ function calloutRules(){
   const r = (re, label, how) => R.push({re, label, how: how || 'near'});
   r(/^Worktop /, () => worktopLabel(), 'top');
   r(/^Leg 2″/, () => castorOn() ? 'LEG 2" X 2" SQUARE TUBE' : 'LEG WITH LEVELLING GLIDE');
-  r(/^Leg frame post/, () => S.legStyle === 'panel' ? 'PANEL LEG FRAME' : 'LEG FRAME');
-  r(/^Tech leg 2/, () => S.legStyle === 'panel' ? 'PANEL TECH LEG' : 'TECH LEG');
+  r(/^Leg frame post/, () => `${S.legStyle === 'panel' ? 'PANEL LEG FRAME' : 'LEG FRAME'}- ${ifr(S.hc - .5)}"H`);
+  r(/^Tech leg 2/, () => `${S.legStyle === 'panel' ? 'PANEL TECH LEG' : 'TECH LEG'}- ${ifr(S.hc - .5)}"H`);
   r(/^Top support rail/, 'TOP SUPPORT RAIL');
   r(/^Leg extender/, 'LEG EXTENDER');
   r(/^Castor wheel|^Castor 6|^Castor [35]″/, 'CASTOR WHEELS');
@@ -2516,6 +3958,30 @@ function calloutRules(){
   r(/^Overhead cabinet /, 'OVERHEAD CABINET');
   r(/^Cabinet top |^Retainer top$/, () => S.ctop === 'RT' ? 'RETAINER TOP' : `${(CTOPS[S.ctop].n.split(' (')[0]).toUpperCase()} TOP`);
   r(/^Plastic front handle/, 'PLASTIC FRONT HANDLE');
+  r(/^Link stand upright/, () => `LINK WORKSTAND FRAME-${S.lJust === 'rear' ? 'REAR' : 'CENTRE'} JUSTIFIED-STARTER SET`, 'first');
+  r(/^Link stand upright/, () => lSecs() > 1 ? 'LINK WORKSTAND FRAME-ADDER SET' : null, 'last');
+  r(/^Link trolley upright/, () => `LINK MOBILE TROLLEY FRAME-${S.lJust === 'rear' ? 'REAR' : 'CENTRE'} JUSTIFIED`);
+  r(/^Link worksurface/, () => `WORKSURFACE- ${lTopCode() === 'PELW' ? 'ESD LAMINATE' : 'POSTFORM LAMINATED PARTICLE BOARD'}`, 'top');
+  r(/^Worksurface bracket/, () => S.lType === 'flow' ? 'WORKSURFACE BRACKET / FOOT KIT' : 'WORKSURFACE BRACKET');
+  r(/^Worksurface back stop/, 'BACK STOP');
+  r(/^Variable angle shelf/, 'VARIABLE ANGLE SHELVES');
+  r(/^Link tube light/, () => `FIXED TUBELIGHT ASSEMBLY- ${lWsDepth() <= 24 ? 19 : 26}'' BRACKET`);
+  r(/^Trolley side handle/, 'SIDE HANDLE');
+  r(/^Flow rack upright \(starter\)/, 'LINK FLOW RACK FRAME-STARTER SET');
+  r(/^Flow rack upright$/, () => lSecs() > 1 ? 'LINK FLOW RACK FRAME-ADDER SET' : null, 'last');
+  r(/^Roller shelf frame/, 'ROLLER SHELF');
+  r(/^Roller track/, 'ROLLER TRACKS');
+  r(/^Roller guide/, 'ROLLER GUIDES');
+  r(/^Flexi slotted column/, () => isFlexi() ? (S.xType === 'cart' ? 'FLEXI UNIVERSAL CART FRAME' : 'FLEXI UPRIGHT ASSEMBLY-OPEN STABILIZER') : null, 'first');
+  r(/^Flexi worksurface/, () => `WORKSURFACE ASSEMBLY- ${FX_TOP[S.xTop] ? FX_TOP[S.xTop].n.toUpperCase() : ''}`, 'top');
+  r(/^Flexi corner worksurface/, 'CORNER WORKSURFACE ASSEMBLY');
+  r(/^Outrigger foot/, 'OUTRIGGER');
+  r(/^Open stabilizer/, 'OPEN STABILIZER');
+  r(/^Flow rack column \(starter\)/, 'FLEXI FLOW RACK STARTER ASSEMBLY');
+  r(/^Flow rack shelf assembly/, 'FLOW RACK SHELF ASSEMBLY');
+  r(/^Hanging cabinet F-/, 'HANGING CABINET');
+  r(/^Overhead cabinet \d/, 'OVERHEAD CABINET');
+  r(/^Task light bracket/, 'TASK LIGHT BRACKET');
   r(/^Tubular steel side handle/, 'TUBULAR STEEL SIDE HANDLE');
   return R;
 }
@@ -2561,7 +4027,7 @@ function drawingMeta(){
   const d = new Date(), pad = n => String(n).padStart(2, '0');
   return {project:v('dwgTitle').trim().toUpperCase() || '-', by:v('dwgBy').trim() || '-', date:`${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`};
 }
-const productName = () => isCabinet() ? (S.product === 'mob' ? 'Mobile Cabinet' : 'Base Cabinet') : `${SERIES[S.series].n} Workbench`;
+const productName = () => isFlexi() ? FLEXI_TYPES[S.xType] : isLink() ? LINK_TYPES[S.lType] : isCabinet() ? (S.product === 'mob' ? 'Mobile Cabinet' : 'Base Cabinet') : `${SERIES[S.series].n} Workbench`;
 function sheetFrame(x, n, total, subtitle, meta){
   const {SW, SH, M, TB} = DW;
   drawWatermark(x, SW, SH);
@@ -2607,6 +4073,10 @@ function specRows(){
     rows.push(['TOP', CTOPS[S.ctop].n]);
     if(mob) rows.push(['HANDLE', S.mhandle === 'PPH' ? 'Plastic front handle (PPH)' : 'Tubular steel side handle (MPH)']);
     rows.push(['LOCK', S.lock === 'IL' ? 'Integrated lock' : 'No lock']);
+  } else if(isFlexi()){
+    flexiSpecRows(rows);
+  } else if(isLink()){
+    linkSpecRows(rows);
   } else {
     const W = Wmm(), D = Dmm(), H = workHeight();
     rows.push(['PRODUCT', productName() + (ser === 'flexi' && S.sides === 'double' ? ', double sided' : '')]);
@@ -2617,7 +4087,7 @@ function specRows(){
     if(ser === 'flexi'){ const {n} = flexiSections(); sup = `${n + 1} slotted uprights ${S.colH}" on outrigger feet`; }
     else if(carryOn()) sup = `${S.rowCab} base cabinets carry the worktop, frame base with glides`;
     else if(ser === 'base') sup = `${S.W >= 84 && !rowOn() ? 6 : 4} legs, 2" x 2" square tube`;
-    else { const legs = 2 - cabs + (ser === 'pro' && S.W >= 84 && !rowOn() ? 1 : 0); sup = [legs ? `${legs} ${ser === 'pro' ? 'leg frame' : 'tech leg'}${legs > 1 ? 's' : ''}${S.legStyle === 'panel' ? ' (panel)' : ''}` : '', cabs ? `${cabs} cabinet pedestal${cabs > 1 ? 's' : ''}` : ''].filter(Boolean).join(' + '); }
+    else { const legs = 2 - cabs + (ser === 'pro' && S.W >= 84 && !rowOn() ? 1 : 0); sup = [legs ? `${legs} ${ser === 'pro' ? 'leg frame' : 'tech leg'}${legs > 1 ? 's' : ''}${S.legStyle === 'panel' ? ' (panel)' : ''}, ${ifr(S.hc - .5)}" high` : '', cabs ? `${cabs} cabinet pedestal${cabs > 1 ? 's' : ''}` : ''].filter(Boolean).join(' + '); }
     if(rowOn() && !carryOn()) sup += `, ${S.rowCab} base cabinet${S.rowCab > 1 ? 's' : ''} between legs`;
     rows.push(['SUPPORT', sup]);
     const feet = castorOn() ? (ser === 'pro' ? (S.castor === 'FC' ? '6" fixed castors' : '6" swivel castors with locks') : '5" castors, 2 with brakes') : 'Levelling glides';
@@ -2651,7 +4121,7 @@ function specRows(){
     if(ser === 'flexi' && S.fStop) acc.push('back stop');
     rows.push(['ACCESSORIES', acc.length ? acc.join(', ') : 'None']);
   }
-  rows.push(['COLOURS', `Powder coat ${COLORS[S.frame].n} (${S.frame})${isCabinet() ? '' : `; worktop ${S.top}`}`]);
+  rows.push(['COLOURS', `Powder coat ${COLORS[S.frame].n} (${S.frame})${isFlexi() ? (S.xType !== 'cart' && S.xTop !== 'none' ? `; worksurface ${S.xTop}` : '') : isLink() ? (lHasTop() ? `; worksurface ${lTopCode()}` : '') : isCabinet() ? '' : `; worktop ${S.top}`}`]);
   const bb = new THREE.Box3().setFromObject(build), sz = bb.getSize(new THREE.Vector3()).multiplyScalar(1000);
   rows.push(['OVERALL SIZE', `${Math.round(sz.x)} W x ${Math.round(sz.z)} D x ${Math.round(sz.y)} H mm  (${inQ(sz.x)} x ${inQ(sz.z)} x ${inQ(sz.y)})`]);
   rows.push(['QUANTITY', String(qty())]);
@@ -2833,8 +4303,8 @@ async function makeDrawingPages(){
     const meshes = []; build.traverse(o => { if(o.isMesh && !o.userData.noExport) meshes.push(o); });
     const boxes = re => meshes.filter(m => re.test(m.name)).map(m => new THREE.Box3().setFromObject(m));
     const unite = list => list.length ? list.reduce((a, b) => a.union(b)) : null;
-    const H = isCabinet() ? geo.overall : geo.H;
-    const wt = isCabinet() ? unite(boxes(/^Cabinet top |^Retainer top$|^Postform bullnose/)) : unite(boxes(/^Worktop |^Postform bullnose/).filter(b => b.max.y*1000 > H - 60 && b.max.y*1000 < H + 5));
+    const H = isCabinet() || !geo.H ? geo.overall : geo.H;
+    const wt = isCabinet() ? unite(boxes(/^Cabinet top |^Retainer top$|^Postform bullnose/)) : unite(boxes(isLink() || isFlexi() ? /^Link worksurface|^Flexi worksurface|^Postform bullnose/ : /^Worktop |^Postform bullnose/).filter(b => b.max.y*1000 > H - 60 && b.max.y*1000 < H + 5));
     const wx1 = wt ? wt.min.x*1000 : minX, wx2 = wt ? wt.max.x*1000 : maxX;
     const nominal = w => { const k = Object.keys(CABW).find(k2 => Math.abs(CABW[k2] - w) < 2); return k ? `${Math.round(w)} [${k}"]` : dual(w); };
     // FRONT VIEW
@@ -2864,7 +4334,7 @@ async function makeDrawingPages(){
     if(hangs.length){ const h = hangs[0]; hd(X(h.x - h.w/2), X(h.x + h.w/2), Y(h.y0) + 60, dual(h.w), Y(h.y0), Y(h.y0)); }
     const shelves = boxes(/^Adjustable shelf|^Steel shelf/);
     // RIGHT SIDE VIEW
-    const allT = boxes(/^Worktop |^Postform bullnose/).filter(b => isCabinet() || (b.max.y*1000 > H - 60 && b.max.y*1000 < H + 5));
+    const allT = boxes(isLink() || isFlexi() ? /^Link worksurface|^Flexi worksurface|^Postform bullnose/ : /^Worktop |^Postform bullnose/).filter(b => isCabinet() || (b.max.y*1000 > H - 60 && b.max.y*1000 < H + 5));
     const tz1 = allT.length ? Math.min(...allT.map(b => b.min.z))*1000 : minZ, tz2 = allT.length ? Math.max(...allT.map(b => b.max.z))*1000 : maxZ;
     if(isCabinet()) hd(Z(CABD[S.cd]/2), Z(-CABD[S.cd]/2), Y(maxY) - 150, dual(CABD[S.cd]), Y(geo.overall), Y(geo.overall));
     else hd(Z(tz2), Z(tz1), Y(H) - (maxY > H + 100 ? 80 : 150), S.series === 'flexi' && S.sides === 'double' ? dual(tz2 - tz1) : dual(Dmm()), Y(H), Y(H));
@@ -3084,7 +4554,7 @@ sheetBtn.addEventListener('click', async () => {
 (() => {
   const KEY = 'fx-tour-done';
   const STEPS = [
-    {sel:'.panel-head .seg[data-key="product"]', t:'1. Choose a product', d:'Pick Workbench, Base Cabinet or Mobile Cabinet. These tabs stay at the top while you scroll the options.'},
+    {sel:'.panel-head .seg[data-key="product"]', t:'1. Choose a product', d:'Pick Workbench, Base Cabinet, Mobile Cabinet, Link (workstands, trolleys, flow racks) or Flexi (workstations, universal carts, flow racks). These tabs stay at the top while you scroll the options.'},
     {sel:'#presets', group:true, t:'2. Start from a catalog preset', d:'A preset loads a complete catalog configuration (e.g. PRWB-0100) that you can then adjust. Optional: you can also build from scratch.'},
     {sel:'#panelBody', t:'3. Configure it', d:'Work down the list: series, size, worktop, legs or cabinets, drawers and above-worktop accessories. Scroll for more. Options that don\'t fit the current build are greyed out.'},
     {sel:'#stage', t:'4. Check it in 3D', d:'Drag to rotate, scroll to zoom. Use 3D / Front / Side / Top for standard views, and switch dimensions and inch / mm at the top right.'},
