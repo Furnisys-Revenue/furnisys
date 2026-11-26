@@ -4,6 +4,7 @@
 const { zoho, leadFields } = require('../lib/zoho');
 
 const FORM_LABEL = { enquiry: 'Website enquiry', partner: 'Partner application', match: 'Partner match request', support: 'Support request', catalogue: 'Catalogue request', brochure: 'Brochure request' };
+const PAGE_LABELS = ['referrer', 'lead source page', 'website page', 'source page', 'lead page', 'landing page', 'page url', 'form page', 'lead page url'];
 const norm = s => String(s || '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
 
 function options(f) { return (f.pick_list_values || []).map(o => o.display_value || o.actual_value).filter(v => v && v !== '-None-'); }
@@ -65,7 +66,6 @@ module.exports = async (req, res) => {
     setPick('Lead_Source', 'Website'); setPick('Lead_Origin', 'Marketing Orignated Lead'); setPick('Rating', 'MQL');
     setPick('Portal_Lead_Type', 'Lead Form'); setPick('Lead_Stage1', 'Raw Leads');
     set('Lead_Date', today()); set('Lead_Enquiry_Date', nowIST());
-    if (b.page) set('Referrer', 'https://' + String(b.page).replace(/^https?:\/\//, ''));
     // qualification
     const ind = a.industry || (type === 'partner' ? 'Manufacturing' : 'Manufacturing');
     setPick('Lead_State', (a.state || '').replace(/ NCR$/, ''), 'Maharashtra');
@@ -89,7 +89,17 @@ module.exports = async (req, res) => {
     }
     // optional custom fields, filled automatically once they exist in Leads (matched by label)
     const byLabel = l => fields.find(f => norm(f.field_label) === norm(l));
-    const pagePath = String(b.page || '').replace(/^https?:\/\//, '').replace(/^[^/]*/, '').replace(/\.html$/, '') || '/';
+    const pagePath = String(b.page || '').replace(/^https?:\/\//, '').replace(/^[^/]*/, '').replace(/\.html$/, '').split('?')[0] || '/';
+    const pageUrl = 'https://www.furnisys.co.in' + pagePath;
+    // the page the form was sent from: written to every page field that exists (Referrer, Lead Source Page, Website Page...)
+    if (b.page) for (const f of fields) {
+      if (f.read_only || f.field_read_only || rec[f.api_name] !== undefined) continue;
+      const lab = norm(f.field_label), api = norm(f.api_name);
+      if (!(PAGE_LABELS.includes(lab) || api === 'referrer')) continue;
+      if (f.data_type === 'picklist' || f.data_type === 'multiselectpicklist') continue;
+      const v = f.data_type === 'website' || lab === 'referrer' || api === 'referrer' ? pageUrl : pagePath;
+      set(f.api_name, v.slice(0, f.length || 255));
+    }
     for (const [labels, val] of [[['Website Page', 'Source Page', 'Lead Page', 'Landing Page'], pagePath],
                                  [['Form Type', 'Website Form'], FORM_LABEL[type]],
                                  [['Campaign', 'UTM Campaign', 'Website Campaign'], b.utm || '']]) {
