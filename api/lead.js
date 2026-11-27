@@ -3,7 +3,7 @@
 // Any other mandatory field that appears later is filled with a safe default so CRM never rejects the record.
 const { zoho, leadFields } = require('../lib/zoho');
 
-const FORM_LABEL = { enquiry: 'Website enquiry', partner: 'Partner application', match: 'Partner match request', support: 'Support request', catalogue: 'Catalogue request', brochure: 'Brochure request' };
+const FORM_LABEL = { enquiry: 'Website enquiry', partner: 'Partner application', match: 'Partner match request', support: 'Support request', catalogue: 'Catalogue request', brochure: 'Brochure request', product: 'Product enquiry' };
 const PAGE_LABELS = ['referrer', 'lead source page', 'website page', 'source page', 'lead page', 'landing page', 'page url', 'form page', 'lead page url'];
 const norm = s => String(s || '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
 
@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
     setPick('Workspace_Type_New', workspace(ind), 'Manufacturing');
     setPick('Department_Function', type === 'support' ? 'Maintenance' : 'Other', 'Other');
     setPick('Enquiry_Category', isProject(a) ? 'Project' : 'Product');
-    setPick('Enqiry_Sub_Category', subCat(a) || (isProject(a) ? 'Configurable' : 'Preconfigured'));
+    setPick('Enqiry_Sub_Category', (/^configurable$/i.test(a.approach || '') ? 'Configurable' : /^pre-?configured$/i.test(a.approach || '') ? 'Preconfigured' : null) || subCat(a) || (isProject(a) ? 'Configurable' : 'Preconfigured'));
     setPick('Enquiry_Type', 'Standard');
     setPick('Organization_Size', orgSize(a), 'Medium');
     setPick('Product_Matrix', matrix(a), 'Primary');
@@ -102,6 +102,7 @@ module.exports = async (req, res) => {
     }
     for (const [labels, val] of [[['Website Page', 'Source Page', 'Lead Page', 'Landing Page'], pagePath],
                                  [['Form Type', 'Website Form'], FORM_LABEL[type]],
+                                 [['Enquired Product', 'Product Enquired', 'Enquired Configuration', 'Product Configuration', 'Configuration'], a.product || ''],
                                  [['Campaign', 'UTM Campaign', 'Website Campaign'], b.utm || '']]) {
       if (!val) continue;
       for (const l of labels) { const f = byLabel(l); if (f && rec[f.api_name] === undefined) { if (f.data_type === 'picklist' || f.data_type === 'multiselectpicklist') setPick(f.api_name, val); else set(f.api_name, String(val).slice(0, f.length || 255)); break; } }
