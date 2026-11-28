@@ -1,0 +1,36 @@
+# Weekly AI-answer check: asks ChatGPT (OpenAI API), Gemini (Google API) and Perplexity (API)
+# the 10 Furnisys buyer questions with web search on, and records whether Furnisys is mentioned.
+# Results are committed to ai-visibility/ (not published on the website).
+# Each engine runs only if its key is saved in Settings > Secrets and variables > Actions:
+#   OPENAI_API_KEY, GEMINI_API_KEY, PERPLEXITY_API_KEY
+# Optional repository variables to change models: OPENAI_MODEL, GEMINI_MODEL, PERPLEXITY_MODEL
+name: AI answer visibility check
+on:
+  schedule:
+    - cron: '17 2 * * 1'   # Mondays 07:47 IST, ready before the Tuesday SEO run
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Ask the buyer questions
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          PERPLEXITY_MODEL: ${{ vars.PERPLEXITY_MODEL }}
+        run: node .github/scripts/ai-visibility.mjs
+      - name: Save results
+        run: |
+          git config user.name "furnisys-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ai-visibility
+          git diff --cached --quiet || (git commit -m "AI answer visibility check $(date -u +%F)" && git push)

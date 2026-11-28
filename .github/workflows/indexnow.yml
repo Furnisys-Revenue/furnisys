@@ -1,0 +1,18 @@
+# Tells Bing, Yandex and other IndexNow search engines about the site's pages after every update.
+# Runs on GitHub's servers; no computer needed.
+name: Notify search engines (IndexNow)
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['ai-visibility/**', '.github/**', '**.md']
+  workflow_dispatch:
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel to publish the update
+        run: sleep 150
+      - name: Submit sitemap URLs
+        run: |
+          curl -sS -X POST https://www.furnisys.co.in/api/indexnow -w '\nHTTP %{http_code}\n' | tee result.txt
+          grep -q '"ok":true' result.txt
