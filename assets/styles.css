@@ -1691,3 +1691,9 @@ img{height:auto}
 .lb-x{position:absolute;top:12px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:28px;line-height:1;cursor:pointer}
 .lb-x:focus-visible{outline:2px solid #fff}
 /* /v78 */
+
+/* v79: listing cards (case studies, use cases, blogs, solutions) fill the frame edge to edge */
+.post .photo img,.post .photo.contain img,.sol-card .photo img,.sol-card .photo.contain img{object-fit:cover;object-position:center;padding:0;width:100%;height:100%}
+.post .photo.fitbg::before,.sol-card .photo.fitbg::before{display:none}
+.post .photo,.sol-card .photo{background:var(--tint)}
+/* /v79 */
